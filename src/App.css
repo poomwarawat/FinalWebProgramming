@@ -5,6 +5,10 @@
   color: rgb(114, 103, 180);
   font-weight: 900;
 }
+#header1{
+  color: white;
+  font-weight: 900;
+}
 .header h3{
   color: rgb(114, 103, 180);
   font-weight: 900;
@@ -25,7 +29,197 @@
   height: 100vh;
   background-size: cover;
 }
-
+.SignInBox{
+  padding-top: 100px;
+  backdrop-filter: blur(10px);
+}
+.detial h1{
+  color: rgb(114, 103, 180);
+}
+.runimage{
+  width: 100%;
+  height: 300px;
+}
+.runimage img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.7;
+}
+.feed{
+  height: 100%;
+  background-size: cover;
+}
+.bgFeed{
+  background-color :white;
+  height: 100%;
+}
+.nevigator{
+  padding: 15px;
+  background-color: #626FF2;
+  height: 100vh;
+  position: fixed;
+}
+.nevigator hr{
+  margin-left: auto;
+  width: 250px;
+  background-color: rgb(219, 219, 219);
+}
+.sidetext{
+  text-align: center;
+  color: white;
+  display: none;
+}
+.sidetext hr{
+  width: 90%;
+}
+.sidetext h4, h4:hover{
+  color: white;
+  text-decoration: none;
+}
+.sidetext1{
+  padding: 20px;
+}
+.sidetext1 hr{
+  width: 90%;
+}
+.sidetext1 h4, h4:hover{
+  margin-top: 20px;
+  color: white;
+  text-decoration: none;
+}
+.Chat{
+  padding: 20px;
+}
+.ListProfile{
+  text-align: center;
+  float: right;
+  padding-top: 20px;
+}
+.ListProfile img{
+  border-radius: 50%;
+  object-fit: cover;
+}
+.Post{
+  padding-left: 35px;
+  height:100vh;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+.search{
+  width: 87%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.search > .inputSearch{
+  width: 500px;
+  padding-top: 10px;
+}
+.search > .btnSearch{
+  width: 120px;
+  padding: 10px;
+}
+.ToTop{
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  margin-right: 30px;
+  margin-bottom: 30px;
+  width: 80px;
+  height: 80px;
+}
+.ToTop button{
+  border-radius: 50%;
+  width: 100%;
+  height: 100%;
+}
+/* .profile-header{
+  margin-top: 20px;
+  width: 100%;
+  height: 250px;
+  padding: 10px;
+  border: 2px solid white;
+  border-radius: 10px;
+}
+.cover-image{
+  width: 100%;
+  height: 100%;
+  position: static;
+}
+.cover-image img{
+  border-radius: 5px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.coverimg{
+  opacity: 0.7;
+  position: relative;
+}
+.profile-image{
+  width: 200px;
+  height: 200px;
+  float: right;
+} */
+.cover{
+  position: relative;
+  margin-top: 20px;
+  height: 350px;
+  padding: 10px;
+}
+.coverimg{
+  opacity: 0.7;
+}
+.cover img{
+  border-radius: 10px 10px;
+  width: 100%;
+  height: 290px;
+  object-fit: cover;
+}
+.bottomleft {
+  position: absolute;
+  bottom: 0;
+  left: 38%;
+}
+.bottomleft img{
+  width: 200px;
+  height: 200px;
+  border: 5px solid white;
+  border-radius: 50%;
+}
+.user-data{
+  margin-top: 100px;
+}
+.About{
+  text-align: center;
+}
+.list-album{
+  display: flex;
+}
+.list-album > .album{
+  width: 150px;
+  height: 200px;
+  text-align: center;
+  padding-right: 10px;
+  padding-top: 10px;
+  
+}
+.album img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.7;
+  background-color: black;
+  border-radius: 5px;
+  transition: 0.5s;
+}
+.album img:hover{
+  opacity: 1;
+}
+.profile-page{
+  padding-bottom: 50px;
+}
 @media only screen and (max-width: 767px){
   .HeadText{
     width: 90vw;
@@ -40,8 +234,37 @@
     padding-bottom: 50%;
     backdrop-filter: blur(10px);
   }
-}
-.SignInBox{
-  padding-top: 100px;
-  backdrop-filter: blur(10px);
+  .nevigator{
+    background-color: #626FF2;
+    height: 100%;
+    position: static;
+  }
+  .sidetext{
+    display: contents;
+  }
+  .sidetext1{
+    display: none;
+  }
+  .search{
+    width: 105%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .ListProfile{
+    display: none;
+  }
+  .Chat{
+    display: none;
+  }
+  .ToTop{
+    margin-bottom: 50px;
+  }
+  .bottomleft {
+    position: absolute;
+    bottom: 0;
+    left: 28%;
+    width: 200px;
+    height: 200px;
+  }
 }

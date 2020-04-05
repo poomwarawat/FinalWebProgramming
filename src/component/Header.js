@@ -22,10 +22,14 @@ export default class Header extends Component {
                     <form className="form-inline my-2 my-lg-0">
                         <ul className="navbar-nav">
                             <li className="nav-item active text-center HeadText">
-                                <a className="nav-link" id="header">About Us</a>
+                                <Link to='/about'>
+                                    <p className="nav-link" id="header">About Us</p>
+                                </Link>
                             </li>
                             <li className="nav-item active text-center HeadText">
-                                <a className="nav-link" id="header">Contact</a>
+                                <Link to='/contact'>
+                                    <p className="nav-link" id="header">Contact</p>
+                                </Link>
                             </li>
                         </ul>
                     </form>
