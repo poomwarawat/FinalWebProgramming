@@ -2,6 +2,10 @@ import React, { Component } from 'react'
 import {Link} from 'react-router-dom'
 
 export default class Nevigator extends Component {
+    handleLogout = () =>{
+        localStorage.clear()
+        window.location.reload()
+    }
     render() {
         return (
             <div>
@@ -29,6 +33,9 @@ export default class Nevigator extends Component {
                             <Link to='/setting'>
                                 <h4>Setting</h4>
                             </Link>
+                            <h4><button onClick={this.handleLogout}>
+                                Logout    
+                            </button></h4>
                         </div>
                     </div>
                     </nav>
