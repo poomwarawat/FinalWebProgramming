@@ -4,6 +4,7 @@ import Chat from '../component/Chat'
 import TopFeed from '../component/TopFeed'
 import UploadPost from '../component/UploadPost'
 import ToTop from '../component/ToTop'
+import PostStatus from '../component/PostStatus'
 
 export default class Feed extends Component {
     render() {
@@ -19,6 +20,7 @@ export default class Feed extends Component {
                         <div className="row">
                             <div className="col-sm-8 col-12">
                                 <div className="Post">
+                                    <PostStatus></PostStatus>
                                     <UploadPost></UploadPost>
                                     <UploadPost></UploadPost>
                                     <UploadPost></UploadPost>

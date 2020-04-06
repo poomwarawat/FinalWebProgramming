@@ -7,7 +7,7 @@ export default class PostStatus extends Component {
                 <h3>Your Status</h3>
                 <div className="mt-2 post-box">
                     <div className="head-post-box">
-                        <p>Update your today running score</p>
+                        <p>Update your today running status</p>
                     </div>
                     <textarea placeholder="   Enter your status..."></textarea>
                     <div className="head-post-box">

@@ -10,11 +10,11 @@
   font-weight: 900;
 }
 .header h3{
-  color: rgb(114, 103, 180);
+  /* color: rgb(114, 103, 180); */
   font-weight: 900;
 }
 .header p, label {
-  color: rgb(133, 126, 172);
+  /* color: rgb(133, 126, 172); */
 }
 .header span{
   font-weight: 700;
@@ -286,7 +286,7 @@
   .bottomleft {
     position: absolute;
     bottom: 0;
-    left: 28%;
+    left: 26%;
     width: 200px;
     height: 200px;
   }

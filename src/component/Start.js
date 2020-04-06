@@ -8,7 +8,8 @@ export default class Start extends Component {
         this.state = {
             email: '',
             password : '',
-            remember : false
+            remember : false,
+            err : 'wrong your password!'
         }
     }
     handleChange = (e) =>{
@@ -22,6 +23,15 @@ export default class Start extends Component {
         localStorage.setItem("email", this.state.email)
         window.location.reload()
     }
+    errRender = () =>{
+        if(this.state.err != ''){
+            return(
+                    <div className="alert alert-danger" role="alert">
+                        {this.state.err}
+                    </div>
+            )
+        }
+    }
     render() {
         return (
             <div>
@@ -34,16 +44,17 @@ export default class Start extends Component {
                             <p>For see awesome people</p>
                             <input onChange={this.handleChange} className="form-control" placeholder="Email" type="text" id="email"></input><br/>
                             <input onChange={this.handleChange} className="form-control" placeholder="Password" type="password" id="password"></input><br/>
-                            <div className="form-group form-check">
+                            {/* <div className="form-group form-check">
                                 <input type="checkbox" className="form-check-input" id="remember"></input>
                                 <label className="form-check-label">Remember me</label>
-                            </div>
+                            </div> */}
                             <button className="btn btn-primary w-100" id="login" onClick={this.handleClicked}>Login</button><br/>
                             <p className="mt-2">Not member? 
                                 <Link to="/register">
                                     <span>Sign Up</span>
                                 </Link>
                             </p>
+                            {this.errRender()}
                         </div>
                     </div>
                 </div>

@@ -26,8 +26,11 @@ export default class Nevigator extends Component {
                             <Link to='/profile'>
                                 <h4>Profile</h4>
                             </Link>
-                            <Link to='/explorer'>
-                                <h4>Exploere</h4>
+                            <Link to='/graph'>
+                                <h4>Graph</h4>
+                            </Link>
+                            <Link to='/friend'>
+                                <h4>Friend</h4>
                             </Link>
                             <hr/>
                             <Link to='/setting'>
@@ -46,8 +49,11 @@ export default class Nevigator extends Component {
                             <Link to='/profile'>
                                 <h4>Profile</h4>
                             </Link>
-                            <Link to='/explorer'>
-                                <h4>Exploere</h4>
+                            <Link to='/graph'>
+                                <h4>Graph</h4>
+                            </Link>
+                            <Link to='/friend'>
+                                <h4>Friend</h4>
                             </Link>
                             <hr/>
                             <Link to='/setting'>

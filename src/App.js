@@ -7,7 +7,7 @@ import About from './page/About'
 import Contact from './page/Contact'
 import Feed from './page/Feed'
 import Profile from './page/Profile'
-import Explorer from './page/Explorer'
+import Graph from './page/Graph'
 import Setting from './page/Setting'
 
 function App() {
@@ -19,7 +19,7 @@ function App() {
           <Route path='/about' component={About}></Route>
           <Route path='/contact' component={Contact}></Route>
           <Route path='/profile' component={Profile}></Route>
-          <Route path='/explorer' component={Explorer}></Route>
+          <Route path='/graph' component={Graph}></Route>
           <Route path='/setting' component={Setting}></Route>
         </Switch>
     </div>
