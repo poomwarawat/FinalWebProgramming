@@ -13,7 +13,8 @@ export default class Register extends Component {
             address : "",
             city : "",
             password : "",
-            repassword : ""
+            repassword : "",
+            err : ""
         }
     }
     handleSignUp = () =>{
@@ -37,8 +38,14 @@ export default class Register extends Component {
         })
         .then(res => {
             if(res.status == 200){
-                alert("Signed up")
+                console.log(res.data)
+                this.setState({ err: res.data })
             }
+            if(this.state.err == ""){
+                alert("Signed Up!!")
+                window.location.reload()
+            }
+            
         })
 
         // Get data Success
@@ -52,6 +59,17 @@ export default class Register extends Component {
         this.setState({
             [name] : value
         })
+    }
+    renderErr = () =>{
+        if(this.state.err != ""){
+            return(
+                <div className="col-sm-5 col-12">
+                    <div className="alert alert-danger" role="alert">
+                        {this.state.err}
+                    </div>
+                </div>
+            )
+        }
     }
     render() {
         return (
@@ -98,9 +116,12 @@ export default class Register extends Component {
                         </div>
                     </div><br/>
                     <div className="row">
-                        <div className="col-sm-3 col-12">
+                        <div className="col-sm-5 col-12">
                             <button className="btn btn-primary w-100" onClick={this.handleSignUp}>Sign Up</button>
                         </div>
+                    </div>
+                    <div className="row mt-4">
+                        {this.renderErr()}
                     </div>
                 </div>
             </div>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Header from './Header'
 import {Link} from 'react-router-dom'
+import API from '../API/API'
 
 export default class Start extends Component {
     constructor(props){
@@ -8,8 +9,7 @@ export default class Start extends Component {
         this.state = {
             email: '',
             password : '',
-            remember : false,
-            err : 'wrong your password!'
+            err : ''
         }
     }
     handleChange = (e) =>{
@@ -20,15 +20,32 @@ export default class Start extends Component {
         })
     }
     handleClicked = () =>{
-        localStorage.setItem("email", this.state.email)
-        window.location.reload()
+        const { email, password } = this.state
+        let formData = new FormData();
+        formData.append('email', email)
+        formData.append('password', password)
+        API({
+            method: 'post',
+            url: '/login.php',
+            data: formData,
+            config: { headers: {'Content-Type': 'multipart/form-data' }}
+        })
+        .then(res =>{
+            if(res.status == 200){
+                if(res.data == "success"){
+                    localStorage.setItem('email', true)
+                    window.location.reload()
+                }
+                this.setState({ err: res.data })
+            }
+        })
     }
     errRender = () =>{
         if(this.state.err != ''){
             return(
-                    <div className="alert alert-danger" role="alert">
-                        {this.state.err}
-                    </div>
+                <div className="alert alert-danger" role="alert">
+                    {this.state.err}
+                </div>
             )
         }
     }
@@ -44,10 +61,6 @@ export default class Start extends Component {
                             <p>For see awesome people</p>
                             <input onChange={this.handleChange} className="form-control" placeholder="Email" type="text" id="email"></input><br/>
                             <input onChange={this.handleChange} className="form-control" placeholder="Password" type="password" id="password"></input><br/>
-                            {/* <div className="form-group form-check">
-                                <input type="checkbox" className="form-check-input" id="remember"></input>
-                                <label className="form-check-label">Remember me</label>
-                            </div> */}
                             <button className="btn btn-primary w-100" id="login" onClick={this.handleClicked}>Login</button><br/>
                             <p className="mt-2">Not member? 
                                 <Link to="/register">
