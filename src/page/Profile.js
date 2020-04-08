@@ -16,9 +16,11 @@ export default class Profile extends Component {
             address : '',
             city : '',
             birthday : '',
-            urlpic : 'https://www.thairath.co.th/media/Dtbezn3nNUxytg04OL8mgI3NIEavohv2W18gLB2c0r2biv.jpg'
+            urlpic : '',
+            post : []
         }
     }
+    //https://www.thairath.co.th/media/Dtbezn3nNUxytg04OL8mgI3NIEavohv2W18gLB2c0r2biv.jpg
     componentWillMount(){
         if(localStorage.getItem('key')){
             let key = new FormData();
@@ -42,6 +44,12 @@ export default class Profile extends Component {
                     urlpic : urlpic
                 })
             })
+            API.get('/getpost.php')
+            .then(res =>{
+                this.setState({
+                    post : this.state.post.concat(res.data)
+                })
+            })
         }
     }
     render() {
@@ -52,11 +60,15 @@ export default class Profile extends Component {
                 </div>
                 <div className="col-sm-8 col-12">
                     <HeaderUser user={this.state}></HeaderUser>
-                    <PostStatus></PostStatus>
-                    <UploadPost></UploadPost>
-                    <UploadPost></UploadPost>
-                    <UploadPost></UploadPost>
-                    <UploadPost></UploadPost>
+                    <PostStatus email={this.state.email}></PostStatus>
+                    {
+                        this.state.post.map(datas =>{
+                            return(
+                                <UploadPost data={datas}></UploadPost>
+                            )
+                        })
+                    }
+                    
                 </div>
             </div>
         )

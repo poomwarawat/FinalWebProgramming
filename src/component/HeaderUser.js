@@ -13,18 +13,16 @@ export default class HeaderUser extends Component {
             this.setState({
                 urlpic : this.props.user.urlpic
             })
+        }else{
+            this.setState({
+                urlpic : "http://www.accountingweb.co.uk/sites/all/modules/custom/sm_pp_user_profile/img/default-user.png"
+            })
         }
     }
     renderPic = () =>{
-        if(this.props.user.urlpic !== ""){
-            return(
-                <img src={this.state.urlpic}/>
-            )
-        }else{
-            return(
-                <img src="http://www.tourstouzbekistan.com/uploads/albums/photogallery/tajik_people_23.jpg"/>
-            )
-        }
+        return(
+            <img src={this.state.urlpic}/>
+        )
     }
     render() {
         return (

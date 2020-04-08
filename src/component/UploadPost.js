@@ -1,14 +1,17 @@
 import React, { Component } from 'react'
 
 export default class UploadPost extends Component {
+    constructor(props){
+        super(props)
+    }
     render() {
         return (
             <div>
                 <div className="media container mt-4">
                 <div className="media-body">
-                    <h5 className="mt-0">Center-aligned media</h5>
-                    <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
-                    <p className="mb-0">Donec sed odio dui. Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+                    <h5 className="mt-0">{this.props.data.name + " " + this.props.data.lastname}</h5>
+                    <p>{this.props.data.data}</p>
+                    {/* <p className="mb-0">{this.props.data.date}</p> */}
                 </div>
                 </div>
             </div>

@@ -9,6 +9,7 @@ import PostStatus from '../component/PostStatus'
 export default class Feed extends Component {
     constructor(props){
         super(props)
+        console.log(this.props)
     }
     render() {
         return (
@@ -23,7 +24,7 @@ export default class Feed extends Component {
                         <div className="row">
                             <div className="col-sm-8 col-12">
                                 <div className="Post">
-                                    <PostStatus></PostStatus>
+                                    <PostStatus email={this.props.email}></PostStatus>
                                     <UploadPost></UploadPost>
                                     <UploadPost></UploadPost>
                                     <UploadPost></UploadPost>
