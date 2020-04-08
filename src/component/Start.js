@@ -31,17 +31,17 @@ export default class Start extends Component {
             config: { headers: {'Content-Type': 'multipart/form-data' }}
         })
         .then(res =>{
-            if(res.status == 200){
-                if(res.data == "success"){
-                    localStorage.setItem('email', true)
-                    window.location.reload()
-                }
-                this.setState({ err: res.data })
+            if(res.data.err){
+                console.log(res.data.err)
+                this.setState({ err: res.data.err })
+            }else{
+                localStorage.setItem('key', res.data.token)
+                window.location.reload()
             }
         })
     }
     errRender = () =>{
-        if(this.state.err != ''){
+        if(this.state.err !== '' ){
             return(
                 <div className="alert alert-danger" role="alert">
                     {this.state.err}

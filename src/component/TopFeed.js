@@ -22,14 +22,12 @@ export default class TopFeed extends Component {
                         </div>
                     </div>
                     <div className="col-sm-2 col-12">
-                        <div className="ListProfile">
+                        <div className="ListProfile mt-2">
                             <div className="dropdown">
-                                <div className="dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <img src="http://www.tourstouzbekistan.com/uploads/albums/photogallery/tajik_people_23.jpg"  width="50" height="50" alt="RunnerIcon"></img>
+                                <div className="dropdown-toggle" id="userName" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    {this.props.email}
                                 </div>
                                 <div className="dropdown-menu dropdown-menu-right dropdown-menu-lg-left">
-                                    <button className="dropdown-item">Action</button>
-                                    <button className="dropdown-item">Another action</button>
                                     <button className="dropdown-item" onClick={this.handleLogout}>Logout</button>
                                 </div>
                             </div>

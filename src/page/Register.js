@@ -37,11 +37,11 @@ export default class Register extends Component {
             config: { headers: {'Content-Type': 'multipart/form-data' }}
         })
         .then(res => {
-            if(res.status == 200){
+            if(res.status === 200){
                 console.log(res.data)
                 this.setState({ err: res.data })
             }
-            if(this.state.err == ""){
+            if(this.state.err === ""){
                 alert("Signed Up!!")
                 window.location.reload()
             }
@@ -61,7 +61,7 @@ export default class Register extends Component {
         })
     }
     renderErr = () =>{
-        if(this.state.err != ""){
+        if(this.state.err !== ""){
             return(
                 <div className="col-sm-5 col-12">
                     <div className="alert alert-danger" role="alert">

@@ -1,0 +1,85 @@
+[debug] [2020-04-07T03:12:34.112Z] ----------------------------------------------------------------------
+[debug] [2020-04-07T03:12:34.114Z] Command:       /usr/local/bin/node /Users/poomwarawat/.npm-global/bin/firebase deploy
+[debug] [2020-04-07T03:12:34.114Z] CLI Version:   7.13.1
+[debug] [2020-04-07T03:12:34.115Z] Platform:      darwin
+[debug] [2020-04-07T03:12:34.115Z] Node Version:  v12.16.1
+[debug] [2020-04-07T03:12:34.118Z] Time:          Tue Apr 07 2020 10:12:34 GMT+0700 (Indochina Time)
+[debug] [2020-04-07T03:12:34.118Z] ----------------------------------------------------------------------
+[debug] [2020-04-07T03:12:34.119Z] 
+[debug] [2020-04-07T03:12:34.131Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-04-07T03:12:34.132Z] > authorizing via signed-in user
+[debug] [2020-04-07T03:12:34.132Z] [iam] checking project runrena-db93f for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2020-04-07T03:12:34.134Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/runrena-db93f:testIamPermissions  
+
+[debug] [2020-04-07T03:12:34.197Z] [iam] error while checking permissions, command may fail: FirebaseError: Server Error. Client network socket disconnected before secure TLS connection was established
+[debug] [2020-04-07T03:12:34.198Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/runrena-db93f  
+ 
+[debug] [2020-04-07T03:12:34.214Z] Server Error. Client network socket disconnected before secure TLS connection was established
+[debug] [2020-04-07T03:12:34.229Z] FirebaseError: Server Error. Client network socket disconnected before secure TLS connection was established
+    at Request._callback (/Users/poomwarawat/.npm-global/lib/node_modules/firebase-tools/lib/api.js:30:31)
+    at self.callback (/Users/poomwarawat/.npm-global/lib/node_modules/firebase-tools/node_modules/request/request.js:185:22)
+    at Request.emit (events.js:311:20)
+    at Request.EventEmitter.emit (domain.js:482:12)
+    at Request.onRequestError (/Users/poomwarawat/.npm-global/lib/node_modules/firebase-tools/node_modules/request/request.js:877:8)
+    at ClientRequest.emit (events.js:323:22)
+    at ClientRequest.EventEmitter.emit (domain.js:482:12)
+    at TLSSocket.socketErrorListener (_http_client.js:426:9)
+    at TLSSocket.emit (events.js:311:20)
+    at TLSSocket.EventEmitter.emit (domain.js:482:12)
+    at emitErrorNT (internal/streams/destroy.js:92:8)
+    at emitErrorAndCloseNT (internal/streams/destroy.js:60:3)
+    at processTicksAndRejections (internal/process/task_queues.js:84:21)
+[error] 
+[error] Error: Failed to get Firebase project runrena-db93f. Please make sure the project exists and your account has permission to access it.
+[debug] [2020-04-07T03:13:31.437Z] ----------------------------------------------------------------------
+[debug] [2020-04-07T03:13:31.459Z] Command:       /usr/local/bin/node /Users/poomwarawat/.npm-global/bin/firebase init
+[debug] [2020-04-07T03:13:31.470Z] CLI Version:   7.13.1
+[debug] [2020-04-07T03:13:31.470Z] Platform:      darwin
+[debug] [2020-04-07T03:13:31.470Z] Node Version:  v12.16.1
+[debug] [2020-04-07T03:13:31.471Z] Time:          Tue Apr 07 2020 10:13:31 GMT+0700 (Indochina Time)
+[debug] [2020-04-07T03:13:31.471Z] ----------------------------------------------------------------------
+[debug] [2020-04-07T03:13:31.471Z] 
+[debug] [2020-04-07T03:13:31.483Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-04-07T03:13:31.484Z] > authorizing via signed-in user
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  /Users/poomwarawat/Desktop/Learning_web/Final_Project/my-app
+
+Before we get started, keep in mind:
+
+  * You are initializing in an existing Firebase project directory
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[info] i  .firebaserc already has a default project, using runrena-db93f.
+[debug] [2020-04-07T03:13:35.149Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/runrena-db93f  
+ 
+[debug] [2020-04-07T03:13:35.210Z] Server Error. Client network socket disconnected before secure TLS connection was established
+[debug] [2020-04-07T03:13:35.235Z] FirebaseError: Server Error. Client network socket disconnected before secure TLS connection was established
+    at Request._callback (/Users/poomwarawat/.npm-global/lib/node_modules/firebase-tools/lib/api.js:30:31)
+    at self.callback (/Users/poomwarawat/.npm-global/lib/node_modules/firebase-tools/node_modules/request/request.js:185:22)
+    at Request.emit (events.js:311:20)
+    at Request.EventEmitter.emit (domain.js:482:12)
+    at Request.onRequestError (/Users/poomwarawat/.npm-global/lib/node_modules/firebase-tools/node_modules/request/request.js:877:8)
+    at ClientRequest.emit (events.js:323:22)
+    at ClientRequest.EventEmitter.emit (domain.js:482:12)
+    at TLSSocket.socketErrorListener (_http_client.js:426:9)
+    at TLSSocket.emit (events.js:311:20)
+    at TLSSocket.EventEmitter.emit (domain.js:482:12)
+    at emitErrorNT (internal/streams/destroy.js:92:8)
+    at emitErrorAndCloseNT (internal/streams/destroy.js:60:3)
+    at processTicksAndRejections (internal/process/task_queues.js:84:21)
+[error] 
+[error] Error: Failed to get Firebase project runrena-db93f. Please make sure the project exists and your account has permission to access it.

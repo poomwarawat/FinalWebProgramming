@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom'
 
 export default class Nevigator extends Component {
     handleLogout = () =>{
-        localStorage.clear()
+        localStorage.removeItem('key')
         window.location.reload()
     }
     render() {

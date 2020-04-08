@@ -7,6 +7,9 @@ import ToTop from '../component/ToTop'
 import PostStatus from '../component/PostStatus'
 
 export default class Feed extends Component {
+    constructor(props){
+        super(props)
+    }
     render() {
         return (
             <div className="bgFeed">
@@ -16,7 +19,7 @@ export default class Feed extends Component {
                         <Nevigator></Nevigator>
                     </div>
                     <div className="col-sm-9 col-12 mt-2">
-                        <TopFeed></TopFeed>
+                        <TopFeed email={this.props.email}></TopFeed>
                         <div className="row">
                             <div className="col-sm-8 col-12">
                                 <div className="Post">
@@ -35,7 +38,7 @@ export default class Feed extends Component {
                             </div>
                             <div className="col-sm-4 col-12">
                                 <div className="container">
-                                    <Chat></Chat>
+                                    {/* <Chat></Chat> */}
                                 </div>
                             </div>
                         </div>
