@@ -243,6 +243,18 @@
   margin-top: 15px;
   margin-left: 10px;
 }
+.status-box{
+  background-color: rgba(238, 238, 238, 0.288);
+  border-radius: 5px;
+  padding-bottom: 10px;
+}
+.status-box p{
+  word-break: break-all;
+}
+.btn-like{
+  color: rgb(114, 103, 180);
+}
+
 @media only screen and (max-width: 767px){
   .HeadText{
     width: 90vw;

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import API from '../API/API'
+import UploadPost from '../component/UploadPost'
 
 export default class PostStatus extends Component {
     constructor(props){
@@ -9,25 +10,61 @@ export default class PostStatus extends Component {
             data : '',
             date : new Date(),
             name : '',
-            lastname : ''
+            lastname : '',
+            post : []
         }
     }
     componentWillMount(){
-        let key = new FormData();
-        key.append('key', localStorage.getItem('key'))
-        API({
-            method : "POST",
-            url: '/getprofile.php',
-            data: key,
-            config: { headers: {'Content-Type': 'multipart/form-data' }}
-        })
-        .then(res => {
-            this.setState({
-                email : res.data.email,
-                name : res.data.name,
-                lastname : res.data.lastname
+        const URL = window.location.href
+        var fullurl = URL,
+        url = "/" + fullurl.split("/")[3];
+
+            let key = new FormData();
+            key.append('key', localStorage.getItem('key'))
+            API({
+                method : "POST",
+                url: '/getprofile.php',
+                data: key,
+                config: { headers: {'Content-Type': 'multipart/form-data' }}
             })
-        })
+            .then(res => {
+                this.setState({
+                    email : res.data.email,
+                    name : res.data.name,
+                    lastname : res.data.lastname
+                })
+                this.getPost()
+            })
+        
+    }
+    getPost = () =>{
+        const URL = window.location.href
+        var fullurl = URL,
+        url = "/" + fullurl.split("/")[3];
+
+        if(url === "/profile"){
+            let Email = new FormData();
+            Email.append('email', this.state.email)
+                API({
+                    method : "POST",
+                    url: '/getpost.php',
+                    data: Email,
+                    config: { headers: {'Content-Type': 'multipart/form-data' }}
+                })
+                .then(res =>{
+                    this.setState({
+                        post : this.state.post.concat(res.data)
+                    })
+            })
+        }else if(url === "/"){
+            API.get("/getpost.php")
+            .then(res =>{
+                this.setState({
+                    post : this.state.post.concat(res.data)
+                })
+            })
+        }
+        
     }
     handleChange = (e) =>{
         const name = e.target.id
@@ -51,27 +88,39 @@ export default class PostStatus extends Component {
             config: { headers: {'Content-Type': 'multipart/form-data' }}
         })
         .then(res =>{
-            if(res.data == "success"){
-                alert("Upload success!")
+            if(res.data === "success"){
                 this.setState({
-                    data : ''
+                    data : '',
+                    post : []
                 })
+                this.getPost()
             }
         })
     }
     render() {
         return (
-            <div className="container mt-4">
-                <h3>Your Status</h3>
-                <div className="mt-2 post-box">
-                    <div className="head-post-box">
-                        <p>Update your today running status</p>
-                    </div>
-                    <textarea placeholder="   Enter your status..." value={this.state.data} id="data" onChange={this.handleChange}></textarea>
-                    <div className="head-post-box">
-                        <button className="btn btn-info w-100" onClick={this.handleClick}>POST</button>
+            <div>
+                <div className="container mt-4">
+                    <h3>Your Status</h3>
+                    <div className="mt-2 post-box">
+                        <div className="head-post-box">
+                            <p>Update your today running status</p>
+                        </div>
+                        <textarea placeholder="   Enter your status..." value={this.state.data} id="data" onChange={this.handleChange}></textarea>
+                        <div className="head-post-box">
+                            <button className="btn btn-info w-100" onClick={this.handleClick}>POST</button>
+                        </div>
                     </div>
                 </div>
+                {
+                    this.state.post.reverse().map(datas =>{
+                        return(
+                            <div key={datas.id}>
+                                <UploadPost data={datas}></UploadPost>
+                            </div>
+                        )
+                    })
+                }
             </div>
         )
     }

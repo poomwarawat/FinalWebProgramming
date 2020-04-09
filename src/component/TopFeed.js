@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 export default class TopFeed extends Component {
     handleLogout = () =>{
-        localStorage.removeItem("email")
+        localStorage.removeItem("key")
         window.location.reload()
     }
     render() {

@@ -44,12 +44,6 @@ export default class Profile extends Component {
                     urlpic : urlpic
                 })
             })
-            API.get('/getpost.php')
-            .then(res =>{
-                this.setState({
-                    post : this.state.post.concat(res.data)
-                })
-            })
         }
     }
     render() {
@@ -61,14 +55,6 @@ export default class Profile extends Component {
                 <div className="col-sm-8 col-12">
                     <HeaderUser user={this.state}></HeaderUser>
                     <PostStatus email={this.state.email}></PostStatus>
-                    {
-                        this.state.post.map(datas =>{
-                            return(
-                                <UploadPost data={datas}></UploadPost>
-                            )
-                        })
-                    }
-                    
                 </div>
             </div>
         )
