@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import Nevigator from '../component/Nevigator'
-import Chat from '../component/Chat'
 import TopFeed from '../component/TopFeed'
-import UploadPost from '../component/UploadPost'
 import ToTop from '../component/ToTop'
 import PostStatus from '../component/PostStatus'
 import API from '../API/API'

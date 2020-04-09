@@ -137,34 +137,6 @@
   width: 100%;
   height: 100%;
 }
-/* .profile-header{
-  margin-top: 20px;
-  width: 100%;
-  height: 250px;
-  padding: 10px;
-  border: 2px solid white;
-  border-radius: 10px;
-}
-.cover-image{
-  width: 100%;
-  height: 100%;
-  position: static;
-}
-.cover-image img{
-  border-radius: 5px;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-.coverimg{
-  opacity: 0.7;
-  position: relative;
-}
-.profile-image{
-  width: 200px;
-  height: 200px;
-  float: right;
-} */
 .cover{
   position: relative;
   margin-top: 20px;
@@ -180,7 +152,15 @@
   height: 290px;
   object-fit: cover;
 }
+.profilepic{
+  transition: 1s;
+}
+.profilepic:hover{
+  opacity: 0.5;
+}
 .bottomleft {
+  border-radius: 50%;
+  background-color: black;
   position: absolute;
   bottom: 0;
   left: 38%;
@@ -254,7 +234,36 @@
 .btn-like{
   color: rgb(114, 103, 180);
 }
-
+.input-image-profile{
+  text-align: center;
+}
+[type="file"] {
+  height: 0;
+  overflow: hidden;
+  width: 0;
+}
+[type="file"] + label{
+  margin-top: 10px;
+  background: rgb(114, 103, 180);
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+	font-size: inherit;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  outline: none;
+  padding: 1rem 50px;
+  position: relative;
+  transition: all 0.3s;
+  vertical-align: middle;
+}
+.image-preview{
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
 @media only screen and (max-width: 767px){
   .HeadText{
     width: 90vw;

@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import Nevigator from '../component/Nevigator'
 import HeaderUser from '../component/HeaderUser'
 import PostStatus from '../component/PostStatus'
-import UploadPost from '../component/UploadPost'
 import API from '../API/API'
 
 export default class Profile extends Component {
@@ -32,17 +31,30 @@ export default class Profile extends Component {
                 config: { headers: {'Content-Type': 'multipart/form-data' }}
             })
             .then(res =>{
-                const { email, id, name, lastname, address, city, birthday, urlpic} = res.data
-                this.setState({
-                    email : email,
-                    id : id,
-                    name : name,
-                    lastname : lastname,
-                    address : address,
-                    city : city,
-                    birthday : birthday,
-                    urlpic : urlpic
-                })
+                const { email, id, name, lastname, address, city, birthday, url} = res.data
+                if(url !== null){
+                    this.setState({
+                        email : email,
+                        id : id,
+                        name : name,
+                        lastname : lastname,
+                        address : address,
+                        city : city,
+                        birthday : birthday,
+                        urlpic : url
+                    })
+                }else{
+                    this.setState({
+                        email : email,
+                        id : id,
+                        name : name,
+                        lastname : lastname,
+                        address : address,
+                        city : city,
+                        birthday : birthday,
+                        urlpic : "http://www.accountingweb.co.uk/sites/all/modules/custom/sm_pp_user_profile/img/default-user.png"
+                    })
+                }
             })
         }
     }

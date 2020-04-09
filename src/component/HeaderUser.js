@@ -1,28 +1,75 @@
 import React, { Component } from 'react'
 import Album from '../component/Album'
+import firebase from 'firebase'
+import { Progress } from 'reactstrap';
+import API from '../API/API'
 
 export default class HeaderUser extends Component {
     constructor(props){
         super(props)
         this.state = {
-            urlpic : ''
+            urlpic : '',
+            fileurl : "https://weneedfun.com/wp-content/uploads/2016/08/The-Color-Grey-16.jpg",
+            file : null,
+            uploadper : null,
+            messag : null,
         }
-    }
-    componentWillMount(){
-        if(this.props.user.urlpic !== ""){
-            this.setState({
-                urlpic : this.props.user.urlpic
-            })
-        }else{
-            this.setState({
-                urlpic : "http://www.accountingweb.co.uk/sites/all/modules/custom/sm_pp_user_profile/img/default-user.png"
-            })
+        var firebaseConfig = {
+            apiKey: "AIzaSyCu36Uit6DfffqB7DiQjyHLhCmAI-s6pxI",
+            authDomain: "runrena-db93f.firebaseapp.com",
+            databaseURL: "https://runrena-db93f.firebaseio.com",
+            projectId: "runrena-db93f",
+            storageBucket: "runrena-db93f.appspot.com",
+            messagingSenderId: "1084016282506",
+            appId: "1:1084016282506:web:2ce25be1a4215f46f4d673"
+          };
+          // Initialize Firebase
+        if (!firebase.apps.length) {
+            firebase.initializeApp(firebaseConfig);
         }
     }
     renderPic = () =>{
         return(
-            <img src={this.state.urlpic}/>
+            <div>
+                <img alt="" data-toggle="modal" data-target="#exampleModal" className="profilepic" src={this.props.user.urlpic}/>
+            </div>
         )
+    }
+    handleChange = (e) =>{
+        this.setState({
+            fileurl: URL.createObjectURL(e.target.files[0]),
+            file : e.target.files
+        })
+    }
+    handleClick = () =>{
+        const storageRef = firebase.storage().ref(`${this.props.user.email}/profile`);
+        const task = storageRef.put(this.state.file[0])
+        task.on(`state_changed` , (snapshort) => {
+            let percentage = (snapshort.bytesTransferred / snapshort.totalBytes) * 100;
+            this.setState({
+                uploadper : percentage
+            })
+        } , (error) => {
+            this.setState({
+                messag:`Upload error : ${error.message}`
+            })
+        } , () => {
+            this.setState({
+                messag:`Upload Success`,
+            })
+            task.snapshot.ref.getDownloadURL().then((downloadUrl) =>{
+                let user = new FormData();
+                user.append('url', downloadUrl)
+                user.append('id', this.props.user.id)
+                API({
+                    method : 'POST',
+                    url: '/addprofile.php',
+                    data: user,
+                    config: { headers: {'Content-Type': 'multipart/form-data' }}
+                })
+                window.location.reload()
+            })
+        }) 
     }
     render() {
         return (
@@ -46,6 +93,32 @@ export default class HeaderUser extends Component {
                     </div>
                 </div>
                 <Album></Album>
+        
+                <div className="modal fade" id="exampleModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div className="modal-dialog" role="document">
+                    <div className="modal-content">
+                    <div className="modal-header">
+                        <h5 className="modal-title" id="exampleModalLabel">Add Profile Picture</h5>
+                        <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div className="modal-body">
+                        <div className="preview-image-profile w-100">
+                            <img className="w-100 image-preview" src={this.state.fileurl}></img>
+                        </div>
+                        <div className="input-image-profile">
+                            <input onChange={this.handleChange} type="file" id="file" />
+                            <label htmlFor="file">choose a file</label>
+                        </div>
+                        <Progress className="mt-2 mb-2" color="info" value={this.state.uploadper} />
+                    </div>
+                    <div className="modal-footer">
+                        <button onClick={this.handleClick} type="button" className="btn btn-primary">Upload</button>
+                    </div>
+                    </div>
+                </div>
+                </div>
             </div>
         )
     }

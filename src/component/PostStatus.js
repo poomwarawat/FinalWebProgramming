@@ -15,10 +15,6 @@ export default class PostStatus extends Component {
         }
     }
     componentWillMount(){
-        const URL = window.location.href
-        var fullurl = URL,
-        url = "/" + fullurl.split("/")[3];
-
             let key = new FormData();
             key.append('key', localStorage.getItem('key'))
             API({
