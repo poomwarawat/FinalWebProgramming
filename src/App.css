@@ -279,6 +279,9 @@
   height: 300px;
   object-fit: cover;
 }
+.comment-picture{
+  border-radius: 50%;
+}
 @media only screen and (max-width: 767px){
   .HeadText{
     width: 90vw;

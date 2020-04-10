@@ -48,6 +48,7 @@ export default class PostStatus extends Component {
                     config: { headers: {'Content-Type': 'multipart/form-data' }}
                 })
                 .then(res =>{
+                    console.log(res)
                     this.setState({
                         post : this.state.post.concat(res.data)
                     })
@@ -70,33 +71,45 @@ export default class PostStatus extends Component {
         })
     }
     handleClick = () =>{
-        let Data = new FormData();
-        const { email, data, date, name, lastname } = this.state
-        Data.append('email', email)
-        Data.append('data', data)
-        Data.append('date', date)
-        Data.append('name', name)
-        Data.append('lastname', lastname)
+        let Token = new FormData();
+        Token.append('key', localStorage.getItem('key'))
         API({
             method : "POST",
-            url: '/postmessage.php',
-            data: Data,
+            url : "/getprofile.php",
+            data : Token,
             config: { headers: {'Content-Type': 'multipart/form-data' }}
         })
         .then(res =>{
-            if(res.data === "success"){
-                this.setState({
-                    data : '',
-                    post : []
-                })
-                this.getPost()
-            }
+            let Data = new FormData();
+            const { email, data, date, name, lastname } = this.state
+            Data.append('email', email)
+            Data.append('data', data)
+            Data.append('date', date)
+            Data.append('name', name)
+            Data.append('lastname', lastname)
+            Data.append('url', res.data.url)
+            API({
+                method : "POST",
+                url: '/postmessage.php',
+                data: Data,
+                config: { headers: {'Content-Type': 'multipart/form-data' }}
+            })
+            .then(res =>{
+                if(res.data === "success"){
+                    this.setState({
+                        data : '',
+                        post : []
+                    })
+                    this.getPost()
+                }
+            })
         })
+        
     }
     render() {
         return (
             <div>
-                <div className="container mt-4">
+                <div className="mt-4">
                     <h3>Your Status</h3>
                     <div className="mt-2 post-box">
                         <div className="head-post-box">
