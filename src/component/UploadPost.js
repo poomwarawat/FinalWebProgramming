@@ -72,14 +72,20 @@ export default class UploadPost extends Component {
                                     <div className="col-sm-3 col-12">
                                         <button className="btn btn-light w-100 btn-like"><i class="fa fa-comment-o"></i> Comment</button>
                                     </div>
-                                    <div className="col-sm-8 col-12">
+                                    {/* <div className="col-sm-8 col-12">
                                         
-                                    </div>
+                                    </div> */}
                                     
                             </div>
                         </div>
-                       
-                        
+                       <div className="row container mt-3">
+                           <div className="col-sm-1 col-12">
+                                <img width="50px" height="50px" src={require('../pic/default-user.png')} />
+                           </div>
+                           <div className="col-sm-8 col-12 mt-3">
+                               Hello
+                           </div>
+                       </div>
                         <div className="row container">
                             <div className="col-sm-10 col-12">
                                 <input className="form-control mt-2" placeholder="Enter your comment"/>
