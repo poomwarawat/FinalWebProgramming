@@ -8,7 +8,10 @@
     "@testing-library/user-event": "^7.2.1",
     "axios": "^0.19.2",
     "bootstrap": "^4.4.1",
+<<<<<<< HEAD
     "chart.js": "^2.9.3",
+=======
+>>>>>>> d50370b275d6faf9b4e9341c2f43a67a5c77b101
     "cors": "^2.8.5",
     "firebase": "^7.13.2",
     "firebase-tools": "^8.0.1",

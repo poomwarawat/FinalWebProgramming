@@ -36,6 +36,7 @@ export default class HeaderUser extends Component {
         )
     }
     handleChange = (e) =>{
+        console.log(e.target.files)
         this.setState({
             fileurl: URL.createObjectURL(e.target.files[0]),
             file : e.target.files
