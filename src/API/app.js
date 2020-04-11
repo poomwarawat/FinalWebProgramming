@@ -28,9 +28,11 @@ app.get("/", (req, res) => {
 
 app.post("/runrena", (req, res) => {
   let dataRegister = req.body;
+
   var sql =
     "INSERT INTO users (firstname, lastname, birthday, email, city, password, token , address) VALUES (?, ?, ?, ?, ?, ?, ?, ?) ";
-  let values = ["Company Inc", "Highway 37", "2020-04-08", "anuwat@mail.com", "ปงง", "password", "token", "address"];
+  let values = Object.values(dataRegister);
+  console.log("values", values);
   con.query(sql, values, function (err, result) {
     if (err) throw err;
     console.log("Number of records inserted: " + result.affectedRows);
