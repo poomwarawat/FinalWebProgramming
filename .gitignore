@@ -24,3 +24,4 @@ yarn-error.log*
 
 mySQL.js
 src/API/config/mySQL.js
+src/API/config/mySQL.js
