@@ -22,4 +22,5 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-src\API\config\mySQL.js
+mySQL.js
+src/API/config/mySQL.js
