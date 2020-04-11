@@ -48,7 +48,6 @@ export default class PostStatus extends Component {
                     config: { headers: {'Content-Type': 'multipart/form-data' }}
                 })
                 .then(res =>{
-                    console.log(res)
                     this.setState({
                         post : this.state.post.concat(res.data)
                     })
