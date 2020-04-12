@@ -17,38 +17,22 @@ export default class Register extends Component {
       err: "",
     };
   }
-  handleSignUp = () => {
-    //Post data success
-    const { name, lastname, birthday, email, address, city, password, repassword } = this.state;
-    let formData = new FormData();
-    formData.append("name", name);
-    formData.append("lastname", lastname);
-    formData.append("birthday", birthday);
-    formData.append("email", email);
-    formData.append("city", city);
-    formData.append("password", password);
-    formData.append("repassword", repassword);
-    formData.append("address", address);
-    API({
-      method: "post",
-      url: "/runrena",
-      data: formData,
-      config: { headers: { "Content-Type": "multipart/form-data" } },
-    }).then((res) => {
-      if (res.status === 200) {
-        console.log(res.data);
-        this.setState({ err: res.data });
-      }
-      if (this.state.err === "") {
-        alert("Signed Up!!");
-        window.location.reload();
-      }
-    });
+  handleSignUp = () =>{
+    const Data = new FormData()
+    Data.append("name", this.state.name)
+    Data.append("lastname", this.state.lastname)
+    Data.append("birthday", this.state.birthday)
+    Data.append("email", this.state.email)
+    Data.append("address", this.state.address)
+    Data.append("city", this.state.city)
+    Data.append("password", this.state.password)
+    Data.append("repassword", this.state.repassword)
 
-    // Get data Success
-    // API.get("/register.php")
-    // .then(res => console.log(res.data))
-  };
+    API.post('/register', Data  )
+    .then(res =>{
+      console.log(res.data)
+    })
+  }
   handleChange = (e) => {
     const value = e.target.value;
     const name = e.target.id;
