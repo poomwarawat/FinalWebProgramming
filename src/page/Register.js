@@ -30,7 +30,14 @@ export default class Register extends Component {
 
     API.post('/register', Data  )
     .then(res =>{
-      console.log(res.data)
+      if(res.data.err){
+        this.setState({
+          err : res.data.err
+        })
+      }
+      if(res.data.regis == true){
+        alert("Success")
+      }
     })
   }
   handleChange = (e) => {
