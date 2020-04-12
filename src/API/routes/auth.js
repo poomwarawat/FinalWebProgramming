@@ -82,8 +82,20 @@ router.post('/auth-token', (req, res) =>{
   const sql =  `SELECT * FROM users WHERE token = '${token}'`
   con.query(sql, (err, result) =>{
     for(var i in result){
-      return res.send({email : result[i].email, userId : result[i].userId})
+      return res.send({email : result[i].email, userId : result[i].userId, name : result[i].firstname,
+        lastname : result[i].lastname, address : result[i].address, city : result[i].city, birthday : result[i].birthday,
+        url : result[i].profileurl})
     }
+  })
+})
+
+//update profile
+router.post("/updateProfile", (req,res) =>{
+  const url = req.body.url
+  const id = req.body.id
+  const sql = `UPDATE users SET profileurl = "${url}" WHERE userId = "${id}"`;
+  con.query(sql, (err, result) =>{
+    return res.send({upload : true})
   })
 })
 

@@ -16,6 +16,28 @@ router.post("/posts", (req, res) => {
         return res.send({post : true})
     })
 });
+
+//get user post
+router.post("/get-post", (req, res) =>{
+    const sql = `SELECT post.postId, users.profileurl, post.total_distance, post.activity_title, post.description, post.pace_average, post.userId FROM post INNER JOIN users ON post.userId=users.userId`
+    con.query(sql, (err, result) =>{
+        const post = []
+        for(var i in result){
+            if(req.body.userId == result[i].userId){
+                post.push(result[i])
+            }
+        }
+        return res.send(post)
+    })
+})
+
+//get all post
+router.get('/get-all-post', (req, res) =>{
+    const sql = `SELECT post.postId, users.profileurl, post.total_distance, post.activity_title, post.description, post.pace_average, post.userId FROM post INNER JOIN users ON post.userId=users.userId`
+    con.query(sql, (err, result) =>{
+        return res.send(result)
+    })
+})
     
 //Like post --update like in post
 router.put("/post/:id", (req, res) => {});

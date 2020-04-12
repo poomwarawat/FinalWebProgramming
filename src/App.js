@@ -18,7 +18,7 @@ function App() {
         <Route path="/register" component={Register}></Route>
         <Route path="/about" component={About}></Route>
         <Route path="/contact" component={Contact}></Route>
-        <Route path="/profile" component={Profile}></Route>
+        <Route path="/profile/:id" component={Profile}></Route>
         <Route path="/graph" component={Graph}></Route>
         <Route path="/setting" component={Setting}></Route>
         <Route path="/event" component={Event}></Route>

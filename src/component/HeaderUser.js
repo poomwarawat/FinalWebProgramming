@@ -61,14 +61,14 @@ export default class HeaderUser extends Component {
             task.snapshot.ref.getDownloadURL().then((downloadUrl) =>{
                 let user = new FormData();
                 user.append('url', downloadUrl)
-                user.append('id', this.props.user.id)
-                API({
-                    method : 'POST',
-                    url: '/addprofile.php',
-                    data: user,
-                    config: { headers: {'Content-Type': 'multipart/form-data' }}
+                user.append('id', this.props.user.userId)
+                API.post('/updateProfile', user)
+                .then(res => {
+                    if(res.data.upload === true){
+                        window.location.reload()
+                    }
                 })
-                window.location.reload()
+                
             })
         }) 
     }

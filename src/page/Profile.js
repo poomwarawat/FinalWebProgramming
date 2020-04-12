@@ -8,55 +8,36 @@ export default class Profile extends Component {
     constructor(props){
         super(props)
         this.state = {
-            email : '',
-            id : '',
-            name : '',
-            lastname : '',
-            address : '',
-            city : '',
-            birthday : '',
-            urlpic : '',
-            post : []
+            urlpic : ''
         }
     }
     //https://www.thairath.co.th/media/Dtbezn3nNUxytg04OL8mgI3NIEavohv2W18gLB2c0r2biv.jpg
     componentWillMount(){
-        if(localStorage.getItem('key')){
-            let key = new FormData();
-            key.append('key', localStorage.getItem('key'))
-            API({
-                method : "POST",
-                url: '/getprofile.php',
-                data: key,
-                config: { headers: {'Content-Type': 'multipart/form-data' }}
+        const { id } = this.props.match.params
+        const token = new FormData()
+        token.append('token', id)
+        API.post('/auth-token', token )
+        .then(res =>{
+            console.log(res.data.url)
+            if(res.data.url === ""){
+                this.setState({
+                    urlpic : "http://www.accountingweb.co.uk/sites/all/modules/custom/sm_pp_user_profile/img/default-user.png"
+                })
+            }else{
+                this.setState({
+                    urlpic : res.data.url
+                })
+            }
+            this.setState({
+                email : res.data.email,
+                userId : res.data.userId,
+                name : res.data.name,
+                lastname : res.data.lastname,
+                address : res.data.address,
+                city : res.data.city,
+                birthday : res.data.birthday
             })
-            .then(res =>{
-                const { email, id, name, lastname, address, city, birthday, url} = res.data
-                if(url !== null){
-                    this.setState({
-                        email : email,
-                        id : id,
-                        name : name,
-                        lastname : lastname,
-                        address : address,
-                        city : city,
-                        birthday : birthday,
-                        urlpic : url
-                    })
-                }else{
-                    this.setState({
-                        email : email,
-                        id : id,
-                        name : name,
-                        lastname : lastname,
-                        address : address,
-                        city : city,
-                        birthday : birthday,
-                        urlpic : "http://www.accountingweb.co.uk/sites/all/modules/custom/sm_pp_user_profile/img/default-user.png"
-                    })
-                }
-            })
-        }
+        })
     }
     render() {
         return (

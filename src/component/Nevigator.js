@@ -2,6 +2,12 @@ import React, { Component } from 'react'
 import {Link} from 'react-router-dom'
 
 export default class Nevigator extends Component {
+    constructor(props){
+        super(props)
+        this.state = {
+            token : localStorage.getItem('key')
+        }
+    }
     handleLogout = () =>{
         localStorage.removeItem('key')
         window.location.reload()
@@ -23,7 +29,7 @@ export default class Nevigator extends Component {
                             <Link to='/'>
                                 <h4>Home</h4>
                             </Link>
-                            <Link to='/profile'>
+                            <Link to={`/profile/${this.state.token}`}>
                                 <h4>Profile</h4>
                             </Link>
                             <Link to='/graph'>
@@ -46,7 +52,7 @@ export default class Nevigator extends Component {
                             <Link to='/'>
                                 <h4>Home</h4>
                             </Link>
-                            <Link to='/profile'>
+                            <Link to={`/profile/${this.state.token}`}>
                                 <h4>Profile</h4>
                             </Link>
                             <Link to='/graph'>

@@ -24,22 +24,59 @@ export default class PostStatus extends Component {
         userId : '',
         description : '',
         totalDistance : '',
-        paceAverage : ''
-
+        paceAverage : '',
+        email : this.props.email,
+        post : []
     };
   }
   componentWillMount(){
-    const Key = new FormData()
-    Key.append('token', localStorage.getItem('key') )
-    API.post("/auth-token", Key)
-    .then(res => {
-        if(res.data.userId){
-            this.setState({
-                userId : res.data.userId
+    this.getPost()
+}
+    getPost = () =>{
+        const URL = window.location.href
+        var fullurl = URL,
+        url = "/" + fullurl.split("/")[3];
+
+        if(url === '/profile'){
+            console.log("profile")
+            const Key = new FormData()
+            Key.append('token', localStorage.getItem('key') )
+            API.post("/auth-token", Key)
+            .then(res => {
+                if(res.data.userId){
+                    this.setState({
+                        userId : res.data.userId
+                    })
+                }
+                const userId = new FormData()
+                userId.append('userId', this.state.userId)
+                API.post("/post/get-post", userId)
+                .then(res => {
+                    this.setState({
+                        post : this.state.post.concat(res.data)
+                    })
+                })
+            })
+        }else if(url === '/'){
+            console.log("feed")
+            const Key = new FormData()
+            Key.append('token', localStorage.getItem('key') )
+            API.post("/auth-token", Key)
+            .then(res => {
+                if(res.data.userId){
+                    this.setState({
+                        userId : res.data.userId
+                    })
+                }
+                API.get('/post/get-all-post')
+                .then(res => {
+                    this.setState({
+                        post : this.state.post.concat(res.data)
+                    })
+                })
             })
         }
-    })
-}
+    }
   handleChange = (e) => {
     const name = e.target.id;
     const value = e.target.value;
@@ -61,6 +98,10 @@ export default class PostStatus extends Component {
     .then(res => {
         if(res.data.post == true){
             alert("Post complete")
+            this.setState({
+                post : []
+            })
+            this.getPost()
         }
     })
 }
@@ -121,13 +162,13 @@ export default class PostStatus extends Component {
             </button>
           </div>
         </div>
-        {/* {this.state.post.reverse().map((datas) => {
+        {this.state.post.reverse().map((datas) => {
           return (
-            <div key={datas.id}>
+            <div key={datas.postId}>
               <UploadPost data={datas}></UploadPost>
             </div>
           );
-        })} */}
+        })}
       </div>
     );
   }
