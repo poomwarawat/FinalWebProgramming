@@ -58,15 +58,6 @@ export default class PostStatus extends Component {
                         </div>
                     </div>
                 </div>
-                {/* {
-                    this.state.post.reverse().map(datas =>{
-                        return(
-                            <div key={datas.id}>
-                                <UploadPost data={datas}></UploadPost>
-                            </div>
-                        )
-                    })
-                } */}
             </div>
         )
     }
