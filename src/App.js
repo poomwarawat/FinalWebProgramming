@@ -9,6 +9,7 @@ import Profile from "./page/Profile";
 import Graph from "./page/Graph";
 import Setting from "./page/Setting";
 import Event from "./page/Event";
+import CreateEvent from "./page/CreateEvent";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path="/graph" component={Graph}></Route>
         <Route path="/setting" component={Setting}></Route>
         <Route path="/event" component={Event}></Route>
+        <Route path="/create-event" component={CreateEvent}></Route>
       </Switch>
     </div>
   );
