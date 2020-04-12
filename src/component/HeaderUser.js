@@ -82,16 +82,16 @@ export default class HeaderUser extends Component {
                     </div>
                 </div>
                 <div className="container">
-                    <div className="About">
-                        <h1>{this.props.user.name + " " + this.props.user.lastname}</h1>
-                        <p>{this.props.user.birthday}</p>
-                        <p>{this.props.user.address + ", " + this.props.user.city}</p>
-                    </div>
-                    <div>    
-                    <div className="alert alert-danger" role="alert">
-                        Edit Profile
-                    </div>
-                    </div>
+                        <div className="About">
+                            <h1>{this.props.user.name + " " + this.props.user.lastname}</h1>
+                            <p>{this.props.user.birthday}</p>
+                            <p>{this.props.user.address + ", " + this.props.user.city}</p>
+                        </div>
+                        <div>    
+                                <div className="alert alert-danger" role="alert">
+                                    Edit Profile
+                                </div>
+                        </div>
                 </div>
                 <Album></Album>
         
