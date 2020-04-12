@@ -6,62 +6,24 @@ export default class PostStatus extends Component {
     constructor(props){
         super(props)
         this.state = {
-            email : '',
             data : '',
             date : new Date(),
-            name : '',
-            lastname : '',
-            post : []
+            userId : ''
         }
     }
     componentWillMount(){
-            let key = new FormData();
-            key.append('key', localStorage.getItem('key'))
-            API({
-                method : "POST",
-                url: '/getprofile.php',
-                data: key,
-                config: { headers: {'Content-Type': 'multipart/form-data' }}
-            })
-            .then(res => {
+        const Key = new FormData()
+        Key.append('token', localStorage.getItem('key') )
+        API.post("/auth-token", Key)
+        .then(res => {
+            if(res.data.userId){
                 this.setState({
-                    email : res.data.email,
-                    name : res.data.name,
-                    lastname : res.data.lastname
+                    userId : res.data.userId
                 })
-                this.getPost()
-            })
-        
+            }
+        })
     }
-    getPost = () =>{
-        const URL = window.location.href
-        var fullurl = URL,
-        url = "/" + fullurl.split("/")[3];
 
-        if(url === "/profile"){
-            let Email = new FormData();
-            Email.append('email', this.state.email)
-                API({
-                    method : "POST",
-                    url: '/getpost.php',
-                    data: Email,
-                    config: { headers: {'Content-Type': 'multipart/form-data' }}
-                })
-                .then(res =>{
-                    this.setState({
-                        post : this.state.post.concat(res.data)
-                    })
-            })
-        }else if(url === "/"){
-            API.get("/getpost.php")
-            .then(res =>{
-                this.setState({
-                    post : this.state.post.concat(res.data)
-                })
-            })
-        }
-        
-    }
     handleChange = (e) =>{
         const name = e.target.id
         const value = e.target.value
@@ -70,40 +32,16 @@ export default class PostStatus extends Component {
         })
     }
     handleClick = () =>{
-        let Token = new FormData();
-        Token.append('key', localStorage.getItem('key'))
-        API({
-            method : "POST",
-            url : "/getprofile.php",
-            data : Token,
-            config: { headers: {'Content-Type': 'multipart/form-data' }}
+        const Data = new FormData()
+        Data.append('data', this.state.data)
+        Data.append('date', this.state.date)
+        Data.append('userId', this.state.userId)
+        API.post("/post/posts", Data)
+        .then(res => {
+            if(res.data.post == true){
+                alert("Post complete")
+            }
         })
-        .then(res =>{
-            let Data = new FormData();
-            const { email, data, date, name, lastname } = this.state
-            Data.append('email', email)
-            Data.append('data', data)
-            Data.append('date', date)
-            Data.append('name', name)
-            Data.append('lastname', lastname)
-            Data.append('url', res.data.url)
-            API({
-                method : "POST",
-                url: '/postmessage.php',
-                data: Data,
-                config: { headers: {'Content-Type': 'multipart/form-data' }}
-            })
-            .then(res =>{
-                if(res.data === "success"){
-                    this.setState({
-                        data : '',
-                        post : []
-                    })
-                    this.getPost()
-                }
-            })
-        })
-        
     }
     render() {
         return (
@@ -120,7 +58,7 @@ export default class PostStatus extends Component {
                         </div>
                     </div>
                 </div>
-                {
+                {/* {
                     this.state.post.reverse().map(datas =>{
                         return(
                             <div key={datas.id}>
@@ -128,7 +66,7 @@ export default class PostStatus extends Component {
                             </div>
                         )
                     })
-                }
+                } */}
             </div>
         )
     }

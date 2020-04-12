@@ -12,24 +12,23 @@ export default class Start extends Component {
     }
     componentWillMount(){
         if(localStorage.getItem('key')){
-            let key = new FormData();
-            key.append('key', localStorage.getItem('key'))
-            API({
-                method : "POST",
-                url: '/getuser.php',
-                data: key,
-                config: { headers: {'Content-Type': 'multipart/form-data' }}
-            })
+            const key = new FormData()
+            key.append('token', localStorage.getItem('key'))
+            API.post('/auth-token', key)
             .then(res =>{
-                this.setState({ email : res.data})
+                if(res.data.email){
+                    this.setState({
+                        email : res.data.email
+                    })
+                }
             })
         }
     }
     renderPage = () =>{
-        const { email } = this.state
-        if(email !== ""){
+        
+        if(localStorage.getItem('key')){
             return(
-                <Feed email={email}></Feed>
+                <Feed email={this.state.email}></Feed>
             )
         }else{
             return(

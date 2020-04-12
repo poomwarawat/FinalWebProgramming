@@ -21,23 +21,11 @@ con.connect(function (err) {
 });
 
 //requiring routers
-const authRoutes = require("./routes/auth"),
-  post = require("./routes/post");
-
-// app.post("/runrena", (req, res) => {
-//   let dataRegister = req.body;
-
-//   var sql =
-//     "INSERT INTO users (firstname, lastname, birthday, email, city, password, token , address) VALUES (?, ?, ?, ?, ?, ?, ?, ?) ";
-//   let values = Object.values(dataRegister);
-//   console.log("values", values);
-//   con.query(sql, values, function (err, result) {
-//     if (err) throw err;
-//     console.log("Number of records inserted: " + result.affectedRows);
-//   });
-// });
+const authRoutes = require("./routes/auth");
+const postStatus = require("./routes/post");
 
 app.use("/", authRoutes);
+app.use('/post', postStatus)
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

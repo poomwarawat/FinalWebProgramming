@@ -24,17 +24,12 @@ export default class Start extends Component {
         let formData = new FormData();
         formData.append('email', email)
         formData.append('password', password)
-        API({
-            method: 'post',
-            url: '/login.php',
-            data: formData,
-            config: { headers: {'Content-Type': 'multipart/form-data' }}
-        })
+        API.post('/login', formData)
         .then(res =>{
             if(res.data.err){
-                this.setState({ err: res.data.err })
+                console.log(res.data.err)
             }else{
-                localStorage.setItem('key', res.data.token)
+                localStorage.setItem("key", res.data.token)
                 window.location.reload()
             }
         })
