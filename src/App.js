@@ -9,7 +9,8 @@ import Profile from "./page/Profile";
 import Graph from "./page/Graph";
 import Setting from "./page/Setting";
 import Event from "./page/Event";
-
+import Myalbum from "./page/Myalbum";
+import Myphoto from "./page/Myphoto";
 function App() {
   return (
     <div className="App">
@@ -22,6 +23,8 @@ function App() {
         <Route path="/graph" component={Graph}></Route>
         <Route path="/setting" component={Setting}></Route>
         <Route path="/event" component={Event}></Route>
+        <Route path="/Myalbum" component={Myalbum} exact></Route>
+        <Route path="/Myalbum/Myphoto" component={Myphoto}></Route>
       </Switch>
     </div>
   );

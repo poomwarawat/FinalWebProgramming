@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
-
+import {Link} from 'react-router-dom'
 export default class Album extends Component {
     render() {
         return (
             <div className="container">
-            <h3>Your Album</h3>
+                <Link to='/myalbum'>
+                    <h3>Album</h3>     
+                </Link>
             <div className="list-album">
                 <div className="album">
                     <img src="https://simg.kapook.com/o/photo/129/kapook_world-128211.jpg" alt=""></img>
