@@ -13,15 +13,7 @@ export default class Feed extends Component {
         }
     }
     componentWillMount(){
-        API.get('/getpost.php')
-        .then(res =>{
-            this.setState({
-                post : this.state.post.concat(res.data)
-            })
-        })
-        .then(res =>{
-            this.renderPost()
-        })
+        
     }
     renderPost = () =>{
         return(
