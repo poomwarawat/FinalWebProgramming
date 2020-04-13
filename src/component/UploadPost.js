@@ -6,32 +6,54 @@ export default class UploadPost extends Component {
     constructor(props){
         super(props)
         this.state = {
-            display1 : "",
-            display2 : "none",
-            comment : ""
+            comment : "",
+            PostComment : []
         }
     }
-   
     componentWillMount(){
-        if(this.props.data){
+        this.getComment()
+    }
+    getComment = () =>{
+        const postId = new FormData()
+        postId.append("postId", this.props.data.postId)
+        API.post("/post/get-comment", postId)
+        .then(res => {
+            console.log(res.data)
             this.setState({
-                display1 : "",
-                display2 : "none"
+                PostComment : this.state.PostComment.concat(res.data)
             })
-        }else{
-            this.setState({
-                display1 : "none",
-                display2 : ""
-            })
-        }
+        })
     }
     handleChange = (e) =>{
         this.setState({
             comment : e.target.value
         })
     }
+    renderProfile = () =>{
+        if(this.props.data.profileurl !== ""){
+            return(
+                <img src={this.props.data.profileurl} className="comment-picture" />
+            )
+        }else{
+            return(
+                <img src="http://www.accountingweb.co.uk/sites/all/modules/custom/sm_pp_user_profile/img/default-user.png" className="comment-picture" />
+            )
+        }
+    }
     handleClick = (e) =>{
-        
+        const Comment = new FormData()
+        Comment.append("userId", this.props.userId)
+        Comment.append("content", this.state.comment)
+        Comment.append("postId", e.target.id)
+        API.post("/post/post-comment", Comment)
+        .then(res => {
+            if(res.data.comment === true){
+                this.setState({
+                    PostComment : []
+                })
+                this.getComment()
+            }
+        })
     }
     render() {
         return (
@@ -43,11 +65,11 @@ export default class UploadPost extends Component {
                            <div className="row mt-4">
                                <div className="col-sm-1 col-2">
                                     <div className="p_profile_pic">                     
-                                        <img src={this.props.data.profileurl} className="comment-picture" />
+                                        {this.renderProfile()}
                                     </div>
                                </div>
                                <div className="col-sm-10 col-8">
-                                        <h5 className="mt-3 ml-3">{this.props.data.activity_title}</h5>   
+                                        <h5 id="name-post" className="mt-2 ml-3">{this.props.data.firstname + " " + this.props.data.lastname}</h5>   
                                </div>   
                                <div className="col-sm-1 col-2">
                                    
@@ -75,10 +97,18 @@ export default class UploadPost extends Component {
                                     </div>                                    
                             </div>
                         </div>                       
-                        {/* <CommentBox userID={this.props.data.id}></CommentBox> */}
+                        {
+                            this.state.PostComment.map(datas =>{
+                                return(
+                                    <div key={datas.commentId}>
+                                        <CommentBox data={datas}></CommentBox>
+                                    </div>
+                                )
+                            })
+                        }
                         <div className="row p-2">
                             <div className="col-sm-8 col-12">
-                                <input onChange={this.handleChange} id={`comment${this.props.data.postId}`} className="form-control mt-2" placeholder="Enter your comment"/>
+                                <input onChange={this.handleChange} id="comment" className="form-control mt-2" placeholder="Enter your comment"/>
                             </div>
                             <div className="col-sm-4 col-12">
                                 <button id={this.props.data.postId} onClick={this.handleClick} className="btn btn-primary mt-2 w-100">Comment</button>

@@ -3,10 +3,8 @@ CREATE TABLE comments
   commentId int NOT NULL
   AUTO_INCREMENT,
   userId int NOT NULL,
-  firstname TEXT,
-  lastname TEXT,
+  postId int NOT NULL,
   content TEXT,
-  profileurl TEXT,
   PRIMARY KEY
   (commentId)
 )

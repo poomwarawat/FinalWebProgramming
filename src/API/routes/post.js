@@ -19,7 +19,7 @@ router.post("/posts", (req, res) => {
 
 //get user post
 router.post("/get-post", (req, res) =>{
-    const sql = `SELECT post.postId, users.profileurl, post.total_distance, post.activity_title, post.description, post.pace_average, post.userId FROM post INNER JOIN users ON post.userId=users.userId`
+    const sql = `SELECT post.postId, users.firstname, users.lastname, users.profileurl, post.total_distance, post.activity_title, post.description, post.pace_average, post.userId FROM post INNER JOIN users ON post.userId=users.userId`
     con.query(sql, (err, result) =>{
         const post = []
         for(var i in result){
@@ -33,7 +33,24 @@ router.post("/get-post", (req, res) =>{
 
 //get all post
 router.get('/get-all-post', (req, res) =>{
-    const sql = `SELECT post.postId, users.profileurl, post.total_distance, post.activity_title, post.description, post.pace_average, post.userId FROM post INNER JOIN users ON post.userId=users.userId`
+    const sql = `SELECT post.postId, users.firstname, users.lastname, users.profileurl, post.total_distance, post.activity_title, post.description, post.pace_average, post.userId FROM post INNER JOIN users ON post.userId=users.userId`
+    con.query(sql, (err, result) =>{
+        return res.send(result)
+    })
+})
+
+//post comment
+router.post("/post-comment", (req, res) =>{
+    const sql = `INSERT INTO comments (userId, postId, content) VALUES ('${req.body.userId}', '${req.body.postId}', '${req.body.content}')`
+    con.query(sql, (err, result) =>{
+        return res.send({comment : true})
+    })
+})
+
+//get comment
+router.post("/get-comment", (req, res) =>{
+    const sql = `SELECT comments.commentId, comments.content, users.profileurl FROM comments INNER JOIN users ON comments.userId=users.userId WHERE postId='${req.body.postId}'`
+    // const sql = `SELECT * FROM comments WHERE postId='${req.body.postId}'`
     con.query(sql, (err, result) =>{
         return res.send(result)
     })

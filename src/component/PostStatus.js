@@ -86,7 +86,6 @@ export default class PostStatus extends Component {
   };
   handleClick = () =>{
     const Data = new FormData()
-    console.log(this.state)
     Data.append('data', this.state.data)
     Data.append('date', this.state.date)
     Data.append('userId', this.state.userId)
@@ -97,7 +96,6 @@ export default class PostStatus extends Component {
     API.post("/post/posts", Data)
     .then(res => {
         if(res.data.post == true){
-            alert("Post complete")
             this.setState({
                 post : []
             })
@@ -165,7 +163,7 @@ export default class PostStatus extends Component {
         {this.state.post.reverse().map((datas) => {
           return (
             <div key={datas.postId}>
-              <UploadPost data={datas}></UploadPost>
+              <UploadPost userId={this.state.userId} data={datas}></UploadPost>
             </div>
           );
         })}

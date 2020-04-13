@@ -2,53 +2,28 @@ import React, { Component } from 'react'
 import API from '../API/API'
 
 export default class CommentBox extends Component {
-    constructor(props){
-        super(props)
-        this.state = {
-            data : []
+    renderPic = () =>{
+        if(this.props.data.profileurl !== ""){
+            return(
+                <img className="comment-picture" src={this.props.data.profileurl} />
+            )
+        }else{
+            return(
+                <img className="comment-picture" src="http://www.accountingweb.co.uk/sites/all/modules/custom/sm_pp_user_profile/img/default-user.png" />
+            )
         }
-    }
-    componentWillMount(){
-        let Data = new FormData();
-        Data.append('userID', this.props.userID)
-        API({
-            method: "POST",
-            url : '/getcomment.php',
-            data : Data,
-            config: { headers: {'Content-Type': 'multipart/form-data' }}
-        })
-        .then(res => {
-            if(res.data == "none"){
-                this.setState({
-                    data : []
-                })
-            }
-            else{
-                this.setState({
-                    data : this.state.data.concat(res.data)
-                })
-            }
-        })
     }
     render() {
         return (
             <div>
-                {
-                    this.state.data.map(datas =>{
-                        return(
-                            <div key={datas.id}>
-                                <div className="row container mt-3">
-                                    <div className="col-sm-1 col-2">
-                                        <img className="comment-picture" width="50px" height="50px" src={datas.url} />
-                                    </div>
-                                    <div className="col-sm-8 col-9 mt-3 ml-3">
-                                        {datas.data}
-                                    </div>
-                                </div>  
-                            </div>
-                        )
-                    })
-                }
+                <div className="row container mt-3">
+                    <div className="col-sm-1 col-2">
+                        {this.renderPic()}
+                    </div>
+                    <div className="col-sm-8 col-9 mt-3 ml-3">
+                        {this.props.data.content}
+                    </div>
+                </div>  
             </div>
         )
     }

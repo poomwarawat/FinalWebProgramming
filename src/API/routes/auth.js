@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const con = require("../config/mySQL");
 const { registerValidation, loginValidation } = require('../validation');
-const Cookies = require('cookies');
 const md5 = require('MD5');
 
 router.get("/", (req, res) => {
@@ -52,7 +51,7 @@ router.post("/register", async (req, res) => {
 router.post("/login",async (req, res) => {
   const {email, password} = req.body
 
-  const { error } = registerValidation(req.body)
+  const { error } = loginValidation(req.body)
   
   if (error) {
     return res.send({err : error.details[0].message})
@@ -99,8 +98,8 @@ router.post("/updateProfile", (req,res) =>{
   })
 })
 
-//handling logout
 
+//handling logout
 router.post("/logout", (req, res) => {
   
 });
