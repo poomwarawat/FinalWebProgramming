@@ -13,6 +13,7 @@ export default class Profile extends Component {
     }
     //https://www.thairath.co.th/media/Dtbezn3nNUxytg04OL8mgI3NIEavohv2W18gLB2c0r2biv.jpg
     componentWillMount(){
+        console.log("useless")
         const { id } = this.props.match.params
         const token = new FormData()
         token.append('token', id)
