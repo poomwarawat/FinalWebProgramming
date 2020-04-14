@@ -63,7 +63,7 @@ export default class CreateEvent extends Component {
     if (this.state.marathon) {
       Data.append("marathonPrice", this.state.marathonPrice);
     }
-    //API.post("/event", Data).then((res) => {});
+    API.post("/event", Data).then((res) => {});
   };
   render() {
     const { funrun, mini, half, marathon } = this.state;
