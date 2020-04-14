@@ -26,13 +26,13 @@ export default class DetailEventPage extends Component {
             <Container>
               <Row>
                 <Col md="7">
-                  <div class="shadow-sm p-3 mb-5 bg-white rounded mt-4">
+                  <div className="shadow-sm p-3 mb-5 bg-white rounded mt-4">
                     <h5 className="display-5 b-title-text">2020 Cinco De Mayo Virtual 5K Run</h5>
                     <p className="mt-0 mb-0 b-sub-text-1">May 05, 2020</p>
                     <p className="mt-0 mb-0 b-sub-text-1">From Home • 12345 My Home Your City, MD 21046</p>
                     <p className="mt-0 mb-0 b-sub-text-1">Organized by Rip It Events</p>
                   </div>
-                  <div class="shadow-sm p-3 mb-5 bg-white rounded mt-4">
+                  <div className="shadow-sm p-3 mb-5 bg-white rounded mt-4">
                     <h5 className="display-5 b-title-text">Categories</h5>
                     <hr />
                     <div>
@@ -77,11 +77,11 @@ export default class DetailEventPage extends Component {
                       </Row>
                     </div>
                   </div>
-                  <div class="shadow-sm p-3 mb-5 bg-white rounded mt-4">
+                  <div className="shadow-sm p-3 mb-5 bg-white rounded mt-4">
                     <h5 className="display-5 b-title-text">About This Event</h5>
                     <hr />
-                    <p class="mb-0 b-sub-text-2">May 05, 2020 Tuesday</p>
-                    <p class="mb-0 b-sub-text-2">From Home 12345 My Home Your City, MD 21046</p>
+                    <p className="mb-0 b-sub-text-2">May 05, 2020 Tuesday</p>
+                    <p className="mb-0 b-sub-text-2">From Home 12345 My Home Your City, MD 21046</p>
                     <hr />
                     <p>
                       We want to inspire you to be POSITIVE and HEALTHY during this time of uncertainty. Join us on May
@@ -96,7 +96,7 @@ export default class DetailEventPage extends Component {
                   </div>
                 </Col>
                 <Col md="5">
-                  <div class="shadow-sm p-3 mb-0 bg-white rounded mt-4">
+                  <div className="shadow-sm p-3 mb-0 bg-white rounded mt-4">
                     <h5 className="display-5 b-title-text">Entry Fee</h5>
                     <hr />
                     <p className="mt-0 mb-0 b-sub-text-1 b-checkout-title">
