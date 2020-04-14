@@ -10,6 +10,7 @@ import Graph from "./page/Graph";
 import Setting from "./page/Setting";
 import Event from "../src/page/RunningEventPage/Event";
 import CreateEvent from "../src/page/RunningEventPage/CreateEvent";
+import DetailsEvent from "../src/page/RunningEventPage/DetailsEvent";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path="/setting" component={Setting}></Route>
         <Route path="/event" component={Event}></Route>
         <Route path="/create-event" component={CreateEvent}></Route>
+        <Route path="/events/:id" component={DetailsEvent}></Route>
       </Switch>
     </div>
   );
