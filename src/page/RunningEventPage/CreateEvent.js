@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Navigator from "../component/Nevigator";
+import Navigator from "../../component/Nevigator";
 import {
   Row,
   Col,

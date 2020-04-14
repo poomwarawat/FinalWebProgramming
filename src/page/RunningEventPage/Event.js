@@ -13,9 +13,12 @@ import {
   CardTitle,
   CardHeader,
 } from "reactstrap";
-import Navigator from "../component/Nevigator";
-import EventList from "../component/RunningEvent/EventList";
+import Navigator from "../../component/Nevigator";
+import EventList from "../../component/RunningEvent/EventList";
 class Event extends Component {
+  handelClick = () => {
+    this.props.history.push("/create-event");
+  };
   render() {
     const events = [
       { title: "Anuwat", description: "Run for dad", date: "24-09-20" },
@@ -42,7 +45,7 @@ class Event extends Component {
                 runner in the world
               </p>
               <hr className="my-2" />
-              <Button>Create Event</Button>
+              <Button onClick={this.handelClick}>Create Event</Button>
             </Jumbotron>
             <EventList events={events} />
           </Col>

@@ -8,8 +8,8 @@ import Contact from "./page/Contact";
 import Profile from "./page/Profile";
 import Graph from "./page/Graph";
 import Setting from "./page/Setting";
-import Event from "./page/Event";
-import CreateEvent from "./page/CreateEvent";
+import Event from "../src/page/RunningEventPage/Event";
+import CreateEvent from "../src/page/RunningEventPage/CreateEvent";
 
 function App() {
   return (
