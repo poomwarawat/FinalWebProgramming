@@ -17,13 +17,22 @@ router.post("/event", (req, res) => {
   let values = Object.values(data);
   con.query(sql, values, function (err, result) {
     if (err) throw err;
-    console.log("running_event record inserted");
     return res.send({ event_created: true });
   });
 });
 
 router.get("/event", (req, res) => {
   con.query("SELECT * FROM running_event", (err, result, fields) => {
+    if (err) throw err;
+    res.send(result);
+  });
+});
+
+router.get("/event/:id", (req, res) => {
+  let eventId = req.params.id;
+  let sql = `SELECT * FROM running_event WHERE eventId = ${eventId}`;
+
+  con.query(sql, (err, result, fields) => {
     if (err) throw err;
     res.send(result);
   });

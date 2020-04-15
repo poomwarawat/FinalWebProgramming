@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import {
   Container,
   Row,
@@ -19,7 +20,7 @@ export default class EventSummary extends Component {
     let date = events["event_date"].split("T", 1);
     return (
       <Col sm="12" md="4" className="mt-2">
-        <Card>
+        <Card className="h-100">
           <CardHeader>{events.title}</CardHeader>
           <CardImg
             top
@@ -30,7 +31,9 @@ export default class EventSummary extends Component {
           <CardBody>
             <CardTitle>Date : {date[0]}</CardTitle>
             <CardText>Location : {events.address}</CardText>
-            <Button>Go somewhere</Button>
+            <Link to={"events/" + events.eventId}>
+              <Button size="sm">Register</Button>
+            </Link>
           </CardBody>
         </Card>
       </Col>
