@@ -24,7 +24,6 @@ class Event extends Component {
     this.props.history.push("/create-event");
   };
   componentDidMount = () => {
-    console.log("mount");
     API.get("/event").then((res) => {
       this.setState({ events: res.data });
     });
@@ -33,9 +32,7 @@ class Event extends Component {
   render() {
     const { events } = this.state;
     if (events) {
-      events.forEach((event) => {
-        console.log(typeof event.event_date);
-      });
+      events.forEach((event) => {});
     }
     return (
       <div>

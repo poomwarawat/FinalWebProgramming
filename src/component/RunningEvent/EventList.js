@@ -8,7 +8,6 @@ export default class EventList extends Component {
   };
   render() {
     const { events } = this.state;
-    console.log(events);
     return (
       <div>
         <Row>

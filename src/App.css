@@ -17,10 +17,7 @@
   font-weight: 900;
 }
 
-.header p,
-label {
-  /* color: rgb(133, 126, 172); */
-}
+
 
 .header span {
   font-weight: 700;
@@ -215,7 +212,7 @@ h4:hover {
   border-radius: 50%;
 }
 
-.p_profile_pic {}
+
 
 .p_profile_pic img {
   width: 50px;

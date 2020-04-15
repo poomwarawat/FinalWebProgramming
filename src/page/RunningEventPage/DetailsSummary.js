@@ -15,6 +15,18 @@ import {
 } from "reactstrap";
 
 export default class DetailsSummary extends Component {
+  state = {
+    userId: this.props.userId,
+    funrunSelected: false,
+    miniSelected: false,
+    halfSelected: false,
+    marathonSelected: false,
+    categorySelected: null,
+  };
+  handelClick = (e) => {
+    this.setState({ categorySelected: e.target.id });
+  };
+
   render() {
     const { eventData } = this.props;
     let eventDate = eventData[0]["event_date"].split("T", 1);
@@ -33,6 +45,7 @@ export default class DetailsSummary extends Component {
               </div>
               <div className="shadow-sm p-3 mb-5 bg-white rounded mt-4">
                 <h5 className="display-5 b-title-text">Categories</h5>
+                <p className="mt-0 mb-0 b-sub-text-2 text-warning">You can register only one category.</p>
                 <hr />
                 <div>
                   {eventData[0]["funrun_price"] >= 0 ? (
@@ -44,7 +57,13 @@ export default class DetailsSummary extends Component {
                         {eventData[0]["funrun_price"]} THB
                       </Col>
                       <Col md="2">
-                        <Button color="primary" size="sm">
+                        <Button
+                          color="primary"
+                          size="sm"
+                          onClick={this.handelClick}
+                          disabled={this.state.funrunSelected}
+                          id="funrun"
+                        >
                           Register
                         </Button>
                       </Col>
@@ -59,7 +78,13 @@ export default class DetailsSummary extends Component {
                         {eventData[0]["mini_price"]} THB
                       </Col>
                       <Col md="2">
-                        <Button color="primary" size="sm">
+                        <Button
+                          color="primary"
+                          size="sm"
+                          onClick={this.handelClick}
+                          disabled={this.state.miniSelected}
+                          id="minimarathon"
+                        >
                           Register
                         </Button>
                       </Col>
@@ -74,7 +99,13 @@ export default class DetailsSummary extends Component {
                         {eventData[0]["half_price"]} THB
                       </Col>
                       <Col md="2">
-                        <Button color="primary" size="sm">
+                        <Button
+                          color="primary"
+                          size="sm"
+                          onClick={this.handelClick}
+                          disabled={this.state.halfButton}
+                          id="halfmarathon"
+                        >
                           Register
                         </Button>
                       </Col>
@@ -89,11 +120,31 @@ export default class DetailsSummary extends Component {
                         300 THB
                       </Col>
                       <Col md="2">
-                        <Button color="primary" size="sm">
+                        <Button
+                          color="primary"
+                          size="sm"
+                          onClick={this.handelClick}
+                          disabled={this.state.marathonSelected}
+                          id="marathon"
+                        >
                           Register
                         </Button>
                       </Col>
                     </Row>
+                  ) : null}
+                  {this.state.categorySelected === "funrun" ? (
+                    <p className="text-success">You choose : Fun Run (5K) {eventData[0]["funrun_price"]} THB</p>
+                  ) : null}
+                  {this.state.categorySelected === "minimarathon" ? (
+                    <p className="text-success">You choose : Mini Mathon Run (10K) {eventData[0]["mini_price"]} THB</p>
+                  ) : null}
+                  {this.state.categorySelected === "halfmarathon" ? (
+                    <p className="text-success">
+                      You choose : Half Marathon Run (21K) {eventData[0]["half_price"]} THB
+                    </p>
+                  ) : null}
+                  {this.state.categorySelected === "marathon" ? (
+                    <p className="text-success">You choose : Marathon Run (21K) {eventData[0]["marathon_price"]} THB</p>
                   ) : null}
                 </div>
               </div>
@@ -116,9 +167,6 @@ export default class DetailsSummary extends Component {
                 <hr />
                 <p className="mt-0 mb-0 b-sub-text-1 b-checkout-title">
                   Runner : <span className="b-checkout-data">Anuwat Sukthong</span>
-                </p>
-                <p className="mt-0 mb-0 b-sub-text-1 b-checkout-title">
-                  Tel : <span className="b-checkout-data">0863975940</span>
                 </p>
                 <p className="mt-0 mb-0 b-sub-text-1 b-checkout-title">
                   Categories : <span className="b-checkout-data">Fun Run (5K)</span>
