@@ -17,7 +17,7 @@ app.use(express.static("public"));
 //connect with mysql database
 con.connect(function (err) {
   if (err) throw err;
-  console.log("Connected with database");
+  console.log("Connected with database1");
 });
 
 //requiring routers
