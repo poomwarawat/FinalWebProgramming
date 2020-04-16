@@ -9,7 +9,8 @@ export default class Profile extends Component {
         super(props)
         this.state = {
             urlpic : '',
-            params : ''
+            params : '',
+            cover : ''
         }
     }
     //https://www.thairath.co.th/media/Dtbezn3nNUxytg04OL8mgI3NIEavohv2W18gLB2c0r2biv.jpg
@@ -20,15 +21,26 @@ export default class Profile extends Component {
         token.append('token', id)
         API.post('/auth-token', token )
         .then(res =>{
-            if(res.data.url === ""){
+            if(res.data.url === "" || res.data.url === null){
                 this.setState({
                     urlpic : "http://www.accountingweb.co.uk/sites/all/modules/custom/sm_pp_user_profile/img/default-user.png"
                 })
-            }else{
+            }if(res.data.url !== ""){
                 this.setState({
                     urlpic : res.data.url
                 })
             }
+            if(res.data.cover !== "" && res.data.cover !== null){
+                this.setState({
+                    cover : res.data.cover
+                })
+            }
+            else{
+                this.setState({
+                    cover : "http://www.thailandoutdoor.com/wp-content/uploads/12443704_10207970802445350_1538187090_o.jpg"
+                })
+            }
+            
             this.setState({
                 email : res.data.email,
                 userId : res.data.userId,
@@ -36,7 +48,7 @@ export default class Profile extends Component {
                 lastname : res.data.lastname,
                 address : res.data.address,
                 city : res.data.city,
-                birthday : res.data.birthday
+                birthday : res.data.birthday,
             })
         })
     }

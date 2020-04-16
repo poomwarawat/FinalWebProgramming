@@ -4,6 +4,7 @@ import firebase from 'firebase'
 import { Progress } from 'reactstrap';
 import API from '../API/API'
 import EditProfile from '../component/EditProfile'
+import UploadCover from '../component/UploadCover'
 
 export default class HeaderUser extends Component {
     constructor(props){
@@ -14,6 +15,7 @@ export default class HeaderUser extends Component {
             file : null,
             uploadper : null,
             messag : null,
+            coverDefault : "http://www.thailandoutdoor.com/wp-content/uploads/12443704_10207970802445350_1538187090_o.jpg"
         }
         var firebaseConfig = {
             apiKey: "AIzaSyCu36Uit6DfffqB7DiQjyHLhCmAI-s6pxI",
@@ -44,8 +46,7 @@ export default class HeaderUser extends Component {
             )
         }
     }
-    handleChange = (e) =>{
-        console.log(e.target.files)
+    handleChangeProfile = (e) =>{
         this.setState({
             fileurl: URL.createObjectURL(e.target.files[0]),
             file : e.target.files
@@ -90,11 +91,22 @@ export default class HeaderUser extends Component {
             )
         }
     }
+    renderUploadCover = () =>{
+        if(localStorage.getItem('key') === this.props.param){
+            return(
+                <UploadCover userId={this.props.user.userId} email={this.props.user.email}></UploadCover>
+            )
+        }
+    }
     render() {
         return (
             <div>
                 <div className="cover">
-                    <img className="coverimg" src="http://www.thailandoutdoor.com/wp-content/uploads/12443704_10207970802445350_1538187090_o.jpg" alt="Cinque Terre" width="1000" height="300"/>
+                    {console.log(this.props.user)}
+                    <img className="coverimg" src={this.props.user.cover} alt="Cinque Terre" width="1000" height="300"/>
+                    <div className="top-left">
+                        {this.renderUploadCover()}
+                    </div>
                     <div className="bottomleft">
                         {this.renderPic()}
                     </div>
@@ -125,8 +137,8 @@ export default class HeaderUser extends Component {
                             <img className="w-100 image-preview" src={this.state.fileurl}></img>
                         </div>
                         <div className="input-image-profile">
-                            <input onChange={this.handleChange} type="file" id="file" />
-                            <label htmlFor="file">choose a file</label>
+                            <input onChange={this.handleChangeProfile} type="file" id="fileProfile" />
+                            <label htmlFor="fileProfile">choose a file</label>
                         </div>
                         <Progress className="mt-2 mb-2" color="info" value={this.state.uploadper} />
                     </div>

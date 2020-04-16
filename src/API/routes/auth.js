@@ -83,7 +83,7 @@ router.post('/auth-token', (req, res) =>{
     for(var i in result){
       return res.send({email : result[i].email, userId : result[i].userId, name : result[i].firstname,
         lastname : result[i].lastname, address : result[i].address, city : result[i].city, birthday : result[i].birthday,
-        url : result[i].profileurl})
+        url : result[i].profileurl, cover : result[i].cover})
     }
   })
 })
@@ -103,6 +103,14 @@ router.post("/update-profile", (req, res) =>{
   const { userId, firstname, lastname, birthday, address, city } = req.body
   const sql = `UPDATE users SET firstname='${firstname}', lastname='${lastname}', birthday='${birthday}', address='${address}', city='${city}' WHERE userId='${userId}'`
   con.query(sql, (err, result) => {
+    return res.send({upload : true})
+  })
+})
+
+//upload cover image
+router.post("/upload-cover", (req, res) =>{
+  const sql = `UPDATE users SET cover='${req.body.url}' WHERE userId='${req.body.userId}'`
+  con.query(sql, (err, result) =>{
     return res.send({upload : true})
   })
 })
