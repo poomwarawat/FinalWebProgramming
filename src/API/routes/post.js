@@ -8,8 +8,8 @@ router.get("/posts", (req, res) => {});
 
 //Create a new post
 router.post("/posts", (req, res) => {
-    const sql = `INSERT INTO post (activity_title, userId, total_distance, pace_average, description) VALUES (?, ?, ?, ?, ?)`;
-    const Data = [req.body.data, req.body.userId, req.body.totalDistance, req.body.paceAverage, req.body.description ]
+    const sql = `INSERT INTO post (activity_title, userId, total_distance, totalTime,  pace_average, description) VALUES (?, ?, ?, ?, ?, ?)`;
+    const Data = [req.body.data, req.body.userId, req.body.totalDistance, req.body.totalTime, req.body.paceAverage, req.body.description ]
     const value = Object.values(Data)
     con.query(sql, value, (err, result) =>{
         if(err) throw err
@@ -19,21 +19,15 @@ router.post("/posts", (req, res) => {
 
 //get user post
 router.post("/get-post", (req, res) =>{
-    const sql = `SELECT post.postId, users.firstname, users.lastname, users.profileurl, post.total_distance, post.activity_title, post.description, post.pace_average, post.userId FROM post INNER JOIN users ON post.userId=users.userId`
-    con.query(sql, (err, result) =>{
-        const post = []
-        for(var i in result){
-            if(req.body.userId == result[i].userId){
-                post.push(result[i])
-            }
-        }
-        return res.send(post)
+    const sql = `SELECT post.postId, users.firstname, users.lastname, users.profileurl, post.total_distance, post.activity_title, post.description, post.pace_average, post.userId, post.totalTime, users.token FROM post INNER JOIN users ON post.userId=users.userId WHERE post.userId=${req.body.userId}`
+    con.query(sql, (err, result) => {
+        return res.send(result)
     })
 })
 
 //get all post
 router.get('/get-all-post', (req, res) =>{
-    const sql = `SELECT post.postId, users.firstname, users.lastname, users.profileurl, post.total_distance, post.activity_title, post.description, post.pace_average, post.userId FROM post INNER JOIN users ON post.userId=users.userId`
+    const sql = `SELECT post.postId, post.totalTime, users.firstname, users.lastname, users.profileurl, post.total_distance, post.activity_title, post.description, post.pace_average, post.userId, users.token FROM post INNER JOIN users ON post.userId=users.userId`
     con.query(sql, (err, result) =>{
         return res.send(result)
     })
@@ -77,7 +71,7 @@ router.post("/delete-like", (req, res) =>{
 })
 
 //get like
-router.post("/get-like", (req, res) =>{
+router.get("/get-like", (req, res) =>{
     if(req.query.userId != "" && req.query.posId != ""){
         const sql = `SELECT * FROM postLike WHERE postId=${req.query.postId} AND userId=${req.query.userId}`
         con.query(sql, (err, result) =>{
@@ -100,9 +94,6 @@ router.post("/get-user-like", (req, res) =>{
     }
 })
 
-// router.get("/get-like", (req, res) =>{
-//     console.log(req.query.postId)
-// })
 
 router.post("/test", (req, res) =>{
     console.log(req.body)

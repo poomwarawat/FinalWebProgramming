@@ -25,21 +25,22 @@ export default class PostStatus extends Component {
         description : '',
         totalDistance : '',
         paceAverage : '',
+        totalTime : '',
         email : this.props.email,
         post : []
     };
   }
   componentWillMount(){
     this.getPost()
-}
-    getPost = () =>{
+  }
+  getPost = () =>{
         const URL = window.location.href
         var fullurl = URL,
         url = "/" + fullurl.split("/")[3];
 
         if(url === '/profile'){
             const Key = new FormData()
-            Key.append('token', localStorage.getItem('key') )
+            Key.append('token', this.props.param )
             API.post("/auth-token", Key)
             .then(res => {
                 if(res.data.userId){
@@ -48,7 +49,7 @@ export default class PostStatus extends Component {
                     })
                 }
                 const userId = new FormData()
-                userId.append('userId', this.state.userId)
+                userId.append('userId', res.data.userId)
                 API.post("/post/get-post", userId)
                 .then(res => {
                     this.setState({
@@ -88,6 +89,7 @@ export default class PostStatus extends Component {
     Data.append('date', this.state.date)
     Data.append('userId', this.state.userId)
     Data.append('description', this.state.description)
+    Data.append('totalTime', this.state.totalTime)
     Data.append('totalDistance', this.state.totalDistance)
     Data.append('paceAverage', this.state.paceAverage)
     API.post("/post/posts", Data)
@@ -99,10 +101,13 @@ export default class PostStatus extends Component {
             this.getPost()
         }
     })
-}
-  render() {
-    return (
-      <div>
+  }
+  renderPostBox = () =>{
+    const URL = window.location.href
+        var fullurl = URL,
+        url = "/" + fullurl.split("/")[3];
+    if(url === "/" || url === "/profile" && localStorage.getItem('key') === this.props.param){
+      return(
         <div className="mt-4 container">
           <Card>
             <CardHeader id="test">Post</CardHeader>
@@ -157,6 +162,13 @@ export default class PostStatus extends Component {
             </button>
           </div>
         </div>
+      )
+    }
+  }
+  render() {
+    return (
+      <div>
+        {this.renderPostBox()}
         {this.state.post.reverse().map((datas) => {
           return (
             <div key={datas.postId}>

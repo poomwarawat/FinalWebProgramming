@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import CommentBox from './CommentBox'
 import API from '../API/API'
 import Likebtn from '../component/Likebtn'
+import { Link } from 'react-router-dom'
 
 export default class UploadPost extends Component {
     constructor(props){
@@ -12,6 +13,7 @@ export default class UploadPost extends Component {
         }
     }
     componentWillMount(){
+        console.log(this.props.data)
         this.getComment()
     }
     getComment = () =>{
@@ -69,7 +71,11 @@ export default class UploadPost extends Component {
                                     </div>
                                </div>
                                <div className="col-sm-10 col-8">
-                                        <h5 id="name-post" className="mt-2 ml-3">{this.props.data.firstname + " " + this.props.data.lastname}</h5>   
+                                        <h5 id="name-post" className="mt-2 ml-3">
+                                            <Link to={`/profile/${this.props.data.token}`}>
+                                                {this.props.data.firstname + " " + this.props.data.lastname}
+                                            </Link>
+                                        </h5>   
                                </div>   
                                <div className="col-sm-1 col-2">
                                    
@@ -80,8 +86,20 @@ export default class UploadPost extends Component {
                                     </div>
                                 </div>
                                </div>                           
-                               <div className="col-sm-12 col-12">
-                                    <p className="mt-3">{this.props.data.total_distance}</p> 
+                               <div className="col-sm-12 col-12">                            
+                                    <p className="mt-3">{this.props.data.description}</p> 
+                                    <div className="row">
+                                        <div className="col-6 col-sm-6">
+                                            <div className="alert alert-secondary" role="alert">
+                                                Distance : {this.props.data.total_distance} km.
+                                            </div>
+                                        </div>
+                                        <div className="col-6 col-sm-6">
+                                            <div className="alert alert-secondary" role="alert">
+                                                Time : {this.props.data.totalTime} min.
+                                            </div>
+                                        </div>
+                                    </div>
                                </div>                                                     
                            </div>
                             

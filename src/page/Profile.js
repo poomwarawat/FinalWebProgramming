@@ -8,13 +8,15 @@ export default class Profile extends Component {
     constructor(props){
         super(props)
         this.state = {
-            urlpic : ''
+            urlpic : '',
+            params : ''
         }
     }
     //https://www.thairath.co.th/media/Dtbezn3nNUxytg04OL8mgI3NIEavohv2W18gLB2c0r2biv.jpg
     componentWillMount(){
         console.log("useless")
         const { id } = this.props.match.params
+        this.setState({ params : id })
         const token = new FormData()
         token.append('token', id)
         API.post('/auth-token', token )
@@ -48,7 +50,7 @@ export default class Profile extends Component {
                 </div>
                 <div className="col-sm-8 col-12">
                     <HeaderUser user={this.state}></HeaderUser>
-                    <PostStatus email={this.state.email}></PostStatus>
+                    <PostStatus param={this.state.params} email={this.state.email}></PostStatus>
                 </div>
             </div>
         )
