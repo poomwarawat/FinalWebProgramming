@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Nevigator from '../component/Nevigator'
 import API from '../API/API'
 import FriendBox from '../component/FriendBox'
+import { Form } from 'reactstrap'
 
 export default class Friend extends Component {
     constructor(props){
@@ -55,7 +56,9 @@ export default class Friend extends Component {
         API.post("/auth-token", token)
         .then(res => {
             this.setState({ userId : res.data.userId })
-            API.get(`/friend/friend-list?userId=${res.data.userId}`)
+            const Data = new FormData()
+            Data.append("userId", res.data.userId)
+            API.post(`/friend/friend-list`, Data)
             .then(res => {
                 this.setState({
                     new : this.state.new.concat(res.data)

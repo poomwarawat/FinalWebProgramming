@@ -12,9 +12,7 @@ export default class AddBtn extends Component {
     }
     componentWillMount(){
         const Data = new FormData()
-        Data.append("userId", this.state.userId)
-        Data.append("friendId", this.state.friendId)
-        API.post("/friend/check-friend", Data)
+        API.get(`/friend/check-friend?userId=${this.state.userId}&friendId=${this.state.friendId}`)
         .then(res => {
             if(res.data.state === 'add'){
                 this.setState({
@@ -24,23 +22,19 @@ export default class AddBtn extends Component {
         })
     }
     handleAdd = (e) =>{
-        const Data = new FormData()
-        Data.append("userId", this.props.userId)
-        Data.append("friendId", e.target.id)
-        API.post('/friend/add-friend', Data)
+        alert(e.target.id)
+        API.post(`/friend/add-friend`)
         .then(res => {
-            if(res.data.add === true){
-                this.setState({
-                    btn : false
-                })
-            }
+            console.log(res.data)
+            // if(res.data.add === true){
+            //     this.setState({
+            //         btn : false
+            //     })
+            // }
         })
     }
     handleCancel = (e) =>{
-        const Data = new FormData()
-        Data.append("userId", this.props.userId)
-        Data.append("friendId", e.target.id)
-        API.post('/friend/cancel-friend', Data)
+        API.get(`/friend/cancel-friend?userId=${this.props.userId}&friendId=${e.target.id}`)
         .then(res => {
             if(res.data.cancel === true){
                 this.setState({
@@ -50,16 +44,16 @@ export default class AddBtn extends Component {
         })
     }
     handleConfirm = (e) =>{
-        const Data = new FormData()
-        Data.append("userId", this.props.userId)
-        Data.append("friendId", e.target.id)
-        API.post('/friend/confirm-request', Data)
+        API.get(`/friend/confirm-request?userId=${this.props.userId}&friendId=${e.target.id}`)
         .then(res => {
             console.log(res.data)
         })
     }
-    hadleUnfriend = () =>{
-        alert("Unfriend")
+    hadleUnfriend = (e) =>{
+        API.get(`/friend/delete-friend?resId=${e.target.id}`)
+        .then(res => {
+            console.log(res.data)
+        })
     }
     renderBtn = () =>{
         if(this.props.data.state === "add"){
@@ -69,7 +63,7 @@ export default class AddBtn extends Component {
         }
         if(this.props.data.state === "friend"){
             return(
-                <button onClick={this.hadleUnfriend} id={this.props.data.userId} className="btn btn-danger w-100 float-right">unfriend</button>
+                <button onClick={this.hadleUnfriend} id={this.props.data.resId} className="btn btn-danger w-100 float-right">unfriend</button>
             )
         }
         if(this.state.btn === true){

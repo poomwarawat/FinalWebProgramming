@@ -6,7 +6,7 @@ export default class FriendBox extends Component {
         return (
             <div>
                 <ul className="list-group list-group-flush">
-                {
+                {   
                     this.props.data.map((datas, index) => {
                         return(
                             <li key={index} className="list-group-item">

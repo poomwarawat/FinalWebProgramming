@@ -2,21 +2,21 @@ const express = require("express");
 const router = express.Router();
 const con = require("../config/mySQL");
 
-router.get("/friend-list", (req, res) =>{
-    console.log(req.query.userId)
-    const sql = `SELECT * FROM users WHERE userId!=${req.query.userId}`
+router.post("/friend-list", (req, res) =>{
+    const sql = `SELECT firstname, lastname, userId FROM users WHERE userId!=${req.body.userId}`
     con.query(sql, (err, result) => {
         return res.send(result)
     })
 })
 
-router.get("/add-friend", (req, res) =>{
-    const sql = `INSERT INTO friend (userId,friendId,state) VALUES (${req.query.userId}, ${req.query.friendId}, "add")`
-    con.query(sql, (err, result) => {
-        if(result){
-            return res.send({add : true})
-        }
-    })
+router.post("/add-friend", (req, res) =>{
+    return res.send("Hello")
+    // const sql = `INSERT INTO friend (userId,friendId,state) VALUES (${req.query.userId}, ${req.query.friendId}, "add")`
+    // con.query(sql, (err, result) => {
+    //     if(result){
+    //         return res.send({add : true})
+    //     }
+    // })
 })
 
 //check friend
@@ -32,8 +32,8 @@ router.get("/check-friend", (req, res) =>{
 })
 
 //cancel friend request
-router.post("/cancel-friend", (req,res) =>{
-    const sql = `DELETE FROM friend WHERE userId=${req.body.userId} AND friendId=${req.body.friendId}`
+router.get("/cancel-friend", (req,res) =>{
+    const sql = `DELETE FROM friend WHERE userId=${req.query.userId} AND friendId=${req.query.friendId}`
     con.query(sql, (err, result) =>{
         if(result){
             return res.send({cancel : true})
@@ -52,8 +52,8 @@ router.get("/friend-request", (req, res) =>{
 })
 
 //confirm request
-router.post("/confirm-request", (req, res) =>{
-    const sql =`UPDATE friend SET state="friend" WHERE userId=${req.body.friendId} AND friendId=${req.body.userId}`
+router.get("/confirm-request", (req, res) =>{
+    const sql =`UPDATE friend SET state="friend" WHERE userId=${req.query.friendId} AND friendId=${req.query.userId}`
     con.query(sql, (err, result) =>{
         if(result){
             return res.send({confirm : true})
@@ -76,6 +76,16 @@ router.get("/myfriendme", (req, res) =>{
     con.query(sql, (err, result) => {
         if(result){
             return res.send(result)
+        }
+    })
+})
+
+//delete friend
+router.get("/delete-friend", (req, res) =>{
+    const sql = `DELETE FROM friend WHERE resId=${req.query.resId}`
+    con.query(sql, (err, result) =>{
+        if(result){
+            return res.send({delete : true})
         }
     })
 })
