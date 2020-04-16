@@ -3,6 +3,7 @@ import Album from '../component/Album'
 import firebase from 'firebase'
 import { Progress } from 'reactstrap';
 import API from '../API/API'
+import EditProfile from '../component/EditProfile'
 
 export default class HeaderUser extends Component {
     constructor(props){
@@ -83,9 +84,9 @@ export default class HeaderUser extends Component {
     renderEdit = () =>{
         if(localStorage.getItem('key') === this.props.param){
             return(
-                <div className="alert alert-danger" role="alert">
-                        Edit Profile
-                </div>
+               <div>
+                    <EditProfile></EditProfile>
+               </div>
             )
         }
     }
@@ -98,7 +99,7 @@ export default class HeaderUser extends Component {
                         {this.renderPic()}
                     </div>
                 </div>
-                <div className="container">
+                <div className="">
                     <div className="About">
                         <h1>{this.props.user.name + " " + this.props.user.lastname}</h1>
                         <p>{this.props.user.birthday}</p>

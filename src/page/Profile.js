@@ -47,8 +47,10 @@ export default class Profile extends Component {
                     <Nevigator></Nevigator>
                 </div>
                 <div className="col-sm-8 col-12">
-                    <HeaderUser param={this.state.params} user={this.state}></HeaderUser>
-                    <PostStatus param={this.state.params} email={this.state.email}></PostStatus>
+                    <div className="container">
+                        <HeaderUser param={this.state.params} user={this.state}></HeaderUser>
+                        <PostStatus param={this.state.params} email={this.state.email}></PostStatus>
+                    </div>
                 </div>
             </div>
         )

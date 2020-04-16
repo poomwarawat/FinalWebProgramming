@@ -108,7 +108,7 @@ export default class PostStatus extends Component {
         url = "/" + fullurl.split("/")[3];
     if(url === "/" || url === "/profile" && localStorage.getItem('key') === this.props.param){
       return(
-        <div className="mt-4 container">
+        <div className="mt-4">
           <Card>
             <CardHeader id="test">Post</CardHeader>
             {/* <CardTitle>Update your today running status</CardTitle> */}

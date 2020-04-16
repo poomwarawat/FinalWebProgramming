@@ -58,7 +58,7 @@ export default class UploadPost extends Component {
     }
     render() {
         return (
-            <div className="container">
+            <div className="">
                 <div id={this.props.data.postId} className="">
                     <div className="status-box">
                         <div className="media container mt-4">

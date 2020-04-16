@@ -88,7 +88,7 @@ router.post('/auth-token', (req, res) =>{
   })
 })
 
-//update profile
+//update profile pic
 router.post("/updateProfile", (req,res) =>{
   const url = req.body.url
   const id = req.body.id
@@ -98,6 +98,14 @@ router.post("/updateProfile", (req,res) =>{
   })
 })
 
+//update profile data
+router.post("/update-profile", (req, res) =>{
+  const { userId, firstname, lastname, birthday, address, city } = req.body
+  const sql = `UPDATE users SET firstname='${firstname}', lastname='${lastname}', birthday='${birthday}', address='${address}', city='${city}' WHERE userId='${userId}'`
+  con.query(sql, (err, result) => {
+    return res.send({upload : true})
+  })
+})
 
 //handling logout
 router.post("/logout", (req, res) => {
