@@ -38,7 +38,6 @@ export default class PostStatus extends Component {
         url = "/" + fullurl.split("/")[3];
 
         if(url === '/profile'){
-            console.log("profile")
             const Key = new FormData()
             Key.append('token', localStorage.getItem('key') )
             API.post("/auth-token", Key)
@@ -58,7 +57,6 @@ export default class PostStatus extends Component {
                 })
             })
         }else if(url === '/'){
-            console.log("feed")
             const Key = new FormData()
             Key.append('token', localStorage.getItem('key') )
             API.post("/auth-token", Key)
@@ -92,7 +90,6 @@ export default class PostStatus extends Component {
     Data.append('description', this.state.description)
     Data.append('totalDistance', this.state.totalDistance)
     Data.append('paceAverage', this.state.paceAverage)
-    console.log(this.state)
     API.post("/post/posts", Data)
     .then(res => {
         if(res.data.post == true){

@@ -17,10 +17,7 @@ export default class Likebtn extends Component {
         this.getUserlike()
     }
     getLike = () =>{
-        const Data = new FormData
-        Data.append("userId", this.state.userId)
-        Data.append("postId", this.state.postId)
-        API.post("/post/get-like", Data)
+        API.get(`/post/get-like?postId=${this.state.postId}&userId=${this.state.userId}`)
         .then(res =>{
             if(res.data.like === true){
                 this.setState({ like : false})
