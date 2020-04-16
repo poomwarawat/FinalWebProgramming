@@ -25,8 +25,7 @@ const authRoutes = require("./routes/auth");
 const postStatus = require("./routes/post");
 
 app.use("/", authRoutes);
-app.use('/post', postStatus)
-
+app.use("/post", postStatus);
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
