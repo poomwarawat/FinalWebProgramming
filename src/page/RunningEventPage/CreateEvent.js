@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Navigator from "../../component/Nevigator";
+import FadeWarning from "../RunningEventPage/FadeWarning";
 import API from "../../API/API";
 import {
   Row,
@@ -22,13 +23,17 @@ export default class CreateEvent extends Component {
     mini: false,
     half: false,
     marathon: false,
-    funrunPrice: 0,
-    miniPrice: 0,
-    halfPrice: 0,
-    marathonPrice: 0,
+    funrunPrice: -1,
+    miniPrice: -1,
+    halfPrice: -1,
+    marathonPrice: -1,
     startDate: "",
     endDate: "",
     description: "",
+    address: "",
+    organized_by: "",
+    event_date: "",
+    created_event: false,
   };
 
   handelChange = (e) => {
@@ -48,22 +53,24 @@ export default class CreateEvent extends Component {
     e.preventDefault();
     const Data = new FormData();
     Data.append("name", this.state.name);
+    Data.append("description", this.state.description);
     Data.append("startDate", this.state.startDate);
     Data.append("endDate", this.state.endDate);
-    Data.append("description", this.state.description);
-    if (this.state.funrun) {
-      Data.append("funRunPrice", this.state.funrunPrice);
-    }
-    if (this.state.mini) {
-      Data.append("miniMarathonPrice", this.state.miniPrice);
-    }
-    if (this.state.half) {
-      Data.append("halfMarathonPrice", this.state.halfPrice);
-    }
-    if (this.state.marathon) {
-      Data.append("marathonPrice", this.state.marathonPrice);
-    }
-    API.post("/event", Data).then((res) => {});
+    Data.append("event_date", this.state.event_date);
+    Data.append("imageUrl", "");
+    Data.append("funRunPrice", this.state.funrunPrice);
+    Data.append("halfMarathonPrice", this.state.halfPrice);
+    Data.append("miniMarathonPrice", this.state.miniPrice);
+    Data.append("marathonPrice", this.state.marathonPrice);
+    Data.append("address", this.state.address);
+    Data.append("organized_by", this.state.organized_by);
+    API.post("/event", Data).then((res) => {
+      if (res.status === 200) {
+        console.log("CreateEvent -> handelSubmit -> res.status", res.status);
+        this.setState({ created_event: true });
+        window.location.reload();
+      }
+    });
   };
   render() {
     const { funrun, mini, half, marathon } = this.state;
@@ -81,7 +88,7 @@ export default class CreateEvent extends Component {
             <Card className="mb-5">
               <CardHeader>Form</CardHeader>
               <CardBody>
-                <Form onSubmit={this.handelSubmit}>
+                <Form onSubmit={this.handelSubmit} id="create-course-form">
                   <FormGroup row>
                     <Label for="name" sm={1}>
                       Name
@@ -93,6 +100,7 @@ export default class CreateEvent extends Component {
                         id="name"
                         placeholder="Run for fight covid-19"
                         onChange={this.handelChange}
+                        required
                       />
                     </Col>
                   </FormGroup>
@@ -125,6 +133,7 @@ export default class CreateEvent extends Component {
                           id="funrunPrice"
                           placeholder="500 THB"
                           onChange={this.handelChange}
+                          required
                         />
                       </Col>
                     ) : null}
@@ -137,6 +146,7 @@ export default class CreateEvent extends Component {
                           id="miniPrice"
                           placeholder="500 THB"
                           onChange={this.handelChange}
+                          required
                         />
                       </Col>
                     ) : null}
@@ -149,6 +159,7 @@ export default class CreateEvent extends Component {
                           id="halfPrice"
                           placeholder="500 THB"
                           onChange={this.handelChange}
+                          required
                         />
                       </Col>
                     ) : null}
@@ -161,6 +172,7 @@ export default class CreateEvent extends Component {
                           id="marathonPrice"
                           placeholder="500 THB"
                           onChange={this.handelChange}
+                          required
                         />
                       </Col>
                     ) : null}
@@ -168,18 +180,54 @@ export default class CreateEvent extends Component {
                   <FormGroup row>
                     <Col md={4}>
                       <Label for="startDate">Start Date Register</Label>
-                      <Input type="date" name="startDate" id="startDate" onChange={this.handelChange} />
+                      <Input type="date" name="startDate" id="startDate" onChange={this.handelChange} required />
                     </Col>
                     <Col md={4}>
                       <Label for="endDate">End Date Register</Label>
-                      <Input type="date" name="endDate" id="endDate" onChange={this.handelChange} />
+                      <Input type="date" name="endDate" id="endDate" onChange={this.handelChange} required />
+                    </Col>
+                    <Col md={4}>
+                      <Label for="event_date">Event Date</Label>
+                      <Input type="date" name="eventdate" id="event_date" onChange={this.handelChange} required />
+                    </Col>
+                  </FormGroup>
+                  <FormGroup row>
+                    <Col md="6">
+                      <Label for="address">Address</Label>
+                      <Input
+                        type="textarea"
+                        name="address"
+                        id="address"
+                        rows="2"
+                        onChange={this.handelChange}
+                        required
+                      />
+                    </Col>
+                    <Col md="6">
+                      <Label for="address">Organized By</Label>
+                      <Input
+                        type="textarea"
+                        name="address"
+                        id="organized_by"
+                        rows="2"
+                        onChange={this.handelChange}
+                        required
+                      />
                     </Col>
                   </FormGroup>
                   <FormGroup>
                     <Label for="description">Description</Label>
-                    <Input type="textarea" name="description" id="description" rows="6" onChange={this.handelChange} />
+                    <Input
+                      type="textarea"
+                      name="description"
+                      id="description"
+                      rows="4"
+                      onChange={this.handelChange}
+                      required
+                    />
                   </FormGroup>
                   <Button className="btn-block">Submit</Button>
+                  {this.state.created_event ? <FadeWarning /> : null}
                 </Form>
               </CardBody>
             </Card>

@@ -1,131 +1,161 @@
 .App {
   font-family: 'Montserrat', sans-serif;
 }
-#header{
+
+#header {
   color: rgb(114, 103, 180);
   font-weight: 900;
 }
-#header1{
+
+#header1 {
   color: white;
   font-weight: 900;
 }
-.header h3{
+
+.header h3 {
   /* color: rgb(114, 103, 180); */
   font-weight: 900;
 }
-.header p, label {
-  /* color: rgb(133, 126, 172); */
-}
-.header span{
+
+
+
+.header span {
   font-weight: 700;
 }
-.header{
+
+.header {
   background-image: url('./pic/BG.png');
   height: 100vh;
   background-size: cover;
 }
-.register{
+
+.register {
   background-image: url('./pic/BG3.png');
   height: 100vh;
   background-size: cover;
 }
-.SignInBox{
+
+.SignInBox {
   padding-top: 100px;
   backdrop-filter: blur(10px);
 }
-.detial h1{
+
+.detial h1 {
   color: rgb(114, 103, 180);
 }
-.runimage{
+
+.runimage {
   width: 100%;
   height: 300px;
 }
-.runimage img{
+
+.runimage img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   opacity: 0.7;
 }
-.feed{
+
+.feed {
   height: 100%;
   background-size: cover;
 }
-.bgFeed{
-  background-color :white;
+
+.bgFeed {
+  background-color: white;
   height: 100%;
 }
-.nevigator{
+
+.nevigator {
   padding: 15px;
   background-color: #626FF2;
   height: 100vh;
   position: fixed;
-  
+
   box-shadow: rgb(136, 136, 136) 10px 10px 15px;
 }
-.nevigator hr{
+
+.nevigator hr {
   margin-left: auto;
   width: 250px;
   background-color: rgb(219, 219, 219);
 }
-.sidetext{
+
+.sidetext {
   text-align: center;
   color: white;
   display: none;
 }
-.sidetext hr{
+
+.sidetext hr {
   width: 90%;
 }
-.sidetext h4, h4:hover{
+
+.sidetext h4,
+h4:hover {
   color: white;
   text-decoration: none;
 }
-.sidetext h4 button{
+
+.sidetext h4 button {
   color: white;
 }
-.sidetext1{
+
+.sidetext1 {
   padding: 20px;
 }
-.sidetext1 hr{
+
+.sidetext1 hr {
   width: 90%;
 }
-.sidetext1 h4, h4:hover{
+
+.sidetext1 h4,
+h4:hover {
   margin-top: 20px;
   color: white;
   text-decoration: none;
 }
-.Chat{
+
+.Chat {
   padding: 20px;
 }
-.ListProfile{
+
+.ListProfile {
   text-align: center;
   float: right;
   padding-top: 20px;
 }
-.ListProfile img{
+
+.ListProfile img {
   border-radius: 50%;
   object-fit: cover;
 }
-.Post{
+
+.Post {
   padding-left: 35px;
-  height:100vh;
+  height: 100vh;
   padding-left: 30px;
   padding-right: 30px;
 }
-.search{
+
+.search {
   width: 87%;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 }
-.search > .inputSearch{
+
+.search>.inputSearch {
   width: 500px;
   padding-top: 10px;
 }
-.search > .btnSearch{
+
+.search>.btnSearch {
   width: 120px;
   padding: 10px;
 }
-.ToTop{
+
+.ToTop {
   position: fixed;
   right: 0;
   bottom: 0;
@@ -134,32 +164,39 @@
   width: 80px;
   height: 80px;
 }
-.ToTop button{
+
+.ToTop button {
   border-radius: 50%;
   width: 100%;
   height: 100%;
 }
-.cover{
+
+.cover {
   position: relative;
   margin-top: 20px;
   height: 350px;
   padding: 10px;
 }
-.coverimg{
+
+.coverimg {
   opacity: 0.7;
 }
-.cover img{
+
+.cover img {
   border-radius: 10px 10px;
   width: 100%;
   height: 290px;
   object-fit: cover;
 }
-.profilepic{
+
+.profilepic {
   transition: 1s;
 }
-.profilepic:hover{
+
+.profilepic:hover {
   opacity: 0.5;
 }
+
 .bottomleft {
   border-radius: 50%;
   background-color: black;
@@ -167,39 +204,44 @@
   bottom: 0;
   left: 38%;
 }
-.bottomleft img{
+
+.bottomleft img {
   width: 200px;
   height: 200px;
   border: 5px solid white;
   border-radius: 50%;
 }
-.p_profile_pic {
-  
-}
 
-.p_profile_pic img{
+
+
+.p_profile_pic img {
   width: 50px;
   height: 50px;
   border-radius: 50%;
 }
-.user-data{
+
+.user-data {
   margin-top: 100px;
 }
-.About{
+
+.About {
   text-align: center;
 }
-.list-album{
+
+.list-album {
   display: flex;
 }
-.list-album > .album{
+
+.list-album>.album {
   width: 150px;
   height: 200px;
   text-align: center;
   padding-right: 10px;
   padding-top: 10px;
-  
+
 }
-.album img{
+
+.album img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -208,56 +250,69 @@
   border-radius: 5px;
   transition: 0.5s;
 }
-.album img:hover{
+
+.album img:hover {
   opacity: 1;
 }
-.profile-page{
+
+.profile-page {
   padding-bottom: 50px;
 }
-.post-box{
+
+.post-box {
   width: 100%;
   height: 100%;
   border-radius: 5px;
   border: 1px solid rgb(238, 238, 238);
 }
-.post-box textarea{
+
+.post-box textarea {
   width: 100%;
   height: 150px;
   border: none;
 }
-.head-post-box{
+
+.head-post-box {
   padding: 5px;
   color: black;
   background-color: rgb(238, 238, 238);
 }
+
 .head-post-box p {
   margin-top: 15px;
   margin-left: 10px;
 }
-.status-box{
+
+.status-box {
   background-color: rgba(238, 238, 238, 0.288);
   border-radius: 5px;
   padding-bottom: 10px;
 }
-.grap{
+
+.grap {
   border-top: 1px solid rgb(219, 219, 219);
   border-bottom: 1px solid rgb(219, 219, 219);
 }
-.status-box p{
+
+.status-box p {
   word-break: break-all;
 }
-.btn-like{
+
+.btn-like {
   color: rgb(114, 103, 180);
 }
-.input-image-profile{
+
+.input-image-profile {
   text-align: center;
 }
+
 [type="file"] {
   height: 0;
   overflow: hidden;
   width: 0;
 }
-[type="file"] + label{
+
+[type="file"]+label {
   margin-top: 10px;
   background: rgb(114, 103, 180);
   border: none;
@@ -265,7 +320,7 @@
   color: #fff;
   cursor: pointer;
   display: inline-block;
-	font-size: inherit;
+  font-size: inherit;
   font-weight: 600;
   margin-bottom: 1rem;
   outline: none;
@@ -274,63 +329,78 @@
   transition: all 0.3s;
   vertical-align: middle;
 }
-.image-preview{
+
+.image-preview {
   width: 100%;
   height: 300px;
   object-fit: cover;
 }
-.comment-picture{
+
+.comment-picture {
   width: 50px;
   height: 50px;
   border-radius: 50%;
   object-fit: cover;
 }
-#name-post{
+
+#name-post {
   padding-top: 5px;
 }
-@media only screen and (max-width: 767px){
-  #name-post{
+
+@media only screen and (max-width: 767px) {
+  #name-post {
     padding-top: 0;
   }
-  .HeadText{
+
+  .HeadText {
     width: 90vw;
   }
-  .header{
+
+  .header {
     background-image: url('./pic/BG.png');
     height: 100vh;
     background-size: 400%;
   }
-  .SignInBox{
+
+  .SignInBox {
     padding-top: 100px;
     padding-bottom: 50%;
     backdrop-filter: blur(10px);
   }
-  .nevigator{
+
+  .nevigator {
     background-color: #626FF2;
     height: 100%;
     position: static;
   }
-  .sidetext{
+
+  .sidetext {
     display: contents;
   }
-  .sidetext1{
+
+  .sidetext1 {
     display: none;
   }
-  .search{
+
+  .search {
     width: 105%;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
   }
-  .ListProfile{
+
+  .ListProfile {
     display: none;
   }
-  .Chat{
+
+  .Chat {
     display: none;
   }
-  .ToTop{
+
+  .ToTop {
     margin-bottom: 50px;
   }
+
   .bottomleft {
     position: absolute;
     bottom: 0;
@@ -338,4 +408,32 @@
     width: 200px;
     height: 200px;
   }
+}
+
+.b-sub-text-1 {
+  font-size: 1.5rem;
+}
+
+.b-sub-text-2 {
+  font-size: 0.9rem;
+}
+
+.b-price-text {
+  font-size: 0.9rem;
+  font-weight: bolder;
+}
+
+.b-title-text {
+  font-size: 1.5rem;
+  font-weight: bolder;
+}
+
+.b-checkout-data {
+  font-weight: normal;
+  font-size: 0.9rem
+}
+
+.b-checkout-title {
+  font-weight: bolder;
+  font-size: 0.9rem
 }

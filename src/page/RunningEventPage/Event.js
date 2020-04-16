@@ -15,22 +15,25 @@ import {
 } from "reactstrap";
 import Navigator from "../../component/Nevigator";
 import EventList from "../../component/RunningEvent/EventList";
+import API from "../../API/API";
 class Event extends Component {
+  state = {
+    events: null,
+  };
   handelClick = () => {
     this.props.history.push("/create-event");
   };
+  componentDidMount = () => {
+    API.get("/event").then((res) => {
+      this.setState({ events: res.data });
+    });
+  };
+
   render() {
-    const events = [
-      { title: "Anuwat", description: "Run for dad", date: "24-09-20" },
-      { title: "Sukthong", description: "Run for mom", date: "25-09-20" },
-      { title: "Bon", description: "Run for granpa", date: "26-09-20" },
-      { title: "Bon", description: "Run for granpa", date: "26-09-20" },
-      { title: "Bon", description: "Run for granpa", date: "26-09-20" },
-      { title: "Bon", description: "Run for granpa", date: "26-09-20" },
-      { title: "Bon", description: "Run for granpa", date: "26-09-20" },
-      { title: "Bon", description: "Run for granpa", date: "26-09-20" },
-      { title: "Bon", description: "Run for granpa", date: "26-09-20" },
-    ];
+    const { events } = this.state;
+    if (events) {
+      events.forEach((event) => {});
+    }
     return (
       <div>
         <Row>
@@ -47,7 +50,7 @@ class Event extends Component {
               <hr className="my-2" />
               <Button onClick={this.handelClick}>Create Event</Button>
             </Jumbotron>
-            <EventList events={events} />
+            {events ? <EventList events={events} /> : null}
           </Col>
         </Row>
       </div>
