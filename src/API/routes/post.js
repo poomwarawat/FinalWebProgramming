@@ -78,8 +78,8 @@ router.post("/delete-like", (req, res) =>{
 
 //get like
 router.post("/get-like", (req, res) =>{
-    if(req.body.userId != "" && req.body.posId != ""){
-        const sql = `SELECT * FROM postLike WHERE postId=${req.body.postId} AND userId=${req.body.userId}`
+    if(req.query.userId != "" && req.query.posId != ""){
+        const sql = `SELECT * FROM postLike WHERE postId=${req.query.postId} AND userId=${req.query.userId}`
         con.query(sql, (err, result) =>{
             for(var i in result){
                 return res.send({like : true})
@@ -98,6 +98,14 @@ router.post("/get-user-like", (req, res) =>{
             }
         })
     }
+})
+
+// router.get("/get-like", (req, res) =>{
+//     console.log(req.query.postId)
+// })
+
+router.post("/test", (req, res) =>{
+    console.log(req.body)
 })
 
 //Delete post and its comments from database
