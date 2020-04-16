@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import API from '../API/API'
+import { Link } from 'react-router-dom'
 
 export default class Likebtn extends Component {
     constructor(props){
@@ -7,11 +8,13 @@ export default class Likebtn extends Component {
         this.state = {
             postId : this.props.postId,
             userId : this.props.userId,
-            like : true
+            like : true,
+            userLike : []
         }
     }
     componentWillMount(){
         this.getLike()
+        this.getUserlike()
     }
     getLike = () =>{
         const Data = new FormData
@@ -25,10 +28,9 @@ export default class Likebtn extends Component {
         })
     }
     handleLike =  (e) =>{
-        alert(e.target.id)
         const Like = new FormData()
         Like.append("userId", this.state.userId)
-        Like.append("postId", e.target.id)
+        Like.append("postId", this.state.postId)
         API.post("/post/post-like", Like)
         .then(res => {
             if(res.data.like === true){
@@ -37,10 +39,9 @@ export default class Likebtn extends Component {
         })
     }
     handleUnlike = (e) =>{
-        alert(e.target.id)
         const Like = new FormData
         Like.append("userId", this.state.userId)
-        Like.append("postId", e.target.id)
+        Like.append("postId", this.state.postId)
         API.post("/post/delete-like", Like)
         .then(res => {
             if(res.data.unlike === true){
@@ -48,21 +49,60 @@ export default class Likebtn extends Component {
             }
         })
     }
+    getUserlike = () =>{
+        const postId = new FormData
+        postId.append("postId", this.state.postId)
+        API.post("/post/get-user-like", postId)
+        .then(res => {
+            if(res.data){
+                this.setState({
+                    userLike : this.state.userLike.concat(res.data)
+                })
+            }
+        })
+    }
     renderLike = () =>{
         if(this.state.like === true){
             return(
-                <button id={this.state.postId} onClick={this.handleLike} className="btn btn-light w-100 btn-like"><i className="fa fa-heart-o"></i> Like</button>
+                <div className="row">
+                    <div className="col-sm-2 col-6">
+                        <button id={this.state.postId} onClick={this.handleLike} className="btn btn-light w-100 btn-like"><i className="fa fa-heart-o"></i> Like</button>
+                    </div>
+                    <div className="col-sm-3 col-6">
+                        <button className="btn btn-light w-100 btn-like"><i className="fa fa-comment-o"></i> Comment</button>
+                    </div>
+                </div>   
             )
         }else if(this.state.like === false){
             return(
-                <button id={this.state.postId} onClick={this.handleUnlike} className="btn btn-light w-100 btn-like"><i className="fa fa-heart"></i> Unlike</button>
+                <div className="row">
+                    <div className="col-sm-2 col-6">
+                        <button id={this.state.postId} onClick={this.handleUnlike} className="btn btn-light w-100 btn-like"><i className="fa fa-heart"></i> Unlike</button>
+                    </div>
+                    <div className="col-sm-3 col-6">
+                        <button className="btn btn-light w-100 btn-like"><i className="fa fa-comment-o"></i> Comment</button>
+                    </div>   
+                </div>
             )
         }
     }
     render() {
         return (
             <div>
-                {this.renderLike()}
+                <div className="ml-3">
+                {
+                    this.state.userLike.map((datas, index) =>{
+                        if(index < 3){
+                            return(                            
+                                <span key={index}><Link to={`/profile/${datas.token}`}> {datas.firstname} {datas.lastname}</Link> and</span>
+                            )
+                        }
+                    })
+                }
+                </div>
+                <div className="grap">
+                    {this.renderLike()}
+                </div>
             </div>
         )
     }

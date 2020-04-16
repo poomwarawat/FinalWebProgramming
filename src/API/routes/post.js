@@ -88,6 +88,18 @@ router.post("/get-like", (req, res) =>{
     }
 })
 
+//get user like
+router.post("/get-user-like", (req, res) =>{
+    if(req.body.postId){
+        const sql = `SELECT postLike.postId, users.firstname, users.lastname, users.userId, users.token FROM postLike INNER JOIN users ON postLike.userId=users.userId WHERE postId=${req.body.postId}`
+        con.query(sql, (err, result) => {
+            if(result){
+                return res.send(result)
+            }
+        })
+    }
+})
+
 //Delete post and its comments from database
 router.delete("/post/:id", (req, res) => {});
 

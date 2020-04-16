@@ -87,15 +87,8 @@ export default class UploadPost extends Component {
                             
                         </div>
                         </div>
-                        <div className="grap">
-                            <div className="row">
-                                    <div className="col-sm-2 col-6">
-                                        <Likebtn userId={this.props.userId} postId={this.props.data.postId}></Likebtn>
-                                    </div>
-                                    <div className="col-sm-3 col-6">
-                                        <button className="btn btn-light w-100 btn-like"><i className="fa fa-comment-o"></i> Comment</button>
-                                    </div>                                    
-                            </div>
+                        <div>                                                                
+                            <Likebtn userId={this.props.userId} postId={this.props.data.postId}></Likebtn>                                                                                                 
                         </div>                       
                         {
                             this.state.PostComment.map(datas =>{
