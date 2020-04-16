@@ -97,7 +97,11 @@ export default class Likebtn extends Component {
                     this.state.userLike.map((datas, index) =>{
                         if(index < 3){
                             return(                            
-                                <span key={index}><Link to={`/profile/${datas.token}`}> {datas.firstname} {datas.lastname}</Link> and</span>
+                                <span key={index}><Link className="Link-name" to={`/profile/${datas.token}`}> {datas.firstname} {datas.lastname}</Link> and</span>
+                            )
+                        }else if(index === 3){
+                            return(
+                                <span key={index}>...</span>
                             )
                         }
                     })

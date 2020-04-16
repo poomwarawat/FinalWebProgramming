@@ -50,7 +50,7 @@ export default class UploadPost extends Component {
         .then(res => {
             if(res.data.comment === true){
                 this.setState({
-                    PostComment : []
+                    PostComment : [],
                 })
                 this.getComment()
             }
@@ -71,7 +71,7 @@ export default class UploadPost extends Component {
                                </div>
                                <div className="col-sm-10 col-8">
                                         <h5 id="name-post" className="mt-2 ml-3">
-                                            <Link to={`/profile/${this.props.data.token}`}>
+                                            <Link className="Link-name" to={`/profile/${this.props.data.token}`}>
                                                 {this.props.data.firstname + " " + this.props.data.lastname}
                                             </Link>
                                         </h5>   
@@ -118,7 +118,7 @@ export default class UploadPost extends Component {
                         }
                         <div className="row p-2">
                             <div className="col-sm-8 col-12">
-                                <input onChange={this.handleChange} id="comment" className="form-control mt-2" placeholder="Enter your comment"/>
+                                <input onChange={this.handleChange} id="comment" className="form-control mt-2 comment-input" placeholder="Enter your comment"/>
                             </div>
                             <div className="col-sm-4 col-12">
                                 <button id={this.props.data.postId} onClick={this.handleClick} className="btn btn-primary mt-2 w-100">Comment</button>

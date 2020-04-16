@@ -43,7 +43,7 @@ router.post("/post-comment", (req, res) =>{
 
 //get comment
 router.post("/get-comment", (req, res) =>{
-    const sql = `SELECT comments.commentId, comments.content, users.profileurl FROM comments INNER JOIN users ON comments.userId=users.userId WHERE postId='${req.body.postId}'`
+    const sql = `SELECT comments.commentId, comments.content, users.profileurl, users.firstname, users.lastname, users.token FROM comments INNER JOIN users ON comments.userId=users.userId WHERE postId='${req.body.postId}'`
     // const sql = `SELECT * FROM comments WHERE postId='${req.body.postId}'`
     con.query(sql, (err, result) =>{
         return res.send(result)

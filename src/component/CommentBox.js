@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import API from '../API/API'
+import { Link } from 'react-router-dom'
 
 export default class CommentBox extends Component {
     renderPic = () =>{
@@ -20,8 +21,12 @@ export default class CommentBox extends Component {
                     <div className="col-sm-1 col-2">
                         {this.renderPic()}
                     </div>
-                    <div className="col-sm-8 col-9 mt-3 ml-3">
-                        {this.props.data.content}
+                    {console.log(this.props.data)}
+                    <div className="col-sm-8 col-9 ml-3">
+                        <div className="comment-box">
+                            <Link className="Link-name" to={`/profile/${this.props.data.token}`}><p> {this.props.data.firstname} {this.props.data.lastname}</p></Link>
+                            <p>{this.props.data.content}</p>
+                        </div>
                     </div>
                 </div>  
             </div>
