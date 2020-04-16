@@ -7,4 +7,4 @@ CREATE TABLE comments
   content TEXT,
   PRIMARY KEY
   (commentId)
-)
+);

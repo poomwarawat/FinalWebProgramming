@@ -189,6 +189,9 @@ h4:hover {
   padding: 10px;
   background-color: rgb(240, 240, 240);
 }
+.friend-list{
+  padding-top: 30px;
+}
 .Link-name{
   color: rgb(57, 61, 107);
 }
