@@ -29,11 +29,19 @@ export default class HeaderUser extends Component {
         }
     }
     renderPic = () =>{
-        return(
-            <div>
-                <img alt="" data-toggle="modal" data-target="#exampleModal" className="profilepic" src={this.props.user.urlpic}/>
-            </div>
-        )
+        if(localStorage.getItem('key') === this.props.param){
+            return(
+                <div>
+                    <img alt="" data-toggle="modal" data-target="#exampleModal" className="profilepic" src={this.props.user.urlpic}/>
+                </div>
+            )
+        }else{
+            return(
+                <div>
+                    <img alt="" src={this.props.user.urlpic}/>
+                </div>
+            )
+        }
     }
     handleChange = (e) =>{
         console.log(e.target.files)
@@ -72,6 +80,15 @@ export default class HeaderUser extends Component {
             })
         }) 
     }
+    renderEdit = () =>{
+        if(localStorage.getItem('key') === this.props.param){
+            return(
+                <div className="alert alert-danger" role="alert">
+                        Edit Profile
+                </div>
+            )
+        }
+    }
     render() {
         return (
             <div>
@@ -88,9 +105,7 @@ export default class HeaderUser extends Component {
                         <p>{this.props.user.address + ", " + this.props.user.city}</p>
                     </div>
                     <div>    
-                    <div className="alert alert-danger" role="alert">
-                        Edit Profile
-                    </div>
+                    {this.renderEdit()}
                     </div>
                 </div>
                 <Album></Album>

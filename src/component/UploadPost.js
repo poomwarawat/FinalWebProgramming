@@ -13,7 +13,6 @@ export default class UploadPost extends Component {
         }
     }
     componentWillMount(){
-        console.log(this.props.data)
         this.getComment()
     }
     getComment = () =>{
@@ -89,12 +88,12 @@ export default class UploadPost extends Component {
                                <div className="col-sm-12 col-12">                            
                                     <p className="mt-3">{this.props.data.description}</p> 
                                     <div className="row">
-                                        <div className="col-6 col-sm-6">
+                                        <div className="col-12 col-sm-6">
                                             <div className="alert alert-secondary" role="alert">
                                                 Distance : {this.props.data.total_distance} km.
                                             </div>
                                         </div>
-                                        <div className="col-6 col-sm-6">
+                                        <div className="col-12 col-sm-6">
                                             <div className="alert alert-secondary" role="alert">
                                                 Time : {this.props.data.totalTime} min.
                                             </div>

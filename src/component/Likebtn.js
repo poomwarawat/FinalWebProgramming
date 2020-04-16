@@ -7,7 +7,6 @@ export default class Likebtn extends Component {
         super(props)
         this.state = {
             postId : this.props.postId,
-            userId : this.props.userId,
             like : true,
             userLike : []
         }
@@ -17,12 +16,19 @@ export default class Likebtn extends Component {
         this.getUserlike()
     }
     getLike = () =>{
-        API.get(`/post/get-like?postId=${this.state.postId}&userId=${this.state.userId}`)
-        .then(res =>{
-            if(res.data.like === true){
-                this.setState({ like : false})
-            }
+        const token = new FormData()
+        token.append("token", localStorage.getItem('key'))
+        API.post("/auth-token", token)
+        .then(res => {
+            this.setState({userId : res.data.userId})
+            API.get(`/post/get-like?postId=${this.state.postId}&userId=${res.data.userId}`)
+            .then(res =>{
+                if(res.data.like === true){
+                    this.setState({ like : false})
+                }
+            })
         })
+        
     }
     handleLike =  (e) =>{
         const Like = new FormData()
