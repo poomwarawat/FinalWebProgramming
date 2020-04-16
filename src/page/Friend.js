@@ -27,9 +27,7 @@ export default class Friend extends Component {
         API.post("/auth-token", token)
         .then(res => {
             this.setState({ userId : res.data.userId })
-            const Data = new FormData()
-            Data.append("userId", res.data.userId)
-            API.post("/friend/myfriend", Data)
+            API.get(`/friend/myfriend?userId=${res.data.userId}`)
             .then(res => {
                 this.setState({
                     myfriend : this.state.myfriend.concat(res.data)
@@ -43,9 +41,7 @@ export default class Friend extends Component {
         API.post("/auth-token", token)
         .then(res => {
             this.setState({ userId : res.data.userId })
-            const Data = new FormData()
-            Data.append("userId", res.data.userId)
-            API.post("/friend/myfriendme", Data)
+            API.get(`/friend/myfriendme?userId=${res.data.userId}`)
             .then(res => {
                 this.setState({
                     myfriendme : this.state.myfriendme.concat(res.data)
@@ -59,9 +55,7 @@ export default class Friend extends Component {
         API.post("/auth-token", token)
         .then(res => {
             this.setState({ userId : res.data.userId })
-            const Data = new FormData()
-            Data.append("userId", res.data.userId)
-            API.post("/friend/friend-list", Data)
+            API.get(`/friend/friend-list?userId=${res.data.userId}`)
             .then(res => {
                 this.setState({
                     new : this.state.new.concat(res.data)
@@ -74,9 +68,7 @@ export default class Friend extends Component {
         token.append("token", localStorage.getItem('key'))
         API.post("/auth-token", token)
         .then(res =>{
-            const Data = new FormData()            
-            Data.append("userId", res.data.userId)
-            API.post("/friend/friend-request", Data)
+            API.get(`/friend/friend-request?userId=${res.data.userId}`)
             .then(res => {
                 this.setState({
                     request : this.state.request.concat(res.data)
