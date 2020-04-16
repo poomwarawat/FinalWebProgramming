@@ -57,7 +57,36 @@ router.post("/get-comment", (req, res) =>{
 })
     
 //Like post --update like in post
-router.put("/post/:id", (req, res) => {});
+router.post("/post-like", (req, res) =>{
+    if(req.body.userId != "" && req.body.posId != ""){
+        const sql = `INSERT INTO postLike (postId, userId) VALUES ('${req.body.postId}', '${req.body.userId}')`
+        con.query( sql, (err, result) =>{
+            return res.send({like : true})
+        })
+    }
+})
+
+//delete like
+router.post("/delete-like", (req, res) =>{
+    if(req.body.userId != "" && req.body.posId != ""){
+        const sql = `DELETE FROM postLike WHERE postId=${req.body.postId} AND userId=${req.body.userId}`
+        con.query(sql, (err, result) =>{
+            if(result) { return res.send({unlike : true}) }
+        })
+    }
+})
+
+//get like
+router.post("/get-like", (req, res) =>{
+    if(req.body.userId != "" && req.body.posId != ""){
+        const sql = `SELECT * FROM postLike WHERE postId=${req.body.postId} AND userId=${req.body.userId}`
+        con.query(sql, (err, result) =>{
+            for(var i in result){
+                return res.send({like : true})
+            }
+        })
+    }
+})
 
 //Delete post and its comments from database
 router.delete("/post/:id", (req, res) => {});

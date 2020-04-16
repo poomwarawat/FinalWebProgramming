@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import CommentBox from './CommentBox'
 import API from '../API/API'
+import Likebtn from '../component/Likebtn'
 
 export default class UploadPost extends Component {
     constructor(props){
@@ -18,7 +19,6 @@ export default class UploadPost extends Component {
         postId.append("postId", this.props.data.postId)
         API.post("/post/get-comment", postId)
         .then(res => {
-            console.log(res.data)
             this.setState({
                 PostComment : this.state.PostComment.concat(res.data)
             })
@@ -90,7 +90,7 @@ export default class UploadPost extends Component {
                         <div className="grap">
                             <div className="row">
                                     <div className="col-sm-2 col-6">
-                                        <button className="btn btn-light w-100 btn-like"><i className="fa fa-heart-o"></i> Like</button>
+                                        <Likebtn userId={this.props.userId} postId={this.props.data.postId}></Likebtn>
                                     </div>
                                     <div className="col-sm-3 col-6">
                                         <button className="btn btn-light w-100 btn-like"><i className="fa fa-comment-o"></i> Comment</button>
