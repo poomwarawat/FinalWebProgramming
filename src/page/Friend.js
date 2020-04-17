@@ -12,7 +12,7 @@ export default class Friend extends Component {
             new : [],
             request : [],
             myfriend : [],
-            myfriendme : []
+            myfriendme : [],
         }
     }
     
@@ -58,7 +58,7 @@ export default class Friend extends Component {
             this.setState({ userId : res.data.userId })
             const Data = new FormData()
             Data.append("userId", res.data.userId)
-            API.post(`/friend/friend-list`, Data)
+            API.post(`/friend-list`, Data)
             .then(res => {
                 this.setState({
                     new : this.state.new.concat(res.data)
@@ -71,7 +71,7 @@ export default class Friend extends Component {
         token.append("token", localStorage.getItem('key'))
         API.post("/auth-token", token)
         .then(res =>{
-            API.get(`/friend/friend-request?userId=${res.data.userId}`)
+            API.get(`/friend-request?userId=${res.data.userId}`)
             .then(res => {
                 this.setState({
                     request : this.state.request.concat(res.data)
@@ -92,13 +92,13 @@ export default class Friend extends Component {
                             <FriendBox userId={this.state.userId} data={this.state.myfriend}></FriendBox>
                             <FriendBox userId={this.state.userId} data={this.state.myfriendme}></FriendBox>
                         </div>
-                        <div className="request">
+                        {/* <div className="request">
                             <h1>My request</h1>                            
                             <FriendBox userId={this.state.userId} data={this.state.request}></FriendBox>
-                        </div>
+                        </div> */}
                         <div className="New">
                             <h1>Find your friends</h1>
-                            <FriendBox userId={this.state.userId} data={this.state.new}></FriendBox>                                            
+                            <FriendBox userId={this.state.userId}  data={this.state.new}></FriendBox>                                            
                         </div>
                     </div>
                 </div>

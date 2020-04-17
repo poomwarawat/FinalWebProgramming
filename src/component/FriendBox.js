@@ -11,10 +11,10 @@ export default class FriendBox extends Component {
                         return(
                             <li key={index} className="list-group-item">
                                 <div className="row">
-                                    <div className="col-8 col-sm-9">
+                                    <div className="col-8 col-sm-8">
                                         <p className="mt-1">{datas.firstname} {datas.lastname}</p>
                                     </div>
-                                    <div className="col-4 col-sm-3">
+                                    <div className="col-4 col-sm-4">
                                         <AddBtn userId={this.props.userId} data={datas}></AddBtn>
                                     </div>
                                 </div>                                
