@@ -21,7 +21,6 @@ export default class CommentBox extends Component {
                     <div className="col-sm-1 col-2">
                         {this.renderPic()}
                     </div>
-                    {console.log(this.props.data)}
                     <div className="col-sm-8 col-9 ml-3">
                         <div className="comment-box">
                             <Link className="Link-name" to={`/profile/${this.props.data.token}`}><p> {this.props.data.firstname} {this.props.data.lastname}</p></Link>
