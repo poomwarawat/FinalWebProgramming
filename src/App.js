@@ -11,6 +11,7 @@ import Setting from "./page/Setting";
 import Event from "../src/page/RunningEventPage/Event";
 import CreateEvent from "../src/page/RunningEventPage/CreateEvent";
 import DetailsEvent from "../src/page/RunningEventPage/DetailsEvent";
+import AdminRunningEvent from "./page/admin/AdminRunningEvent";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         <Route path="/event" component={Event}></Route>
         <Route path="/create-event" component={CreateEvent}></Route>
         <Route path="/events/:id" component={DetailsEvent}></Route>
+        <Route path="/admin" component={AdminRunningEvent} />
       </Switch>
     </div>
   );

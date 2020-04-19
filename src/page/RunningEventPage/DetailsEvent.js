@@ -9,22 +9,20 @@ export default class DetailEventPage extends Component {
     eventData: null,
     userId: null,
   };
-  componentDidMount = async () => {
+  componentWillMount = async () => {
     let url = "/event/" + this.state.eventId;
     const Key = new FormData();
     Key.append("token", localStorage.getItem("key"));
-    API.post("/auth-token", Key).then((res) => {
+    await API.post("/auth-token", Key).then((res) => {
       if (res.data.userId) {
         this.setState({
           userId: res.data.userId,
         });
       }
     });
-
     await API.get(url).then((res) => {
       this.setState({ eventData: res.data });
     });
-    await API.get();
   };
 
   render() {
@@ -36,8 +34,8 @@ export default class DetailEventPage extends Component {
             <Navigator />
           </Col>
           <Col md={7}>
-            {this.state.eventData && this.state.userId ? (
-              <DetailsSummary eventData={this.state.eventData} userId={this.state.userId} />
+            {eventData && this.state.userId ? (
+              <DetailsSummary eventData={eventData} userId={this.state.userId} />
             ) : null}
           </Col>
         </Row>
