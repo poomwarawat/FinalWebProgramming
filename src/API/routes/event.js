@@ -17,7 +17,11 @@ router.post("/event", (req, res) => {
   let values = Object.values(data);
   con.query(sql, values, function (err, result) {
     if (err) throw err;
-    return res.send({ event_created: true });
+    console.log("insertId from result", result.insertId);
+    let sql = `CREATE TABLE  event_${result.insertId} (userId int, bib_number int NOT NULL AUTO_INCREMENT, PRIMARY KEY (bib_number))`;
+    con.query(sql, (err, result) => {
+      return res.send({ event_created: true });
+    });
   });
 });
 
@@ -38,4 +42,75 @@ router.get("/event/:id", (req, res) => {
   });
 });
 
+router.post("/event-checkout", (req, res) => {
+  let data = req.body;
+  let sql = `INSERT INTO users_event (userId, eventId, category, paymentState) VALUES (?, ?, ?, ?)`;
+  let value = Object.values(data);
+  value.push(0);
+  con.query(sql, value, (err, result) => {
+    if (err) throw err;
+    res.send(result);
+  });
+});
+
+router.post("/event-status", (req, res) => {
+  let data = req.body;
+  let userId = data["userId"];
+  let eventId = data["eventId"];
+  let sql = `SELECT * FROM users_event WHERE userId = ? AND eventId = ?`;
+  con.query(sql, [userId, eventId], (err, result) => {
+    if (err) throw err;
+    res.send(result);
+  });
+});
+
+router.put("/event-checkout", (req, res) => {
+  console.log("res", req.body);
+
+  let sql = `UPDATE runrena.users_event SET payment_amount = ${req.body.price}, date_payment = "${req.body.date}", time = "${req.body.time}", paymentState  = 1 WHERE userId = ${req.body.userId} AND eventId = ${req.body.eventId}`;
+
+  con.query(sql, () => {
+    console.log("update done");
+  });
+  res.send("put status of event join");
+});
 module.exports = router;
+
+router.get("/payment-state", (req, res) => {
+  let sql = `SELECT  userId, running_event.eventId, 
+  category, paymentState , 
+  payment_amount, date_payment,
+  time, running_event.funrun_price, running_event.half_price, running_event.mini_price, running_event.marathon_price
+  FROM runrena.users_event 
+  INNER JOIN runrena.running_event 
+  ON users_event.eventId  = runrena.running_event.eventId`;
+  con.query(sql, (err, result) => {
+    if (err) throw err;
+    res.send(result);
+  });
+});
+
+router.put("/payment-state", (req, res) => {
+  console.log(req.body);
+  let sql = `UPDATE runrena.users_event SET paymentState = ${req.body.state} WHERE userId = ${req.body.userId} AND eventId = ${req.body.eventId} `;
+  con.query(sql, (err, result) => {
+    if (err) throw err;
+    if (req.body.state === "2") {
+      let sql = `INSERT INTO event_${req.body.eventId} (userId) VALUES (${req.body.userId})`;
+      con.query(sql, (err, result) => {});
+    } else {
+      let sql = `DELETE FROM event_${req.body.eventId} WHERE userId = ${req.body.userId}`;
+      con.query(sql, (err, result) => {});
+    }
+    res.send();
+  });
+});
+
+router.post("/event-bib", (req, res) => {
+  console.log(req.body);
+  let sql = `SELECT bib_number FROM event_${req.body.eventId} WHERE userId = ${req.body.userId}`;
+  con.query(sql, (err, result) => {
+    if (err) throw err;
+    res.send(result);
+  });
+});
