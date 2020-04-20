@@ -66,7 +66,6 @@ export default class CreateEvent extends Component {
     Data.append("organized_by", this.state.organized_by);
     API.post("/event", Data).then((res) => {
       if (res.status === 200) {
-        console.log("CreateEvent -> handelSubmit -> res.status", res.status);
         this.setState({ created_event: true });
         window.location.reload();
       }

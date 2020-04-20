@@ -1,19 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import {
-  Container,
-  Row,
-  Col,
-  Jumbotron,
-  Button,
-  Card,
-  CardImg,
-  CardText,
-  CardBody,
-  CardFooter,
-  CardTitle,
-  CardHeader,
-} from "reactstrap";
+import { Col, Button, Card, CardImg, CardText, CardBody, CardTitle, CardHeader } from "reactstrap";
 export default class EventSummary extends Component {
   render() {
     const { events } = this.props;
