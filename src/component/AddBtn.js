@@ -10,16 +10,21 @@ export default class AddBtn extends Component {
             friendId : this.props.data.userId
         }
     }
-    componentDidMount(){
-        API.get(`/check-user-add?userId=${this.props.userId}&friendId=${this.props.data.userId}`)
-        .then(res => {
-            if(res.data.add === true){
-                this.setState({
-                    btn : false
-                })
-            }            
-        })
-    }
+    // componentDidMount(){
+    //     API.get(`/check-user-add?userId=${this.props.userId}&friendId=${this.props.data.userId}`)
+    //     .then(res => {
+    //         if(res.data.add === true){
+    //             this.setState({
+    //                 btn : false
+    //             })
+    //         }            
+    //     })
+    // }
+    // componentWillUnmount(){
+    //     this.setState({
+    //         btn : true
+    //     })
+    // }
     handleAdd = (e) =>{
         API.get(`/add-friend?userId=${this.props.userId}&friendId=${e.target.id}`)
         .then(res => {
