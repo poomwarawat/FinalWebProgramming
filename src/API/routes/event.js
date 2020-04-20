@@ -5,7 +5,6 @@ const con = require("../config/mySQL");
 //create event
 router.post("/event", (req, res) => {
   let data = req.body;
-  console.log("data", data);
   let name = data["name"];
   let description = data["description"];
   let startDate = data["startDate"];
@@ -17,7 +16,6 @@ router.post("/event", (req, res) => {
   let values = Object.values(data);
   con.query(sql, values, function (err, result) {
     if (err) throw err;
-    console.log("insertId from result", result.insertId);
     let sql = `CREATE TABLE  event_${result.insertId} (userId int, bib_number int NOT NULL AUTO_INCREMENT, PRIMARY KEY (bib_number))`;
     con.query(sql, (err, result) => {
       return res.send({ event_created: true });
@@ -65,13 +63,8 @@ router.post("/event-status", (req, res) => {
 });
 
 router.put("/event-checkout", (req, res) => {
-  console.log("res", req.body);
-
   let sql = `UPDATE runrena.users_event SET payment_amount = ${req.body.price}, date_payment = "${req.body.date}", time = "${req.body.time}", paymentState  = 1 WHERE userId = ${req.body.userId} AND eventId = ${req.body.eventId}`;
-
-  con.query(sql, () => {
-    console.log("update done");
-  });
+  con.query(sql, () => {});
   res.send("put status of event join");
 });
 module.exports = router;
@@ -91,7 +84,6 @@ router.get("/payment-state", (req, res) => {
 });
 
 router.put("/payment-state", (req, res) => {
-  console.log(req.body);
   let sql = `UPDATE runrena.users_event SET paymentState = ${req.body.state} WHERE userId = ${req.body.userId} AND eventId = ${req.body.eventId} `;
   con.query(sql, (err, result) => {
     if (err) throw err;
@@ -107,7 +99,6 @@ router.put("/payment-state", (req, res) => {
 });
 
 router.post("/event-bib", (req, res) => {
-  console.log(req.body);
   let sql = `SELECT bib_number FROM event_${req.body.eventId} WHERE userId = ${req.body.userId}`;
   con.query(sql, (err, result) => {
     if (err) throw err;
@@ -145,7 +136,6 @@ router.get("/event-checkout", (req, res) => {
 
 router.get("/event-report/:id", (req, res) => {
   let eventId = req.params.id;
-  console.log("eventId", eventId);
   let sql = `SELECT event_${eventId}.userId, bib_number, firstname, lastname,  email FROM runrena.event_${eventId} INNER JOIN runrena.users ON event_${eventId}.userId = users.userId`;
   con.query(sql, (err, result) => {
     res.send(result);
