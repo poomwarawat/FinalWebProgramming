@@ -24,10 +24,12 @@ con.connect(function (err) {
 const authRoutes = require("./routes/auth");
 const postStatus = require("./routes/post");
 const eventRouter = require("./routes/event");
+const friendRouter = require("./routes/friend");
 
 app.use("/", authRoutes);
 app.use("/post", postStatus);
 app.use("/", eventRouter);
+app.use("/", friendRouter);
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

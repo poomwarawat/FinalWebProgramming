@@ -108,7 +108,7 @@ export default class UploadPost extends Component {
                             <Likebtn userId={this.props.userId} postId={this.props.data.postId}></Likebtn>                                                                                                 
                         </div>                       
                         {
-                            this.state.PostComment.map(datas =>{
+                            this.state.PostComment.reverse().map(datas =>{
                                 return(
                                     <div key={datas.commentId}>
                                         <CommentBox data={datas}></CommentBox>
