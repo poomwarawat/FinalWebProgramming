@@ -54,6 +54,9 @@ export default class Nevigator extends Component {
                   <h4>Friend</h4>
                 </Link>
                 <hr />
+                <Link to="/event">
+                  <h4>Event</h4>
+                </Link>
                 <Link to="/setting">
                   <h4>Setting</h4>
                 </Link>
@@ -80,6 +83,9 @@ export default class Nevigator extends Component {
               <h4>Event</h4>
             </Link>
             <hr />
+            <Link to="/admin">
+              <h4>Admin</h4>
+            </Link>
             <Link to="/setting">
               <h4>Setting</h4>
             </Link>

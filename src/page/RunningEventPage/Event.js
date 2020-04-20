@@ -1,18 +1,5 @@
 import React, { Component } from "react";
-import {
-  Container,
-  Row,
-  Col,
-  Jumbotron,
-  Button,
-  Card,
-  CardImg,
-  CardText,
-  CardBody,
-  CardFooter,
-  CardTitle,
-  CardHeader,
-} from "reactstrap";
+import { Row, Col, Jumbotron, Button } from "reactstrap";
 import Navigator from "../../component/Nevigator";
 import EventList from "../../component/RunningEvent/EventList";
 import API from "../../API/API";

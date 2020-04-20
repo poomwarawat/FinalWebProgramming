@@ -1,38 +1,65 @@
 import React, { Component } from "react";
-import {
-  Container,
-  Row,
-  Col,
-  Jumbotron,
-  Button,
-  Card,
-  CardImg,
-  CardText,
-  CardBody,
-  CardFooter,
-  CardTitle,
-  CardHeader,
-} from "reactstrap";
-
+import { Container, Row, Col, Button, Alert } from "reactstrap";
+import API from "../../API/API";
+import PaymentModal from "../RunningEventPage/PaymentModal";
+import PaymentCheck from "../RunningEventPage/PaymentCheck";
 export default class DetailsSummary extends Component {
   state = {
     userId: this.props.userId,
+    eventId: this.props.eventData[0]["eventId"],
     funrunSelected: false,
     miniSelected: false,
     halfSelected: false,
     marathonSelected: false,
     categorySelected: null,
+    registered: false,
+    paymentState: false,
+    buttonRegisterState: false,
+    bibNumber: "",
   };
+
   handelClick = (e) => {
     this.setState({ categorySelected: e.target.id });
   };
 
+  componentWillMount = () => {
+    let data = new FormData();
+    let eventId = this.state.eventId;
+    let userId = this.state.userId;
+    data.append("userId", userId);
+    data.append("eventId", eventId);
+    API.post("/event-status", data).then((res) => {
+      if (res.data.length > 0) {
+        this.setState({
+          paymentState: res.data[0]["paymentState"],
+          registered: !this.state.registered,
+          buttonRegisterState: true,
+        });
+        if (res.data[0].paymentState === 2) {
+          API.post("/event-bib", data).then((res) => {
+            this.setState({ bibNumber: res.data[0]["bib_number"] });
+          });
+        }
+      }
+    });
+  };
+
+  handelClickCheckout = async () => {
+    let userIdAndEventID = new FormData();
+    userIdAndEventID.append("userId", this.state.userId);
+    userIdAndEventID.append("eventId", this.state.eventId);
+    userIdAndEventID.append("category", this.state.categorySelected);
+    await API.post("/event-checkout", userIdAndEventID).then((res) => {
+      console.log(res.status);
+    });
+  };
+
   render() {
     const { eventData } = this.props;
+    console.log("DetailsSummary -> render -> eventData", eventData);
     let eventDate = eventData[0]["event_date"].split("T", 1);
     let startDate = eventData[0]["start_date"].split("T", 1);
     let endDate = eventData[0]["end_date"].split("T", 1);
-
     return (
       <div>
         <Container>
@@ -50,10 +77,10 @@ export default class DetailsSummary extends Component {
                 <div>
                   {eventData[0]["funrun_price"] >= 0 ? (
                     <Row className="align-items-center mb-2">
-                      <Col md="7" className="b-sub-text-2">
+                      <Col md="6" className="b-sub-text-2">
                         Fun Run (5K)
                       </Col>
-                      <Col md="2" className="text-centet b-price-text">
+                      <Col md="3" className="text-centet b-price-text">
                         {eventData[0]["funrun_price"]} THB
                       </Col>
                       <Col md="2">
@@ -61,7 +88,7 @@ export default class DetailsSummary extends Component {
                           color="primary"
                           size="sm"
                           onClick={this.handelClick}
-                          disabled={this.state.funrunSelected}
+                          disabled={this.state.buttonRegisterState}
                           id="funrun"
                         >
                           Register
@@ -71,10 +98,10 @@ export default class DetailsSummary extends Component {
                   ) : null}
                   {eventData[0]["mini_price"] >= 0 ? (
                     <Row className="align-items-center mb-2">
-                      <Col md="7" className="b-sub-text-2">
+                      <Col md="6" className="b-sub-text-2">
                         Mini Mathon Run (10K)
                       </Col>
-                      <Col md="2" className="text-centet b-price-text">
+                      <Col md="3" className="text-centet b-price-text">
                         {eventData[0]["mini_price"]} THB
                       </Col>
                       <Col md="2">
@@ -82,7 +109,7 @@ export default class DetailsSummary extends Component {
                           color="primary"
                           size="sm"
                           onClick={this.handelClick}
-                          disabled={this.state.miniSelected}
+                          disabled={this.state.buttonRegisterState}
                           id="minimarathon"
                         >
                           Register
@@ -92,10 +119,10 @@ export default class DetailsSummary extends Component {
                   ) : null}
                   {eventData[0]["half_price"] >= 0 ? (
                     <Row className="align-items-center mb-2">
-                      <Col md="7" className="b-sub-text-2">
+                      <Col md="6" className="b-sub-text-2">
                         Half Mathon Run (21K)
                       </Col>
-                      <Col md="2" className="text-centet b-price-text">
+                      <Col md="3" className="text-centet b-price-text">
                         {eventData[0]["half_price"]} THB
                       </Col>
                       <Col md="2">
@@ -103,7 +130,7 @@ export default class DetailsSummary extends Component {
                           color="primary"
                           size="sm"
                           onClick={this.handelClick}
-                          disabled={this.state.halfButton}
+                          disabled={this.state.buttonRegisterState}
                           id="halfmarathon"
                         >
                           Register
@@ -113,10 +140,10 @@ export default class DetailsSummary extends Component {
                   ) : null}
                   {eventData[0]["marathon_price"] >= 0 ? (
                     <Row className="align-items-center mb-2">
-                      <Col md="7" className="b-sub-text-2">
+                      <Col md="6" className="b-sub-text-2">
                         Marathon (42K)
                       </Col>
-                      <Col md="2" className="text-centet b-price-text">
+                      <Col md="3" className="text-centet b-price-text">
                         300 THB
                       </Col>
                       <Col md="2">
@@ -124,7 +151,7 @@ export default class DetailsSummary extends Component {
                           color="primary"
                           size="sm"
                           onClick={this.handelClick}
-                          disabled={this.state.marathonSelected}
+                          disabled={this.state.buttonRegisterState}
                           id="marathon"
                         >
                           Register
@@ -165,19 +192,57 @@ export default class DetailsSummary extends Component {
               <div className="shadow-sm p-3 mb-0 bg-white rounded mt-4">
                 <h5 className="display-5 b-title-text">Entry Fee</h5>
                 <hr />
+
                 <p className="mt-0 mb-0 b-sub-text-1 b-checkout-title">
                   Runner : <span className="b-checkout-data">Anuwat Sukthong</span>
                 </p>
-                <p className="mt-0 mb-0 b-sub-text-1 b-checkout-title">
-                  Categories : <span className="b-checkout-data">Fun Run (5K)</span>
-                </p>
-                <p className="mt-0 mb-0 b-sub-text-1 b-checkout-title">
-                  Entry Fee : <span className="b-checkout-data-price">30$</span>
-                </p>
+                {this.state.registered ? (
+                  <p>ท่านได้ทำการสมัครเข้าร่วมรายการวิ่งนี้แล้ว ทำการแจ้งยอดชำระเงินและรอการตรวจสอบจากผมนะครับที่รัก</p>
+                ) : (
+                  <div>
+                    {" "}
+                    <p className="mt-0 mb-0 b-sub-text-1 b-checkout-title">
+                      Categories : <span className="b-checkout-data">{this.state.categorySelected}</span>
+                    </p>
+                    <p className="mt-0 mb-0 b-sub-text-1 b-checkout-title">
+                      Entry Fee :{" "}
+                      {this.state.categorySelected === "funrun" ? (
+                        <span className="text-success">{eventData[0]["funrun_price"]} THB</span>
+                      ) : null}
+                      {this.state.categorySelected === "minimarathon" ? (
+                        <span className="text-success">{eventData[0]["mini_price"]} THB</span>
+                      ) : null}
+                      {this.state.categorySelected === "halfmarathon" ? (
+                        <span className="text-success">{eventData[0]["half_price"]} THB</span>
+                      ) : null}
+                      {this.state.categorySelected === "marathon" ? (
+                        <span className="text-success">{eventData[0]["marathon_price"]} THB</span>
+                      ) : null}
+                    </p>
+                  </div>
+                )}
               </div>
               <div>
-                <Button className="ml-auto btn-block">Checkout</Button>
+                {this.state.categorySelected ? <PaymentModal event={eventData} eventData={this.state} /> : null}
               </div>
+              {this.state.registered && this.state.paymentState == 1 ? (
+                <Alert color="warning" className="text-center">
+                  pending
+                </Alert>
+              ) : null}
+              {this.state.registered && this.state.paymentState == 2 ? (
+                <Alert color="success" className="text-center">
+                  Welcome to runrena :<h1>BIB</h1> <h1>- {this.state.bibNumber} -</h1>
+                </Alert>
+              ) : null}
+              {this.state.registered && this.state.paymentState == 3 ? (
+                <Alert color="danger" className="text-center">
+                  จ่ายเบี้ยไม่ครบแล้วอีมาวิ่งพรืออ่ะครับ
+                </Alert>
+              ) : null}
+              {(this.state.registered && this.state.paymentState == 0) || this.state.paymentState == 3 ? (
+                <PaymentCheck userId={this.state.userId} eventId={this.state.eventId} />
+              ) : null}
             </Col>
           </Row>
         </Container>
