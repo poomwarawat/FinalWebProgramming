@@ -15,6 +15,7 @@ import AdminRunningEvent from "./page/admin/AdminRunningEvent";
 import Nevigator from "./page/admin/adminPage";
 import adminPage from "./page/admin/adminPage";
 import EventManagement from "./page/admin/EventManagement";
+import EventReport from "./page/admin/EventReport";
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
         <Route path="/admin" component={adminPage}></Route>
         <Route path="/payment" component={AdminRunningEvent} />
         <Route path="/event-management" component={EventManagement} />
+        <Route path="/event-manage/:id" component={EventReport} />
       </Switch>
     </div>
   );
