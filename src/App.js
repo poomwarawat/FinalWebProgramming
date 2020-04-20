@@ -12,6 +12,9 @@ import Event from "../src/page/RunningEventPage/Event";
 import CreateEvent from "../src/page/RunningEventPage/CreateEvent";
 import DetailsEvent from "../src/page/RunningEventPage/DetailsEvent";
 import AdminRunningEvent from "./page/admin/AdminRunningEvent";
+import Nevigator from "./page/admin/adminPage";
+import adminPage from "./page/admin/adminPage";
+import EventManagement from "./page/admin/EventManagement";
 
 function App() {
   return (
@@ -27,7 +30,9 @@ function App() {
         <Route path="/event" component={Event}></Route>
         <Route path="/create-event" component={CreateEvent}></Route>
         <Route path="/events/:id" component={DetailsEvent}></Route>
-        <Route path="/admin" component={AdminRunningEvent} />
+        <Route path="/admin" component={adminPage}></Route>
+        <Route path="/payment" component={AdminRunningEvent} />
+        <Route path="/event-management" component={EventManagement} />
       </Switch>
     </div>
   );

@@ -114,3 +114,31 @@ router.post("/event-bib", (req, res) => {
     res.send(result);
   });
 });
+
+//query admin dashboard
+router.get("/earning_daily", (req, res) => {
+  let sql = `SELECT SUM(payment_amount) FROM runrena.users_event  WHERE date_payment  = CURDATE() AND paymentState = 2`;
+  con.query(sql, (err, result) => {
+    if (err) throw err;
+    res.send(result);
+  });
+});
+router.get("/event-month", (req, res) => {
+  let sql = "SELECT COUNT(eventId) FROM runrena.running_event WHERE MONTH(event_date) = MONTH(CURDATE())";
+  con.query(sql, (err, result) => {
+    res.send(result);
+  });
+});
+router.get("/participants", (req, res) => {
+  let sql = "SELECT COUNT (DISTINCT userId) FROM runrena.users_event";
+  con.query(sql, (err, result) => {
+    res.send(result);
+  });
+});
+
+router.get("/event-checkout", (req, res) => {
+  let sql = `SELECT COUNT(paymentState), paymentState FROM runrena.users_event GROUP BY paymentState;`;
+  con.query(sql, (err, result) => {
+    res.send(result);
+  });
+});
