@@ -3,13 +3,18 @@ import CommentBox from './CommentBox'
 import API from '../API/API'
 import Likebtn from '../component/Likebtn'
 import { Link } from 'react-router-dom'
+import Lightbox from 'react-image-lightbox';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 export default class UploadPost extends Component {
     constructor(props){
         super(props)
         this.state = {
             comment : "",
-            PostComment : []
+            PostComment : [],
+            photoIndex: 0,
+            isOpen: false,
         }
     }
     componentWillMount(){
@@ -57,11 +62,27 @@ export default class UploadPost extends Component {
         })
     }
     renderPostPhoto = () => {
+        const { isOpen } = this.state;
         if(this.props.data.photo !== "null"){
             return(
-                <div className="photo-post mt-2">                        
-                    <img src={this.props.data.photo}></img>   
-                </div>  
+                <div>
+                    <button className="btn-post-photo" type="button" onClick={() => this.setState({ isOpen: true })}>                        
+                    <div className="photo-post mt-2">                                     
+                        {/* <img src={this.props.data.photo}></img>  */}
+                        <LazyLoadImage    
+                        effect="blur"                        
+                        height={300}                                            
+                        src={this.props.data.photo} // use normal <img> attributes as props
+                         />                        
+                    </div>                      
+                    </button>                               
+                    {isOpen && (
+                    <Lightbox
+                        mainSrc={this.props.data.photo}                        
+                        onCloseRequest={() => this.setState({ isOpen: false })}                                                
+                    />
+                    )}
+                </div>
             )
         }        
     }
@@ -119,8 +140,8 @@ export default class UploadPost extends Component {
                                </div>  
                                {this.renderPostPhoto()}                       
                                <div className="col-sm-12 col-12">
-                                   <h4 className="mt-3">{this.props.data.activity_title}</h4>                            
-                                    <p className="mt-1">{this.props.data.description}</p> 
+                                   <h4 className="mt-4">{this.props.data.activity_title}</h4>                            
+                                    <p>{this.props.data.description}</p> 
                                     <div className="row">
                                         <div className="col-12 col-sm-6">
                                             <div className="alert alert-secondary" role="alert">
