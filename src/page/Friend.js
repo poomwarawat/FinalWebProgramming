@@ -17,10 +17,13 @@ export default class Friend extends Component {
     }
     
     componentWillMount(){
+        this.setState({
+            request : []
+        })
         this.getFriend()
         this.getMyFriend()
         this.getMyFriendMe()
-        this.getRequest()
+        this.getRequest()  
     }
     getRequest = () =>{
         const token = new FormData()
@@ -34,7 +37,7 @@ export default class Friend extends Component {
                     request : this.state.request.concat(res.data)
                 })
             })
-        })
+        })        
     }
     getMyFriend = () =>{
         const token = new FormData()
