@@ -18,9 +18,23 @@ export default class Friend extends Component {
     
     componentWillMount(){
         this.getFriend()
-        this.getRequest()
         this.getMyFriend()
         this.getMyFriendMe()
+        this.getRequest()
+    }
+    getRequest = () =>{
+        const token = new FormData()
+        token.append("token", localStorage.getItem('key'))
+        API.post("/auth-token", token)
+        .then(res => {
+            this.setState({ userId : res.data.userId })
+            API.get(`/friend-request?userId=${res.data.userId}`)
+            .then(res => {
+                this.setState({
+                    request : this.state.request.concat(res.data)
+                })
+            })
+        })
     }
     getMyFriend = () =>{
         const token = new FormData()
@@ -28,7 +42,7 @@ export default class Friend extends Component {
         API.post("/auth-token", token)
         .then(res => {
             this.setState({ userId : res.data.userId })
-            API.get(`/friend/myfriend?userId=${res.data.userId}`)
+            API.get(`/myfriend?userId=${res.data.userId}`)
             .then(res => {
                 this.setState({
                     myfriend : this.state.myfriend.concat(res.data)
@@ -42,7 +56,7 @@ export default class Friend extends Component {
         API.post("/auth-token", token)
         .then(res => {
             this.setState({ userId : res.data.userId })
-            API.get(`/friend/myfriendme?userId=${res.data.userId}`)
+            API.get(`/myfriendme?userId=${res.data.userId}`)
             .then(res => {
                 this.setState({
                     myfriendme : this.state.myfriendme.concat(res.data)
@@ -59,22 +73,9 @@ export default class Friend extends Component {
             const Data = new FormData()
             Data.append("userId", res.data.userId)
             API.post(`/friend-list`, Data)
-            .then(res => {
-                this.setState({
+            .then(res => {                
+                this.setState({                    
                     new : this.state.new.concat(res.data)
-                })
-            })
-        })
-    }
-    getRequest = () =>{
-        const token = new FormData()
-        token.append("token", localStorage.getItem('key'))
-        API.post("/auth-token", token)
-        .then(res =>{
-            API.get(`/friend-request?userId=${res.data.userId}`)
-            .then(res => {
-                this.setState({
-                    request : this.state.request.concat(res.data)
                 })
             })
         })
@@ -89,15 +90,15 @@ export default class Friend extends Component {
                     <div className="friend-list container">
                         <div className="friend">
                             <h1>My Friend</h1>
-                            <FriendBox userId={this.state.userId} data={this.state.myfriend}></FriendBox>
-                            <FriendBox userId={this.state.userId} data={this.state.myfriendme}></FriendBox>
+                            <FriendBox userId={this.state.userId} data={this.state.myfriend} unkey="true"></FriendBox>
+                            <FriendBox userId={this.state.userId} data={this.state.myfriendme} unkey="true"></FriendBox>
                         </div>
-                        {/* <div className="request">
-                            <h1>My request</h1>                            
+                        <div className="request-friend">
+                            <h1>My request</h1>
                             <FriendBox userId={this.state.userId} data={this.state.request}></FriendBox>
-                        </div> */}
+                        </div>
                         <div className="New">
-                            <h1>Find your friends</h1>
+                            <h1>Find your friends</h1>                            
                             <FriendBox userId={this.state.userId}  data={this.state.new}></FriendBox>                                            
                         </div>
                     </div>
