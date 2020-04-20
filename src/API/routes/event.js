@@ -146,7 +146,7 @@ router.get("/event-checkout", (req, res) => {
 router.get("/event-report/:id", (req, res) => {
   let eventId = req.params.id;
   console.log("eventId", eventId);
-  let sql = `SELECT event_32.userId, bib_number, firstname, lastname,  email FROM runrena.event_${eventId} INNER JOIN runrena.users ON event_${eventId}.userId = users.userId`;
+  let sql = `SELECT event_${eventId}.userId, bib_number, firstname, lastname,  email FROM runrena.event_${eventId} INNER JOIN runrena.users ON event_${eventId}.userId = users.userId`;
   con.query(sql, (err, result) => {
     res.send(result);
   });
