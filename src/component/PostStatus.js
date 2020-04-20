@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import API from "../API/API";
 import UploadPost from "../component/UploadPost";
+import { Progress } from 'reactstrap'
+import firebase from 'firebase'
 import {
   Form,
   FormGroup,
@@ -27,8 +29,24 @@ export default class PostStatus extends Component {
         paceAverage : '',
         totalTime : '',
         email : this.props.email,
-        post : []
+        post : [],
+        postPhoto : null,
+        postPhotoUrl : null,
+        uploadper : null
     };
+    var firebaseConfig = {
+      apiKey: "AIzaSyCu36Uit6DfffqB7DiQjyHLhCmAI-s6pxI",
+      authDomain: "runrena-db93f.firebaseapp.com",
+      databaseURL: "https://runrena-db93f.firebaseio.com",
+      projectId: "runrena-db93f",
+      storageBucket: "runrena-db93f.appspot.com",
+      messagingSenderId: "1084016282506",
+      appId: "1:1084016282506:web:2ce25be1a4215f46f4d673"
+    };
+    // Initialize Firebase
+    if (!firebase.apps.length) {
+        firebase.initializeApp(firebaseConfig);
+    }
   }
   componentWillMount(){
     this.getPost()
@@ -92,15 +110,69 @@ export default class PostStatus extends Component {
     Data.append('totalTime', this.state.totalTime)
     Data.append('totalDistance', this.state.totalDistance)
     Data.append('paceAverage', this.state.paceAverage)
+    Data.append('postPhoto', this.state.postPhotoUrl)
     API.post("/post/posts", Data)
     .then(res => {
         if(res.data.post == true){
             this.setState({
-                post : []
+                post : [],
+                postPhoto : null,
+                postPhotoUrl : null,
+                description : '',
+                totalDistance : '',
+                paceAverage : '',
+                totalTime : '',
+                
             })
             this.getPost()
         }
     })
+  }
+  handleChangePhoto = (e) => {
+    this.setState({
+        postPhoto : URL.createObjectURL(e.target.files[0]),
+    })
+    const storageRef = firebase.storage().ref(`${this.props.email}/postphoto/${e.target.files[0].name}`);
+    const task = storageRef.put(e.target.files[0])
+    task.on(`state_changed` , (snapshort) => {
+        let percentage = (snapshort.bytesTransferred / snapshort.totalBytes) * 100;
+        this.setState({
+            uploadper : percentage
+        })
+    } , (error) => {
+        this.setState({
+            messag:`Upload error : ${error.message}`
+        })
+    } , () => {
+        this.setState({
+            messag:`Upload Success`,
+        })
+        task.snapshot.ref.getDownloadURL().then((downloadUrl) =>{
+          alert("Upload Success")
+          this.setState({
+            postPhotoUrl : downloadUrl
+          })  
+        })
+    }) 
+  }
+  handleClosePhoto = () =>{
+    this.setState({
+      postPhoto : null,
+      postPhotoUrl : null
+    })
+  }
+  renderPhoto = () => {
+    if(this.state.postPhoto !== null){
+      return(
+        <div className="photo-post">
+            <div className="top-right">
+              <button className="btn btn-danger rounded-circle" onClick={this.handleClosePhoto}>X</button>
+            </div>
+            <img src={this.state.postPhoto}/>
+            <Progress className="mt-2 mb-2" color="info" value={this.state.uploadper} />
+        </div>
+      )
+    }
   }
   renderPostBox = () =>{
     const URL = window.location.href
@@ -155,6 +227,17 @@ export default class PostStatus extends Component {
                 </Col>
               </Row>
             </Form>
+            {this.renderPhoto()}            
+            <div className="row text-center pb-2">
+              <div className="col-sm-6 col-12">
+                <input id="upload-photo-post" onChange={this.handleChangePhoto} type="file"/>
+                <label htmlFor="upload-photo-post" id="for-picture" className="btn btn-outline-info">Upload photo</label>
+              </div>
+              <div className="col-sm-6 col-12">
+                <input id="upload-album-post" type="file"/>
+                <label htmlFor="upload-album-post" id="for-picture"  className="btn btn-outline-info">Upload album</label>
+              </div>
+            </div>
           </Card>
           <div className="head-post-box">
             <button className="btn btn-info w-100" onClick={this.handleClick}>

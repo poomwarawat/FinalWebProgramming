@@ -56,6 +56,44 @@ export default class UploadPost extends Component {
             }
         })
     }
+    renderPostPhoto = () => {
+        if(this.props.data.photo !== "null"){
+            return(
+                <div className="photo-post mt-2">                        
+                    <img src={this.props.data.photo}></img>   
+                </div>  
+            )
+        }        
+    }
+    handleDeletePost = (e) =>{
+        API.get(`/post/delete-post?postId=${e.target.id}`)
+        .then(res => {
+            if(res.data.delete === true){
+                window.location.reload()
+            }
+        })
+    }
+    renderDeletePost = () =>{
+        if(this.props.userId === this.props.data.userId){
+            return(
+                <div className="dropdown mt-3">
+                    <a  type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i className="fa fa-ellipsis-h"></i></a>
+                    <div className="dropdown-menu dropdown-primary dropdown-menu-right">
+                        <button onClick={this.handleDeletePost} id={this.props.data.postId} className="dropdown-item"><i className="fa fa-trash"></i>&nbsp;&nbsp; Delete</button>
+                    </div>
+                </div>
+            )   
+        }else{
+            return(
+                <div className="dropdown mt-3">
+                    <a  type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i className="fa fa-ellipsis-h"></i></a>
+                    <div className="dropdown-menu dropdown-primary dropdown-menu-right">
+                        <button className="dropdown-item"><i className="fa fa-trash"></i>&nbsp;&nbsp; Report</button>
+                    </div>
+                </div>
+            )
+        }
+    }
     render() {
         return (
             <div className="">
@@ -76,17 +114,13 @@ export default class UploadPost extends Component {
                                             </Link>
                                         </h5>   
                                </div>   
-                               <div className="col-sm-1 col-2">
-                                   
-                               <div className="dropdown mt-3">
-                                    <a  type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i className="fa fa-ellipsis-h"></i></a>
-                                    <div className="dropdown-menu dropdown-primary">
-                                        <a className="dropdown-item"><i className="fa fa-trash"></i>&nbsp;&nbsp; Delete</a>
-                                    </div>
-                                </div>
-                               </div>                           
-                               <div className="col-sm-12 col-12">                            
-                                    <p className="mt-3">{this.props.data.description}</p> 
+                               <div className="col-sm-1 col-2">  
+                                {this.renderDeletePost()}
+                               </div>  
+                               {this.renderPostPhoto()}                       
+                               <div className="col-sm-12 col-12">
+                                   <h4 className="mt-3">{this.props.data.activity_title}</h4>                            
+                                    <p className="mt-1">{this.props.data.description}</p> 
                                     <div className="row">
                                         <div className="col-12 col-sm-6">
                                             <div className="alert alert-secondary" role="alert">

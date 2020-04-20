@@ -8,8 +8,8 @@ router.get("/posts", (req, res) => {});
 
 //Create a new post
 router.post("/posts", (req, res) => {
-    const sql = `INSERT INTO post (activity_title, userId, total_distance, totalTime,  pace_average, description) VALUES (?, ?, ?, ?, ?, ?)`;
-    const Data = [req.body.data, req.body.userId, req.body.totalDistance, req.body.totalTime, req.body.paceAverage, req.body.description ]
+    const sql = `INSERT INTO post (activity_title, userId, total_distance, totalTime,  pace_average, description, photo) VALUES (?, ?, ?, ?, ?, ?, ?)`;
+    const Data = [req.body.data, req.body.userId, req.body.totalDistance, req.body.totalTime, req.body.paceAverage, req.body.description, req.body.postPhoto ]
     const value = Object.values(Data)
     con.query(sql, value, (err, result) =>{
         if(err) throw err
@@ -19,7 +19,7 @@ router.post("/posts", (req, res) => {
 
 //get user post
 router.post("/get-post", (req, res) =>{
-    const sql = `SELECT post.postId, users.firstname, users.lastname, users.profileurl, post.total_distance, post.activity_title, post.description, post.pace_average, post.userId, post.totalTime, users.token FROM post INNER JOIN users ON post.userId=users.userId WHERE post.userId=${req.body.userId}`
+    const sql = `SELECT post.postId, users.firstname, users.lastname, users.profileurl, post.total_distance, post.activity_title, post.description, post.pace_average, post.userId, post.totalTime, users.token, post.photo FROM post INNER JOIN users ON post.userId=users.userId WHERE post.userId=${req.body.userId}`
     con.query(sql, (err, result) => {
         return res.send(result)
     })
@@ -27,9 +27,18 @@ router.post("/get-post", (req, res) =>{
 
 //get all post
 router.get('/get-all-post', (req, res) =>{
-    const sql = `SELECT post.postId, post.totalTime, users.firstname, users.lastname, users.profileurl, post.total_distance, post.activity_title, post.description, post.pace_average, post.userId, users.token FROM post INNER JOIN users ON post.userId=users.userId`
+    const sql = `SELECT post.postId, post.photo, post.totalTime, users.firstname, users.lastname, users.profileurl, post.total_distance, post.activity_title, post.description, post.pace_average, post.userId, users.token FROM post INNER JOIN users ON post.userId=users.userId`
     con.query(sql, (err, result) =>{
         return res.send(result)
+    })
+})
+
+//delete post
+router.get('/delete-post', (req, res) => {
+    const {postId} = req.query
+    const sql = `DELETE FROM post WHERE postId=${postId}`
+    con.query(sql, (err, result) => {
+        return res.send({delete : true})
     })
 })
 

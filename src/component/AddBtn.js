@@ -17,7 +17,7 @@ export default class AddBtn extends Component {
                 this.setState({
                     btn : false
                 })
-            }
+            }            
         })
     }
     handleAdd = (e) =>{
