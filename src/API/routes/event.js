@@ -1,7 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const con = require("../config/mySQL");
-
+const pdf = require("html-pdf");
+const pdfTemplate = require("../pdfTemplate/index");
+resolve = require("path").resolve;
 //create event
 router.post("/event", (req, res) => {
   let data = req.body;
@@ -140,4 +142,32 @@ router.get("/event-report/:id", (req, res) => {
   con.query(sql, (err, result) => {
     res.send(result);
   });
+});
+
+router.get("/participant/:id", (req, res) => {
+  let eventId = req.params.id;
+  let sql = `SELECT COUNT(bib_number) FROM event_${eventId}`;
+  con.query(sql, (err, result) => {
+    res.send(result);
+  });
+});
+
+router.post("/create-pdf", (req, res) => {
+  let eventId = req.body.eventId;
+  let sqlEventQuery = `SELECT * FROM runrena.running_event WHERE eventId = ${eventId}`;
+  let sql = `SELECT event_${eventId}.userId, bib_number, firstname, lastname,  email FROM runrena.event_${eventId} INNER JOIN runrena.users ON event_${eventId}.userId = users.userId`;
+  con.query(sqlEventQuery, (err, result_1) => {
+    con.query(sql, (err, result) => {
+      pdf.create(pdfTemplate(result, result_1), {}).toFile("pdfTemplate/result.pdf", (err) => {
+        if (err) {
+          res.send(Promise.reject());
+        }
+        res.send(Promise.resolve());
+      });
+    });
+  });
+});
+
+router.get("/fetch-pdf", (req, res) => {
+  res.sendFile(`${resolve("pdfTemplate")}/result.pdf`);
 });

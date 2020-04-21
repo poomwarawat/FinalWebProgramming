@@ -5,6 +5,7 @@ const app = express();
 const con = require("./config/mySQL");
 const multer = require("multer");
 const upload = multer();
+
 //----app setup
 app.use(cors());
 app.set("view engine", "pug");
