@@ -3,25 +3,36 @@ import Nevigator from "../../component/Nevigator";
 import { Row, Col } from "reactstrap";
 import API from "../../API/API";
 import EventListReport from "../admin/EventListReport";
+import ReportPdf from "../admin/ReportPdf";
+
 export default class EventReport extends Component {
   state = {
     eventId: this.props.match.params.id,
     eventReportData: null,
     eventData: null,
+    participantCount: 0,
   };
   componentDidMount = () => {
     let url = "/event-report/" + this.state.eventId;
     let urlEvent = "/event/" + this.state.eventId;
+    let urlEventParticipant = "/participant/" + this.state.eventId;
     API.get(url).then((res) => {
       this.setState({ eventReportData: res.data });
     });
     API.get(urlEvent).then((res) => {
       this.setState({ eventData: res.data });
     });
+    API.get(urlEventParticipant).then((res) => {
+      this.setState({ participantCount: res.data });
+    });
   };
   render() {
     const { eventData } = this.state;
-    console.log("EventReport -> render -> eventData", eventData);
+    let participant = null;
+    if (this.state.participantCount) {
+      participant = this.state.participantCount[0]["COUNT(bib_number)"];
+    }
+
     return (
       <div>
         <Row>
@@ -30,6 +41,7 @@ export default class EventReport extends Component {
           </Col>
           <Col md="8">
             <Row>
+              <Col md="12"></Col>
               <Col md="12">
                 <div className="shadow-sm p-3 mb-2 bg-white rounded mt-4 text-center">
                   <p className="mt-0 mb-0 b-title-text">Runrena Admin</p>
@@ -63,7 +75,18 @@ export default class EventReport extends Component {
                     <div className="row no-gutters align-items-center">
                       <div className="col mr-2">
                         <h5 className="text-center">Participant</h5>
-                        <h3 className="text-center">1</h3>
+                        {participant ? <h3 className="text-center">{participant}</h3> : null}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </Col>
+              <Col md="3">
+                <div className="card border-left-warning shadow h-100">
+                  <div className="card-body">
+                    <div className="row no-gutters align-items-center">
+                      <div className="col mr-2">
+                        {this.state.eventId ? <ReportPdf eventId={this.state.eventId} /> : null}
                       </div>
                     </div>
                   </div>
