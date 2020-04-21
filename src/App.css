@@ -182,23 +182,28 @@ h4:hover {
   opacity: 0.7;
   object-fit: cover;
 }
-.comment-box{
+
+.comment-box {
   width: 100%;
   height: 100%;
   border-radius: 15px;
   padding: 10px;
   background-color: rgb(240, 240, 240);
 }
-.friend-list{
+
+.friend-list {
   padding-top: 30px;
 }
-.Link-name{
+
+.Link-name {
   color: rgb(57, 61, 107);
 }
-.comment-input{
+
+.comment-input {
   border-radius: 30px;
   background-color: rgb(240, 240, 240);
 }
+
 .cover img {
   border-radius: 10px 10px;
   width: 100%;
@@ -329,12 +334,13 @@ h4:hover {
   width: 0;
 }
 
-[type="file"]+#for-picture{
+[type="file"]+#for-picture {
   background-color: white;
   color: rgb(43, 43, 43);
   width: 100%;
   height: 30px;
 }
+
 [type="file"]+label {
   margin-top: 10px;
   background: rgb(114, 103, 180);
@@ -352,21 +358,25 @@ h4:hover {
   transition: all 0.3s;
   vertical-align: middle;
 }
-.photo-post{
+
+.photo-post {
   position: relative;
   width: 100%;
   height: 350px;
 }
-.photo-post img{
+
+.photo-post img {
   width: 100%;
   height: 90%;
   object-fit: cover;
 }
+
 .top-right {
   position: absolute;
   top: 8px;
   right: 16px;
 }
+
 .image-preview {
   width: 100%;
   height: 300px;
@@ -383,18 +393,21 @@ h4:hover {
 #name-post {
   padding-top: 5px;
 }
+
 .top-left {
   position: absolute;
   top: 20px;
   left: 20px;
 }
-.cover-upload{
+
+.cover-upload {
   width: 100px;
   height: 50px;
   border-radius: 5px;
   background-color: rgba(240, 248, 255, 0.815);
   border: none;
 }
+
 @media only screen and (max-width: 767px) {
   #name-post {
     padding-top: 0;
@@ -484,4 +497,12 @@ h4:hover {
 .b-checkout-title {
   font-weight: bolder;
   font-size: 0.9rem
+}
+
+.b-title-event-status {
+  color: #333333
+}
+
+.b-title-event-status a:hover {
+  text-decoration: none;
 }

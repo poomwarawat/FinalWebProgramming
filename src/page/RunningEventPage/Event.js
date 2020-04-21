@@ -8,6 +8,7 @@ class Event extends Component {
   state = {
     events: null,
     userId: "",
+    eventStatus: false,
   };
   handelClick = () => {
     this.props.history.push("/create-event");
@@ -26,12 +27,12 @@ class Event extends Component {
       this.setState({ events: res.data });
     });
   };
+  handelClickStatus = () => {
+    this.setState({ eventStatus: !this.state.eventStatus });
+  };
 
   render() {
     const { events } = this.state;
-    if (events) {
-      events.forEach((event) => {});
-    }
     return (
       <div>
         <Row>
@@ -47,8 +48,11 @@ class Event extends Component {
               </p>
               <hr className="my-2" />
               <h6>Event Status : </h6>
-              {this.state.userId ? <EventUserStatus userId={this.state.userId} /> : null}
-              <Button onClick={this.handelClick}>Create Event</Button>
+              {this.state.userId && this.state.eventStatus ? <EventUserStatus userId={this.state.userId} /> : null}
+              <Button onClick={this.handelClickStatus}>Check Status</Button>
+              <Button className="ml-2" onClick={this.handelClick}>
+                Create Event
+              </Button>
             </Jumbotron>
             {events ? <EventList events={events} /> : null}
           </Col>

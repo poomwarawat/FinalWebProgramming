@@ -18,8 +18,10 @@ export default class StatusSummary extends Component {
           <Col md="12">
             <Alert color="secondary">
               <Row>
-                <Col md="12">
-                  <p className="font-weight-bold">{title}</p>
+                <Col md="12" className="b-title-event-status">
+                  <Link to={"/events/" + event.eventId}>
+                    <p className="font-weight-bold b-title-event-status">{title}</p>
+                  </Link>
                 </Col>
                 <Col md="12">
                   <Badge color={styleList}>{paymentState}</Badge>
