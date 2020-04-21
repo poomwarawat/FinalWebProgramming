@@ -20,7 +20,6 @@ module.exports = (eventData, eventReport) => {
 
   let countTag = 0;
   priceData.forEach((price) => {
-    console.log("price", price);
     if (price > -1) {
       priceHtml = priceHtml + priceHtmlTag[countTag] + price;
       priceHtml = priceHtml + ` THB</span>`;
@@ -30,7 +29,6 @@ module.exports = (eventData, eventReport) => {
     countTag = countTag + 1;
   });
   let count = 0;
-  console.log("priceHtmlTag", priceHtmlTag);
   let date = report[0]["event_date"].toString();
   date = date.slice(0, 16);
   data.forEach((event) => {

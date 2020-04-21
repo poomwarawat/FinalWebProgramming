@@ -1,16 +1,27 @@
 import React, { Component } from "react";
-import { Row, Col, Jumbotron, Button } from "reactstrap";
+import { Row, Col, Jumbotron, Button, Badge } from "reactstrap";
 import Navigator from "../../component/Nevigator";
 import EventList from "../../component/RunningEvent/EventList";
 import API from "../../API/API";
+import EventUserStatus from "../RunningEventPage/EventUserStatus";
 class Event extends Component {
   state = {
     events: null,
+    userId: "",
   };
   handelClick = () => {
     this.props.history.push("/create-event");
   };
-  componentDidMount = () => {
+  componentDidMount = async () => {
+    const Key = new FormData();
+    Key.append("token", localStorage.getItem("key"));
+    await API.post("/auth-token", Key).then((res) => {
+      if (res.data.userId) {
+        this.setState({
+          userId: res.data.userId,
+        });
+      }
+    });
     API.get("/event").then((res) => {
       this.setState({ events: res.data });
     });
@@ -35,6 +46,8 @@ class Event extends Component {
                 runner in the world
               </p>
               <hr className="my-2" />
+              <h6>Event Status : </h6>
+              {this.state.userId ? <EventUserStatus userId={this.state.userId} /> : null}
               <Button onClick={this.handelClick}>Create Event</Button>
             </Jumbotron>
             {events ? <EventList events={events} /> : null}

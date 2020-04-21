@@ -171,3 +171,22 @@ router.post("/create-pdf", (req, res) => {
 router.get("/fetch-pdf", (req, res) => {
   res.sendFile(`${resolve("pdfTemplate")}/result.pdf`);
 });
+
+router.get("/event-status/:id", (req, res) => {
+  let userId = req.params.id;
+  let sql = `SELECT userId, 
+  users_event.eventId, 
+  category, 
+  paymentState, 
+  title, 
+  event_date 
+  FROM 
+  runrena.users_event 
+  INNER JOIN 
+  runrena.running_event 
+  ON users_event.eventId = running_event.eventId
+  WHERE userId = ${userId}`;
+  con.query(sql, (err, result) => {
+    res.send(result);
+  });
+});
