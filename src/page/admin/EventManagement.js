@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import { Row, Col, Nav, Card, Badge, CardHeader, CardBody, Button, CardImg } from "reactstrap";
+
 import { Link } from "react-router-dom";
 import Nevigator from "../../component/Nevigator";
 import API from "../../API/API";
 import EventList from "../admin/EventList";
+import SearchEvent from "../admin/SearchEvent";
 export default class EventManagement extends Component {
   state = {
     eventData: null,
@@ -12,6 +14,10 @@ export default class EventManagement extends Component {
     API.get("/event").then((res) => {
       this.setState({ eventData: res.data });
     });
+  };
+  handelSearch = (eventDataSearch) => {
+    console.log("EventManagement -> handelSearch -> eventDataSearch", eventDataSearch);
+    this.setState({ eventData: eventDataSearch });
   };
   render() {
     return (
@@ -28,10 +34,16 @@ export default class EventManagement extends Component {
                 </div>
               </Col>
               <Col md="12">
-                {" "}
                 <div className="card shadow mb-4">
                   <div className="card-header py-3">
-                    <h6 className="m-0 font-weight-bold text-primary">Event</h6>
+                    <div className="row">
+                      <div className="col-md-7">
+                        <h6 className="m-0 font-weight-bold text-primary">Event</h6>
+                      </div>
+                      <div className="col-md-5">
+                        <SearchEvent handelSearch={this.handelSearch} />
+                      </div>
+                    </div>
                   </div>
                   <div className="card-body">
                     <div className="table-responsive">

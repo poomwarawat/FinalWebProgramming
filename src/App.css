@@ -182,16 +182,19 @@ h4:hover {
   opacity: 0.7;
   object-fit: cover;
 }
-.comment-box{
+
+.comment-box {
   width: 100%;
   height: 100%;
   border-radius: 15px;
   padding-left: 10px;
   background-color: rgb(240, 240, 240);
 }
-.friend-list{
+
+.friend-list {
   padding-top: 30px;
 }
+<<<<<<< HEAD
 .online-users{
   border: 4px solid #626FF2;
   width: 50px;
@@ -235,12 +238,18 @@ h4:hover {
   bottom: 0em;
 }
 .Link-name{
+=======
+
+.Link-name {
+>>>>>>> feature/event
   color: rgb(57, 61, 107);
 }
-.comment-input{
+
+.comment-input {
   border-radius: 30px;
   background-color: rgb(240, 240, 240);
 }
+
 .cover img {
   border-radius: 10px 10px;
   width: 100%;
@@ -371,12 +380,13 @@ h4:hover {
   width: 0;
 }
 
-[type="file"]+#for-picture{
+[type="file"]+#for-picture {
   background-color: white;
   color: rgb(43, 43, 43);
   width: 100%;
   height: 30px;
 }
+
 [type="file"]+label {
   margin-top: 10px;
   background: rgb(114, 103, 180);
@@ -394,16 +404,19 @@ h4:hover {
   transition: all 0.3s;
   vertical-align: middle;
 }
-.photo-post{
+
+.photo-post {
   position: relative;
   width: 100%;
   height: 350px;
 }
-.photo-post img{
+
+.photo-post img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
+<<<<<<< HEAD
 .btn-post-photo{
   background-color: #FAFAFA;
   border: none;
@@ -440,11 +453,15 @@ h4:hover {
   width: 100%;
   color: white;
 }
+=======
+
+>>>>>>> feature/event
 .top-right {
   position: absolute;
   top: 8px;
   right: 16px;
 }
+
 .image-preview {
   width: 100%;
   height: 300px;
@@ -461,18 +478,21 @@ h4:hover {
 #name-post {
   padding-top: 5px;
 }
+
 .top-left {
   position: absolute;
   top: 20px;
   left: 20px;
 }
-.cover-upload{
+
+.cover-upload {
   width: 100px;
   height: 50px;
   border-radius: 5px;
   background-color: rgba(240, 248, 255, 0.815);
   border: none;
 }
+<<<<<<< HEAD
 .friend-list-box{
   background-color: none;
   border: none;
@@ -485,6 +505,9 @@ h4:hover {
   background-color: rgba(255, 255, 255, 0);
   padding : 0px;
 }
+=======
+
+>>>>>>> feature/event
 @media only screen and (max-width: 767px) {
   #name-post {
     padding-top: 0;
@@ -574,4 +597,67 @@ h4:hover {
 .b-checkout-title {
   font-weight: bolder;
   font-size: 0.9rem
+}
+
+.b-title-event-status {
+  color: #333333
+}
+
+.b-title-event-status a:hover {
+  text-decoration: none;
+}
+
+
+#b-upload {
+  border: 2px solid gray;
+  color: gray;
+  background-color: white;
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-size: 20px;
+  font-weight: normal;
+}
+
+
+.b-photo-post {
+  position: relative;
+  width: 100%;
+  height: 350px;
+}
+
+.b-photo-post img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.b-top-right {
+  position: absolute;
+  top: 8px;
+  right: 16px;
+}
+
+.b-image-preview {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
+
+#myUL {
+  /* Remove default list styling */
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  background: #fff;
+  border-radius: 10px;
+  position: absolute;
+  width: 200px;
+}
+
+
+#myUL li a {
+  margin-top: -1px;
+  padding: 12px;
+  text-decoration: none;
+  display: block;
 }

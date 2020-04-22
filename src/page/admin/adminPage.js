@@ -153,7 +153,7 @@ export default class adminPage extends Component {
                   </CardBody>
                 </Card>
               </Col>
-              <Col md="4" className="mt-4">
+              <Col md="4" className="mt-4 d-flex align-items-stretch">
                 <Card>
                   <CardHeader>Event Management</CardHeader>
                   <CardImg
@@ -163,17 +163,8 @@ export default class adminPage extends Component {
                     alt="Card image cap"
                   />
                   <CardBody>
-                    <h6>
-                      <Badge color="success">success</Badge> : <Badge color="success">44</Badge>
-                    </h6>
-                    <h6>
-                      <Badge color="warning">pending</Badge> : <Badge color="warning">10</Badge>
-                    </h6>
-                    <h6>
-                      <Badge color="danger">incorrect</Badge> : <Badge color="danger">10</Badge>
-                    </h6>
                     <Link to="/event-management">
-                      <Button size="sm" className="right btn-block">
+                      <Button size="sm" className="right btn-block ">
                         Manage
                       </Button>
                     </Link>
