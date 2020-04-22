@@ -25,7 +25,6 @@ export default class UploadPicEvent extends Component {
     }
   }
   handleChangePhoto = (e) => {
-    console.log("handel change photo");
     this.setState({
       postPhoto: URL.createObjectURL(e.target.files[0]),
     });

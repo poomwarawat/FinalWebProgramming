@@ -4,7 +4,6 @@ import { Col, Button, Card, CardImg, CardText, CardBody, CardTitle, CardHeader }
 export default class EventSummary extends Component {
   render() {
     const { events } = this.props;
-    console.log("EventSummary -> render -> events", events);
     let date = events["event_date"].split("T", 1);
     return (
       <Col sm="12" md="4" className="mt-2">

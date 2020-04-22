@@ -190,3 +190,14 @@ router.get("/event-status/:id", (req, res) => {
     res.send(result);
   });
 });
+
+router.post("/event-search", (req, res) => {
+  let data = req.body.data;
+  let sql = `SELECT *
+  FROM runrena.running_event
+  WHERE title LIKE '${data}__%'`;
+  con.query(sql, (err, result) => {
+    if (err) throw err;
+    res.send(result);
+  });
+});

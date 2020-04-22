@@ -7,11 +7,9 @@ export default class StatusSummary extends Component {
     let paymentState = "XXXX";
     let stateList = ["registered", "pending", "success", "incorrect"];
     let styleList = ["light", "warning", "success", "danger"];
-    console.log("StatusSummary -> render -> event", event);
     paymentState = stateList[event["paymentState"]];
     styleList = styleList[event["paymentState"]];
     let title = event["title"].slice(0, 45) + "...";
-
     return (
       <Col md="6">
         <Row>
