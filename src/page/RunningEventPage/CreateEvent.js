@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Navigator from "../../component/Nevigator";
 import FadeWarning from "../RunningEventPage/FadeWarning";
 import API from "../../API/API";
+import UploadPicEvent from "../RunningEventPage/UploadPicEvent";
 import {
   Row,
   Col,
@@ -34,6 +35,8 @@ export default class CreateEvent extends Component {
     organized_by: "",
     event_date: "",
     created_event: false,
+    photoUrl: "",
+    disable: false,
   };
 
   handelChange = (e) => {
@@ -57,7 +60,7 @@ export default class CreateEvent extends Component {
     Data.append("startDate", this.state.startDate);
     Data.append("endDate", this.state.endDate);
     Data.append("event_date", this.state.event_date);
-    Data.append("imageUrl", "");
+    Data.append("imageUrl", this.state.photoUrl);
     Data.append("funRunPrice", this.state.funrunPrice);
     Data.append("halfMarathonPrice", this.state.halfPrice);
     Data.append("miniMarathonPrice", this.state.miniPrice);
@@ -70,6 +73,10 @@ export default class CreateEvent extends Component {
         window.location.reload();
       }
     });
+  };
+  onPhotoChange = (photoUrl) => {
+    console.log("CreateEvent -> onPhotoChange -> photoUrl", photoUrl);
+    this.setState({ photoUrl: photoUrl });
   };
   render() {
     const { funrun, mini, half, marathon } = this.state;
@@ -225,8 +232,19 @@ export default class CreateEvent extends Component {
                       required
                     />
                   </FormGroup>
-                  <Button className="btn-block">Submit</Button>
-                  {this.state.created_event ? <FadeWarning /> : null}
+                  <FormGroup>
+                    <UploadPicEvent onPhotoChange={this.onPhotoChange} />
+                  </FormGroup>
+
+                  {this.state.photoUrl ? (
+                    <Button className="btn-block">Submit</Button>
+                  ) : (
+                    <Button className="btn-block" disabled>
+                      Submit
+                    </Button>
+                  )}
+
+                  {this.state.created_event ? <h2>Done</h2> : null}
                 </Form>
               </CardBody>
             </Card>
