@@ -4,6 +4,7 @@ import TopFeed from '../component/TopFeed'
 import ToTop from '../component/ToTop'
 import PostStatus from '../component/PostStatus'
 import API from '../API/API'
+import Chat from '../component/Chat/Chat'
 
 export default class Feed extends Component {
     constructor(props){
@@ -38,7 +39,7 @@ export default class Feed extends Component {
                             </div>
                             <div className="col-sm-4 col-12">
                                 <div className="container">
-                                    {/* <Chat></Chat> */}
+                                    <Chat></Chat>
                                 </div>
                             </div>
                         </div>

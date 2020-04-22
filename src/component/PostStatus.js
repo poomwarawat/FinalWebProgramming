@@ -3,6 +3,9 @@ import API from "../API/API";
 import UploadPost from "../component/UploadPost";
 import { Progress } from 'reactstrap'
 import firebase from 'firebase'
+import 'react-image-lightbox/style.css'; 
+import LazyLoad from 'react-lazy-load';
+
 import {
   Form,
   FormGroup,
@@ -32,7 +35,7 @@ export default class PostStatus extends Component {
         post : [],
         postPhoto : null,
         postPhotoUrl : null,
-        uploadper : null
+        uploadper : null,
     };
     var firebaseConfig = {
       apiKey: "AIzaSyCu36Uit6DfffqB7DiQjyHLhCmAI-s6pxI",
@@ -176,8 +179,8 @@ export default class PostStatus extends Component {
   }
   renderPostBox = () =>{
     const URL = window.location.href
-        var fullurl = URL,
-        url = "/" + fullurl.split("/")[3];
+    var fullurl = URL,
+    url = "/" + fullurl.split("/")[3];
     if(url === "/" || url === "/profile" && localStorage.getItem('key') === this.props.param){
       return(
         <div className="mt-4">
@@ -227,16 +230,12 @@ export default class PostStatus extends Component {
                 </Col>
               </Row>
             </Form>
-            {this.renderPhoto()}            
-            <div className="row text-center pb-2">
-              <div className="col-sm-6 col-12">
+            {this.renderPhoto()}                       
+            <div className="row text-center pb-2 mt-3">
+              <div className="col-sm-12 col-12">
                 <input id="upload-photo-post" onChange={this.handleChangePhoto} type="file"/>
                 <label htmlFor="upload-photo-post" id="for-picture" className="btn btn-outline-info">Upload photo</label>
-              </div>
-              <div className="col-sm-6 col-12">
-                <input id="upload-album-post" type="file"/>
-                <label htmlFor="upload-album-post" id="for-picture"  className="btn btn-outline-info">Upload album</label>
-              </div>
+              </div>              
             </div>
           </Card>
           <div className="head-post-box">
@@ -255,7 +254,9 @@ export default class PostStatus extends Component {
         {this.state.post.reverse().map((datas) => {
           return (
             <div key={datas.postId}>
-              <UploadPost userId={this.state.userId} data={datas}></UploadPost>
+              <LazyLoad offsetHorizontal={300}>              
+                <UploadPost userId={this.state.userId} data={datas}></UploadPost>
+              </LazyLoad>
             </div>
           );
         })}
