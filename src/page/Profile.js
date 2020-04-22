@@ -14,13 +14,15 @@ export default class Profile extends Component {
         }
     }
     //https://www.thairath.co.th/media/Dtbezn3nNUxytg04OL8mgI3NIEavohv2W18gLB2c0r2biv.jpg
-    componentWillMount(){
+    componentDidMount = () => {
         const { id } = this.props.match.params
+        console.log("Here is!!!!!!" + id)
         this.setState({ params : id })
         const token = new FormData()
         token.append('token', id)
-        API.post('/auth-token', token )
+        API.post(`/auth-token`, token)
         .then(res =>{
+            console.log(res.data)
             if(res.data.url === "" || res.data.url === null){
                 this.setState({
                     urlpic : "http://www.accountingweb.co.uk/sites/all/modules/custom/sm_pp_user_profile/img/default-user.png"
