@@ -39,7 +39,7 @@ export default class Feed extends Component {
                             </div>
                             <div className="col-sm-4 col-12">
                                 <div className="container">
-                                    {/* <Chat></Chat> */}
+                                    <Chat></Chat>
                                 </div>
                             </div>
                         </div>
