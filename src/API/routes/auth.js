@@ -94,6 +94,19 @@ router.post("/auth-token", (req, res) => {
   });
 });
 
+router.get('/auth-token', (req, res) => {
+  const {token} = req.query
+  console.log(token)
+  const sql =  `SELECT * FROM users WHERE token = '${token}'`
+  con.query(sql, (err, result) =>{
+    for(var i in result){
+      return res.send({email : result[i].email, userId : result[i].userId, name : result[i].firstname,
+        lastname : result[i].lastname, address : result[i].address, city : result[i].city, birthday : result[i].birthday,
+        url : result[i].profileurl, cover : result[i].cover})
+    }
+  })
+})
+
 //update profile pic
 router.post("/updateProfile", (req, res) => {
   const url = req.body.url;

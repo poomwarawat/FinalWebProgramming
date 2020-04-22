@@ -79,7 +79,7 @@ router.get("/confirm-request", (req, res) =>{
 
 //get my friend
 router.get("/myfriend", (req, res) =>{
-    const sql = `SELECT users.userId, users.firstname, users.lastname, friend.resId, friend.state, users.token FROM friend INNER JOIN users ON friend.userId=users.userID WHERE state='friend' AND friendId=${req.query.userId}`
+    const sql = `SELECT users.userId, users.firstname, users.lastname, friend.resId, friend.state, users.token, users.profileurl FROM friend INNER JOIN users ON friend.userId=users.userID WHERE state='friend' AND friendId=${req.query.userId}`
     con.query(sql, (err, result) => {
         if(result){
             return res.send(result)
@@ -88,7 +88,7 @@ router.get("/myfriend", (req, res) =>{
 })
 
 router.get("/myfriendme", (req, res) =>{
-    const sql = `SELECT users.userId, users.firstname, users.lastname, friend.resId, friend.state, users.token FROM friend INNER JOIN users ON friend.friendId=users.userID WHERE friend.userId=${req.query.userId} AND friend.state='friend'`  
+    const sql = `SELECT users.userId, users.profileurl, users.firstname, users.lastname, friend.resId, friend.state, users.token FROM friend INNER JOIN users ON friend.friendId=users.userID WHERE friend.userId=${req.query.userId} AND friend.state='friend'`  
     con.query(sql, (err, result) => {
         if(result){
             return res.send(result)

@@ -186,11 +186,53 @@ h4:hover {
   width: 100%;
   height: 100%;
   border-radius: 15px;
-  padding: 10px;
+  padding-left: 10px;
   background-color: rgb(240, 240, 240);
 }
 .friend-list{
   padding-top: 30px;
+}
+.online-users{
+  border: 4px solid #626FF2;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.chat-box-area{
+  display: block;
+  position: fixed;
+  height: 330px;
+  bottom: 0em;
+  right: 20%;
+}
+.chat-box{
+  width: 270px;
+  height: 100vh;
+  background-color: rgb(238, 238, 238);
+  border-radius: 5px;
+  box-shadow: 5px 5px 2px rgb(185, 185, 185);
+
+}
+.chat-box .header-chat{
+  color: white;
+  background-color: #626FF2;
+  border-radius: 5px 5px;
+  padding: 4px;
+}
+.chat-space{
+  height: 35vh;
+}
+.chat-input{
+  width: 100%;
+  height: 35px;
+  background-color: white;
+  color: #333333;
+  border: none;
+}
+.footer-chat{
+  position: relative;
+  bottom: 0em;
 }
 .Link-name{
   color: rgb(57, 61, 107);
@@ -359,8 +401,44 @@ h4:hover {
 }
 .photo-post img{
   width: 100%;
-  height: 90%;
+  height: 100%;
   object-fit: cover;
+}
+.btn-post-photo{
+  background-color: #FAFAFA;
+  border: none;
+  padding: 0%;
+  height: 350px;
+}
+.album-box{
+  width: 100%;
+  height: 200px;
+  border-radius: 10px;
+  position: relative;
+}
+.img-album{
+  width: 100%;
+  height: 100%;
+}
+.img-album img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.6;
+  transition: 1s;
+}
+.img-album img:hover{
+  opacity: 0.8;
+}
+.name-album{
+  position: absolute;
+  width: 100%;
+}
+.name-album p{
+  padding-left: 10px;
+  background-color: rgb(54, 54, 54);
+  width: 100%;
+  color: white;
 }
 .top-right {
   position: absolute;
@@ -394,6 +472,18 @@ h4:hover {
   border-radius: 5px;
   background-color: rgba(240, 248, 255, 0.815);
   border: none;
+}
+.friend-list-box{
+  background-color: none;
+  border: none;
+  padding: 0%;
+}
+.exit-chat{
+  margin-right: 10px;
+  color: white;
+  border: none;
+  background-color: rgba(255, 255, 255, 0);
+  padding : 0px;
 }
 @media only screen and (max-width: 767px) {
   #name-post {
