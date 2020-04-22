@@ -8,6 +8,8 @@ export default class DetailEventPage extends Component {
     eventId: this.props.match.params.id,
     eventData: null,
     userId: null,
+    userName: null,
+    lastName: null,
   };
   componentWillMount = async () => {
     let url = "/event/" + this.state.eventId;
@@ -17,6 +19,8 @@ export default class DetailEventPage extends Component {
       if (res.data.userId) {
         this.setState({
           userId: res.data.userId,
+          userName: res.data.name,
+          lastName: res.data.lastname,
         });
       }
     });
@@ -35,7 +39,11 @@ export default class DetailEventPage extends Component {
           </Col>
           <Col md={7}>
             {eventData && this.state.userId ? (
-              <DetailsSummary eventData={eventData} userId={this.state.userId} />
+              <DetailsSummary
+                eventData={eventData}
+                userId={this.state.userId}
+                name={this.state.userName + " " + this.state.lastName}
+              />
             ) : null}
           </Col>
         </Row>
