@@ -68,7 +68,6 @@ export default class UploadPost extends Component {
                 <div>
                     <button className="btn-post-photo" type="button" onClick={() => this.setState({ isOpen: true })}>                        
                     <div className="photo-post mt-2">                                     
-                        {/* <img src={this.props.data.photo}></img>  */}
                         <LazyLoadImage    
                         effect="blur"                        
                         height={300}                                            
@@ -163,7 +162,7 @@ export default class UploadPost extends Component {
                             <Likebtn userId={this.props.userId} postId={this.props.data.postId}></Likebtn>                                                                                                 
                         </div>                       
                         {
-                            this.state.PostComment.reverse().map(datas =>{
+                            this.state.PostComment.map(datas =>{
                                 return(
                                     <div key={datas.commentId}>
                                         <CommentBox data={datas}></CommentBox>

@@ -232,14 +232,10 @@ export default class PostStatus extends Component {
             </Form>
             {this.renderPhoto()}                       
             <div className="row text-center pb-2 mt-3">
-              <div className="col-sm-6 col-12">
+              <div className="col-sm-12 col-12">
                 <input id="upload-photo-post" onChange={this.handleChangePhoto} type="file"/>
                 <label htmlFor="upload-photo-post" id="for-picture" className="btn btn-outline-info">Upload photo</label>
-              </div>
-              <div className="col-sm-6 col-12">
-                <input id="upload-album-post" type="file"/>
-                <label htmlFor="upload-album-post" id="for-picture"  className="btn btn-outline-info">Upload album</label>
-              </div>
+              </div>              
             </div>
           </Card>
           <div className="head-post-box">
