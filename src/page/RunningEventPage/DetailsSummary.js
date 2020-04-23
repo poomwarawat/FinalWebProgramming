@@ -7,6 +7,7 @@ export default class DetailsSummary extends Component {
   state = {
     userId: this.props.userId,
     eventId: this.props.eventData[0]["eventId"],
+    name: this.props.name,
     funrunSelected: false,
     miniSelected: false,
     halfSelected: false,
@@ -43,6 +44,7 @@ export default class DetailsSummary extends Component {
       }
     });
   };
+  componentDidMount = () => {};
 
   handelClickCheckout = async () => {
     let userIdAndEventID = new FormData();
@@ -144,7 +146,7 @@ export default class DetailsSummary extends Component {
                         Marathon (42K)
                       </Col>
                       <Col md="3" className="text-centet b-price-text">
-                        300 THB
+                        {eventData[0]["marathon_price"]} THB
                       </Col>
                       <Col md="2">
                         <Button
@@ -194,7 +196,7 @@ export default class DetailsSummary extends Component {
                 <hr />
 
                 <p className="mt-0 mb-0 b-sub-text-1 b-checkout-title">
-                  Runner : <span className="b-checkout-data">Anuwat Sukthong</span>
+                  Runner : <span className="b-checkout-data">{this.state.name}</span>
                 </p>
                 {this.state.registered ? (
                   <p>ท่านได้ทำการสมัครเข้าร่วมรายการวิ่งนี้แล้ว ทำการแจ้งยอดชำระเงินและรอการตรวจสอบจากผมนะครับที่รัก</p>
