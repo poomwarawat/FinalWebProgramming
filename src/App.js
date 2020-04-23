@@ -11,15 +11,15 @@ import Setting from "./page/Setting";
 import Event from "../src/page/RunningEventPage/Event";
 import CreateEvent from "../src/page/RunningEventPage/CreateEvent";
 import DetailsEvent from "../src/page/RunningEventPage/DetailsEvent";
-import Myalbum from './component/Album/Myalbum'
+import Myalbum from "./component/Album/Myalbum";
 import Friend from "./page/Friend";
 import AdminRunningEvent from "./page/admin/AdminRunningEvent";
 // import Nevigator from "./page/admin/adminPage";
 import adminPage from "./page/admin/adminPage";
 import EventManagement from "./page/admin/EventManagement";
 import EventReport from "./page/admin/EventReport";
-import Myphoto from './component/Album/Myphoto'
-
+import Myphoto from "./component/Album/Myphoto";
+import Game from "./page/game/Game";
 function App() {
   return (
     <div className="App">
@@ -41,6 +41,7 @@ function App() {
         <Route path="/event-manage/:id" component={EventReport} />
         <Route path="/myalbum" component={Myalbum}></Route>
         <Route path="/myphoto" component={Myphoto}></Route>
+        <Route path="/runrena-game" component={Game}></Route>
       </Switch>
     </div>
   );

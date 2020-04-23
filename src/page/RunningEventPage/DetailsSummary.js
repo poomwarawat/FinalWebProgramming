@@ -21,6 +21,7 @@ export default class DetailsSummary extends Component {
 
   handelClick = (e) => {
     this.setState({ categorySelected: e.target.id });
+    console.log("hello");
   };
 
   componentWillMount = () => {
