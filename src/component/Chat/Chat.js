@@ -71,11 +71,13 @@ export default class Chat extends Component {
         })
     }
     handleEnter = (target) =>{
-        if(target.charCode==13){
-            console.log(this.state.message)
-            API.get(`/send-message?userId=${this.state.userId}&friendId=${target.currentTarget.id}&message=${this.state.message}`)    
+        if(target.charCode==13){            
+            API.get(`/send-message?userId=${this.state.userId}&friendId=${target.currentTarget.id}&message=${this.state.message}`)                          
+            this.setState({
+                message : ""
+            })
         } 
-    }
+    }    
     handleChage = (e) =>{
         this.setState({
             message : e.target.value
@@ -95,12 +97,11 @@ export default class Chat extends Component {
                                 </span>                            
                             </div>
                         </div>
-                        <div className="chat-space">            
-                            {/* {console.log(datas.userId)}                 */}
+                        <div className="chat-space">                                        
                             <Message userId={this.state.userId} friendId={datas.userId}></Message>
                         </div>
                         <div className="footer-chat">                            
-                            <input placeholder="  enter your message here" onChange={this.handleChage} id={datas.userId} onKeyPress={this.handleEnter} className="chat-input"></input>
+                            <input placeholder="  enter your message here" value={this.state.message} onChange={this.handleChage} id={datas.userId} onKeyPress={this.handleEnter} className="chat-input"></input>
                         </div>
                     </div> 
                     </div>

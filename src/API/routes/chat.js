@@ -40,19 +40,22 @@ router.get(`/delete-chat-room`, (req, res) =>{
     })
 })
 
-router.get('/send-message', (req, res) => {    
-    const sql = `INSERT INTO message (fromId, toId, toMessage) VALUES (${req.query.userId}, ${req.query.friendId}, '${req.query.message}')`
+router.get('/send-message', (req, res) => {  
+    const chatId = req.query.userId + "_" + req.query.friendId  
+    const sql = `INSERT INTO message (chatId, toMessage) VALUES ('${chatId}', '${req.query.message}')`
     con.query(sql, (err, result) => {
         return res.send({send : true})
     })
 })
 
 router.get('/read-message', (req, res) => {
-    console.log(req.query)
-    const sql = `SELECT * FROM message WHERE fromId=${req.query.userId} AND toId=${req.query.friendId}`
-    con.query(sql, (err, result) => {
+    const chatId = req.query.userId + "_" + req.query.friendId    
+    const chatIdFriend = req.query.friendId + "_" + req.query.userId 
+    const sql = `SELECT * FROM message WHERE chatId='${chatId}' OR chatId='${chatIdFriend}'`
+    con.query(sql, (err, result) => {        
         return res.send(result)
     })
 })
+
 
 module.exports = router;
