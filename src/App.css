@@ -228,7 +228,8 @@ h4:hover {
 }
 
 .chat-space {
-  height: 35vh;
+  height: 37vh;
+  overflow-y: auto;
 }
 
 .chat-input {
@@ -513,6 +514,32 @@ h4:hover {
   background-color: rgba(255, 255, 255, 0);
   padding: 0px;
 }
+.message-me{
+  margin-top: 5px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+.message-friend{
+  margin-top: 5px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+.message-friend p{
+  background-color: rgb(219, 219, 219);
+  color: #333333;
+  font: larger;
+  border-radius: 20px;
+  padding: 15px;
+  line-height: 80%;
+}
+.message-me p{
+  background-color: #626FF2;
+  color: white;
+  border-radius: 20px;
+  padding: 15px;
+  line-height: 80%;
+}
+
 
 @media only screen and (max-width: 767px) {
   #name-post {
