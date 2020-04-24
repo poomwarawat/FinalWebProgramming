@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Nevigator from "../../component/Nevigator";
 import Game from "../../page/game/Game";
 import { Row, Col, Container } from "reactstrap";
+import { Link } from "react-router-dom";
 import API from "../../API/API";
 export default class GamePage extends Component {
   state = {
@@ -50,7 +51,10 @@ export default class GamePage extends Component {
             <Row>
               <Col md="8">
                 <h3>Your're Score : {this.state.score}</h3>
-                <p>All Range</p>
+                <Link to="/ScoreRange">
+                  {" "}
+                  <p>All Range</p>
+                </Link>
               </Col>
               <Col md="4">
                 {maxScoreData ? <h3>Best Score : {maxScoreData[0]["MAX(runrena.game.score)"]} </h3> : null}

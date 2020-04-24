@@ -221,5 +221,6 @@ router.post("/score", (req, res) => {
 });
 
 router.get("/score-range", (req, res) => {
+  let sql = "SELECT ";
   res.send("get score range");
 });
