@@ -6,7 +6,7 @@ export default class Message extends Component {
     constructor(props){
         super(props)
         this.state = {
-            message : [],              
+            message : [],                             
         }
     }        
     componentDidMount(){                     
@@ -23,8 +23,7 @@ export default class Message extends Component {
                 if(this.state.message.length !== res.data.length){
                     this.setState({
                         message : []
-                    })      
-                    this.handlePlaySound()              
+                    })                                    
                     this.setState({
                         message : this.state.message.concat(res.data)
                     })                    
@@ -33,21 +32,36 @@ export default class Message extends Component {
             })                    
         }, 100);                            
     }     
+    count = []
     renderMessage = () => {
+        var countRight = 0
+        var countLeft = 0
         const message = this.state.message.map((datas, index) => {            
-            const chatId = this.props.userId + "_" + this.props.friendId            
+            const chatId = this.props.userId + "_" + this.props.friendId 
+                               
             if(chatId === datas.chatId){
+                countLeft=index
                 return(
                     <li key={index} className="message-me"><p className="float-right">{datas.toMessage}</p></li>                                 
                 )
-            }else{                
+            }else{   
+                this.count.push(index)  
+                countRight=index                              
                 return(
                     <li key={index} className="message-friend"><p className="float-left">{datas.toMessage}</p></li>
                 )
             }            
-        }) 
+        })
+        if(countRight > countLeft){            
+            if(countRight === Math.max(...this.count)){
+                this.handlePlaySound() 
+            }
+        }
+        // console.log(countRight)        
+        // console.log(Math.max(...this.count)) 
         return message               
     }
+    
     handlePlaySound = () => {
         let audio = new Audio(alert);
         audio.play()
