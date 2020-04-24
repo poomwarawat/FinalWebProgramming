@@ -71,7 +71,7 @@ export default class UploadPost extends Component {
                         <LazyLoadImage    
                         effect="blur"                        
                         height={300}                                            
-                        src={this.props.data.photo} // use normal <img> attributes as props
+                        src={this.props.data.photo} 
                          />                        
                     </div>                      
                     </button>                               

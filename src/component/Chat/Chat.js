@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import API from '../../API/API'
 import Message from './Message'
+import LazyLoad from 'react-lazy-load';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 export default class Chat extends Component {
     constructor(props){
@@ -117,11 +119,18 @@ export default class Chat extends Component {
                     {                        
                         this.state.friend.map((datas, index) => {                                                                                  
                             return(
-                                <li key={datas.userId} className="list-group-item">                                    
-                                    <button className="friend-list-box" id={datas.userId} onClick={this.handleClickFriend}>
-                                        <img src={datas.profileurl} className="comment-picture"/>
+                                <li key={datas.userId} className="list-group-item"> 
+                                <LazyLoad offsetHorizontal={300}>
+                                    <button className="friend-list-box" id={datas.userId} onClick={this.handleClickFriend}>                                        
+                                        <LazyLoadImage 
+                                        className="comment-picture"   
+                                        effect="blur"                                                                                                           
+                                        src={datas.profileurl} 
+                                        />       
+                                        {/* <img src={datas.profileurl} className="comment-picture"/> */}
                                         <span className="ml-2">{datas.firstname}</span>
                                     </button>
+                                </LazyLoad>                                    
                                 </li>
                             )
                         })
