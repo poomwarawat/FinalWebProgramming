@@ -201,3 +201,21 @@ router.post("/event-search", (req, res) => {
     res.send(result);
   });
 });
+
+router.get("/score", (req, res) => {
+  let sql = `SELECT runrena.game.userId, MAX(runrena.game.score), runrena.users.firstname FROM runrena.game INNER JOIN runrena.users 
+  ON game.userId = users.userId 
+  GROUP BY userId
+  `;
+  con.query(sql, (err, result) => {
+    res.send(result);
+  });
+});
+
+router.post("/score", (req, res) => {
+  let sql = `INSERT INTO runrena.game (userId, score) VALUES (${req.body.userId}, ${req.body.score});`;
+  con.query(sql, (err, result) => {
+    if (err) throw err;
+    res.send(result);
+  });
+});
