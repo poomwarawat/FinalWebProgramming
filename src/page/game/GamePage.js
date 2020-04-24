@@ -15,6 +15,9 @@ export default class GamePage extends Component {
     data.append("score", score);
     data.append("userId", this.state.userId);
     API.post("/score", data).then((res) => {});
+    API.get("/score").then((res) => {
+      this.setState({ maxScoreData: res.data });
+    });
     this.setState({ score: score });
   };
   componentDidMount = async () => {

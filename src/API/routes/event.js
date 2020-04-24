@@ -219,3 +219,7 @@ router.post("/score", (req, res) => {
     res.send(result);
   });
 });
+
+router.get("/score-range", (req, res) => {
+  res.send("get score range");
+});

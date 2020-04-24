@@ -20,7 +20,7 @@ import EventManagement from "./page/admin/EventManagement";
 import EventReport from "./page/admin/EventReport";
 import Myphoto from "./component/Album/Myphoto";
 import Game from "./page/game/GamePage";
-
+import ScoreRange from "./page/game/ScoreRange";
 function App() {
   return (
     <div className="App">
@@ -43,6 +43,7 @@ function App() {
         <Route path="/myalbum" component={Myalbum}></Route>
         <Route path="/myphoto" component={Myphoto}></Route>
         <Route path="/game" component={Game}></Route>
+        <Route path="/ScoreRange" component={ScoreRange}></Route>
       </Switch>
     </div>
   );
