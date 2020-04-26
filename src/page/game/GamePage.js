@@ -32,6 +32,7 @@ export default class GamePage extends Component {
       }
     });
     API.get("/score").then((res) => {
+      console.log(res.data);
       this.setState({ maxScoreData: res.data });
     });
   };

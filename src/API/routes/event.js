@@ -205,9 +205,10 @@ router.post("/event-search", (req, res) => {
 router.get("/score", (req, res) => {
   let sql = `SELECT runrena.game.userId, MAX(runrena.game.score), runrena.users.firstname FROM runrena.game INNER JOIN runrena.users 
   ON game.userId = users.userId 
-  GROUP BY userId
+  GROUP BY userId ORDER BY MAX(runrena.game.score) desc;
   `;
   con.query(sql, (err, result) => {
+    if (err) throw err;
     res.send(result);
   });
 });
