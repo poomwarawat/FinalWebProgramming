@@ -27,16 +27,12 @@ export default class Explorer extends Component {
           <Col md="3">
             <Nevigator />
           </Col>
-          <Col md="8">
+          <Col md="8" className="mt-3">
             <Card>
               <CardHeader>Overview</CardHeader>
               <CardBody>
                 <Row>
-                  <Col md="12">
-                    <CardTitle>
-                      <div>Month Report</div>
-                    </CardTitle>
-                  </Col>
+                  <Col md="12"></Col>
                   <Col md="12">{this.state.userId ? <MonthReport userId={this.state.userId} /> : null}</Col>
                 </Row>
               </CardBody>
