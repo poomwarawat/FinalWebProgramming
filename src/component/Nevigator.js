@@ -17,12 +17,7 @@ export default class Nevigator extends Component {
       <div>
         <div className="nevigator">
           <nav className="navbar navbar-expand-lg navbar-dark">
-            <img
-              src="https://www.shareicon.net/data/512x512/2017/03/29/881757_run_512x512.png"
-              width="50"
-              height="50"
-              alt="RunnerIcon"
-            ></img>
+            <img src="https://www.shareicon.net/data/512x512/2017/03/29/881757_run_512x512.png" width="50" height="50" alt="RunnerIcon"></img>
             <Link to="/">
               <h3 className="navbar-brand mt-2 ml-3" id="header1">
                 Runrena
@@ -57,8 +52,8 @@ export default class Nevigator extends Component {
                 <Link to="/event">
                   <h4>Event</h4>
                 </Link>
-                <Link to="/setting">
-                  <h4>Setting</h4>
+                <Link to="/game">
+                  <h4>Game</h4>
                 </Link>
                 <h4>
                   <button onClick={this.handleLogout}>Logout</button>
@@ -86,8 +81,8 @@ export default class Nevigator extends Component {
             <Link to="/admin">
               <h4>Admin</h4>
             </Link>
-            <Link to="/setting">
-              <h4>Setting</h4>
+            <Link to="/game">
+              <h4>Game</h4>
             </Link>
           </div>
         </div>
