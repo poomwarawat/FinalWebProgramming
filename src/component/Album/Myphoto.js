@@ -25,24 +25,35 @@ export default function Myphoto() {
                 <div className="col-sm-3 col-12">
                     <Nevigator></Nevigator>
                 </div>
-                <div className="col-sm-9 col-12">
+                <div className="col-sm-8 col-12">
+                        <div className="cover">
+                            <img className="coverimg" src="http://www.thailandoutdoor.com/wp-content/uploads/12443704_10207970802445350_1538187090_o.jpg" alt="Cinque Terre" width="1000" height="300"/>
+                            <div className="bottomleft">
+                                {/* renderpic function */}
+                            </div>
+                        </div>
                     <div className="container mt-4">
-                        <h1>My Album</h1>
-                        <Gallery photos={photos} onClick={openLightbox} />
-                        <ModalGateway>
-                            {viewerIsOpen ? (
-                            <Modal onClose={closeLightbox}>
-                                <Carousel
-                                currentIndex={currentImage}
-                                views={photos.map(x => ({
-                                    ...x,
-                                    srcset: x.srcSet,
-                                    caption: x.title
-                                }))}
-                                />
-                            </Modal>
-                            ) : null}
-                        </ModalGateway>
+                        <h1 className ="p_text">Album Name</h1>
+                        <div className="row p_picbox ">
+                            <div className="col-sm-4 col-12 p_pic">
+                                <img src="http://www.thailandoutdoor.com/wp-content/uploads/12443704_10207970802445350_1538187090_o.jpg"/>
+                            </div>
+                            <div className="col-sm-4 col-12 p_pic">
+                                <img src="http://www.thailandoutdoor.com/wp-content/uploads/12443704_10207970802445350_1538187090_o.jpg"/>
+                            </div>
+                            <div className="col-sm-4 col-12 p_pic">
+                                <img src="http://www.thailandoutdoor.com/wp-content/uploads/12443704_10207970802445350_1538187090_o.jpg"/>
+                            </div>
+                            <div className="col-sm-4 col-12 p_pic">
+                                <img src="http://www.thailandoutdoor.com/wp-content/uploads/12443704_10207970802445350_1538187090_o.jpg"/>
+                            </div>
+                            <div className="col-sm-4 col-12 p_pic">
+                                <img src="http://www.thailandoutdoor.com/wp-content/uploads/12443704_10207970802445350_1538187090_o.jpg"/>
+                            </div>
+                            <div className="col-sm-4 col-12 p_pic">
+                                <img src="http://www.thailandoutdoor.com/wp-content/uploads/12443704_10207970802445350_1538187090_o.jpg"/>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
