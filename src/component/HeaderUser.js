@@ -40,7 +40,7 @@ export default class HeaderUser extends Component {
             )
         }else{
             return(
-                <div>
+                <div>                    
                     <img alt="" src={this.props.user.urlpic}/>
                 </div>
             )
@@ -101,8 +101,7 @@ export default class HeaderUser extends Component {
     render() {
         return (
             <div>
-                <div className="cover">
-                    {/* {console.log(this.props.user)} */}
+                <div className="cover">                    
                     <img className="coverimg" src={this.props.user.cover} alt="Cinque Terre" width="1000" height="300"/>
                     <div className="top-left">
                         {this.renderUploadCover()}

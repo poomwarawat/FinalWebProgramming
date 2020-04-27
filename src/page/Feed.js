@@ -3,7 +3,6 @@ import Nevigator from '../component/Nevigator'
 import TopFeed from '../component/TopFeed'
 import ToTop from '../component/ToTop'
 import PostStatus from '../component/PostStatus'
-import API from '../API/API'
 import Chat from '../component/Chat/Chat'
 
 export default class Feed extends Component {

@@ -36,6 +36,7 @@ export default class PostStatus extends Component {
         postPhoto : null,
         postPhotoUrl : null,
         uploadper : null,
+        uploadState : true
     };
     var firebaseConfig = {
       apiKey: "AIzaSyCu36Uit6DfffqB7DiQjyHLhCmAI-s6pxI",
@@ -114,22 +115,27 @@ export default class PostStatus extends Component {
     Data.append('totalDistance', this.state.totalDistance)
     Data.append('paceAverage', this.state.paceAverage)
     Data.append('postPhoto', this.state.postPhotoUrl)
-    API.post("/post/posts", Data)
-    .then(res => {
-        if(res.data.post == true){
-            this.setState({
-                post : [],
-                postPhoto : null,
-                postPhotoUrl : null,
-                description : '',
-                totalDistance : '',
-                paceAverage : '',
-                totalTime : '',
-                
-            })
-            this.getPost()
-        }
-    })
+    if(this.state.uploadState === true){
+      API.post("/post/posts", Data)
+      .then(res => {
+          if(res.data.post == true){
+              this.setState({
+                  post : [],
+                  postPhoto : null,
+                  postPhotoUrl : null,
+                  description : '',
+                  totalDistance : '',
+                  paceAverage : '',
+                  totalTime : '',
+                  uploadState : false
+                  
+              })
+              this.getPost()
+          }
+      })
+    }else{
+      alert("Please wait fot picture upload")
+    }
   }
   handleChangePhoto = (e) => {
     this.setState({
@@ -140,7 +146,8 @@ export default class PostStatus extends Component {
     task.on(`state_changed` , (snapshort) => {
         let percentage = (snapshort.bytesTransferred / snapshort.totalBytes) * 100;
         this.setState({
-            uploadper : percentage
+            uploadper : percentage,
+            uploadState : false
         })
     } , (error) => {
         this.setState({
@@ -149,6 +156,7 @@ export default class PostStatus extends Component {
     } , () => {
         this.setState({
             messag:`Upload Success`,
+            uploadState : true
         })
         task.snapshot.ref.getDownloadURL().then((downloadUrl) =>{
           alert("Upload Success")

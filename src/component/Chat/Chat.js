@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import API from '../../API/API'
 import Message from './Message'
+import LazyLoad from 'react-lazy-load';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 export default class Chat extends Component {
     constructor(props){
@@ -9,7 +11,8 @@ export default class Chat extends Component {
             friend : [],
             userId : '',
             chatroom : [],
-            message : ''
+            message : '',
+            read : []            
         }
     }
     componentWillMount(){
@@ -45,7 +48,7 @@ export default class Chat extends Component {
                 })
                 this.renderRoom()
             })                        
-        })        
+        })          
     }
     handleClickFriend = (e) => {   
         this.setState({
@@ -58,7 +61,21 @@ export default class Chat extends Component {
                 this.componentDidMount()                                
             }
         })
+        API.get(`/get-read-message?userId=${this.state.userId}&friendId=${e.currentTarget.id}`)        
     }    
+    // getRead = (id) =>{
+    //     var data =[]
+    //     API.get(`/get-read?userId=${this.state.userId}&friendId=${id}`)
+    //     .then(res => {            
+    //         for (let index = 0; index < res.data.length; index++) {                
+    //             if(res.data[index].state !== "read"){
+    //                 data.push(res.data[index])
+    //             }             
+    //         }                                       
+    //     })        
+    //     console.log(data)
+    // }    
+    
     handleExit = (e) => {        
         this.setState({
             chatroom : []
@@ -98,10 +115,10 @@ export default class Chat extends Component {
                             </div>
                         </div>
                         <div className="chat-space">                                        
-                            <Message userId={this.state.userId} friendId={datas.userId}></Message>
+                            <Message userId={this.state.userId} ms={this.state.message} friendId={datas.userId}></Message>
                         </div>
                         <div className="footer-chat">                            
-                            <input placeholder="  enter your message here" value={this.state.message} onChange={this.handleChage} id={datas.userId} onKeyPress={this.handleEnter} className="chat-input"></input>
+                            <input placeholder="  enter your message here" value={this.state.message}  onChange={this.handleChage} id={datas.userId} onKeyPress={this.handleEnter} className="chat-input"></input>
                         </div>
                     </div> 
                     </div>
@@ -117,11 +134,20 @@ export default class Chat extends Component {
                     {                        
                         this.state.friend.map((datas, index) => {                                                                                  
                             return(
-                                <li key={datas.userId} className="list-group-item">                                    
-                                    <button className="friend-list-box" id={datas.userId} onClick={this.handleClickFriend}>
-                                        <img src={datas.profileurl} className="comment-picture"/>
+                                <li key={datas.userId} className="list-group-item"> 
+                                <LazyLoad offsetHorizontal={300}>
+                                    <button className="friend-list-box" id={datas.userId} onClick={this.handleClickFriend}>                                        
+                                        <LazyLoadImage 
+                                        className="comment-picture"   
+                                        effect="blur"                                                                                                           
+                                        src={datas.profileurl} 
+                                        />       
+                                        {/* <img src={datas.profileurl} className="comment-picture"/> */}
                                         <span className="ml-2">{datas.firstname}</span>
+                                        {/* {this.getRead(datas.userId)} */}
+                                        {/* <span className="ml-2">{this.renderAlert()}</span> */}
                                     </button>
+                                </LazyLoad>                                    
                                 </li>
                             )
                         })

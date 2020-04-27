@@ -15,14 +15,12 @@ export default class Profile extends Component {
     }
     //https://www.thairath.co.th/media/Dtbezn3nNUxytg04OL8mgI3NIEavohv2W18gLB2c0r2biv.jpg
     componentDidMount = () => {
-        const { id } = this.props.match.params
-        console.log("Here is!!!!!!" + id)
+        const { id } = this.props.match.params        
         this.setState({ params : id })
         const token = new FormData()
         token.append('token', id)
         API.post(`/auth-token`, token)
-        .then(res =>{
-            console.log(res.data)
+        .then(res =>{            
             if(res.data.url === "" || res.data.url === null){
                 this.setState({
                     urlpic : "http://www.accountingweb.co.uk/sites/all/modules/custom/sm_pp_user_profile/img/default-user.png"
@@ -54,6 +52,16 @@ export default class Profile extends Component {
             })
         })
     }
+    sendUser = () => {        
+        const { urlpic, params, cover} = this.state
+        if(urlpic === "" || params === "" || cover === ""){
+            console.log("Undefined")
+        }else{
+            return(
+                <HeaderUser param={this.state.params} user={this.state}></HeaderUser>
+            )
+        }
+    }
     render() {
         return (
             <div className="row profile-page">
@@ -62,7 +70,7 @@ export default class Profile extends Component {
                 </div>
                 <div className="col-sm-8 col-12">
                     <div className="container">
-                        <HeaderUser param={this.state.params} user={this.state}></HeaderUser>
+                        {this.sendUser()}                                                
                         <PostStatus param={this.state.params} email={this.state.email}></PostStatus>
                     </div>
                 </div>
