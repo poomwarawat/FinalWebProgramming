@@ -27,7 +27,7 @@ export default class Message extends Component {
                     this.setState({
                         message : this.state.message.concat(res.data)
                     })                    
-                    this.refs.hello.scrollIntoView({ block: "end" })   
+                    // this.refs.hello.scrollIntoView({ block: "end" })   
                 }                
             })                    
         }, 100);                            
