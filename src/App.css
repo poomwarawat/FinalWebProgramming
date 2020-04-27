@@ -514,17 +514,20 @@ h4:hover {
   background-color: rgba(255, 255, 255, 0);
   padding: 0px;
 }
-.message-me{
+
+.message-me {
   margin-top: 5px;
   margin-left: 5px;
   margin-right: 5px;
 }
-.message-friend{
+
+.message-friend {
   margin-top: 5px;
   margin-left: 5px;
   margin-right: 5px;
 }
-.message-friend p{
+
+.message-friend p {
   background-color: rgb(219, 219, 219);
   color: #333333;
   font: larger;
@@ -532,7 +535,8 @@ h4:hover {
   padding: 15px;
   line-height: 80%;
 }
-.message-me p{
+
+.message-me p {
   background-color: #626FF2;
   color: white;
   border-radius: 20px;
@@ -693,4 +697,8 @@ h4:hover {
   padding: 12px;
   text-decoration: none;
   display: block;
+}
+
+.b-chart {
+  height: 450px;
 }
