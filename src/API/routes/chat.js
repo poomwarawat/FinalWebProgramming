@@ -19,8 +19,24 @@ router.get(`/add-chat-box`, (req, res) => {
     })
 })
 
+router.get('/get-read-message', (req, res) => {    
+    const chatId = req.query.friendId + "_" + req.query.userId
+    const sql = `UPDATE message SET state="read" WHERE chatId='${chatId}'`
+    con.query(sql, (err, result) => {
+        console.log(result)
+    })
+})
+
 router.get(`/get-chat-box`, (req, res) => {
     const sql = `SELECT chatbox.id, users.userId, users.firstname, users.lastname, users.token FROM chatbox INNER JOIN users ON chatbox.friendId=users.userId WHERE chatbox.userId=${req.query.userId}`    
+    con.query(sql, (err, result) => {
+        return res.send(result)
+    })
+})
+
+router.get('/get-read', (req, res) => {
+    const chatId = req.query.friendId + "_" + req.query.userId
+    const sql = `SELECT state from message WHERE chatId='${chatId}'`
     con.query(sql, (err, result) => {
         return res.send(result)
     })

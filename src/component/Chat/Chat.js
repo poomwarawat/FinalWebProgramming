@@ -11,7 +11,8 @@ export default class Chat extends Component {
             friend : [],
             userId : '',
             chatroom : [],
-            message : ''
+            message : '',
+            read : []            
         }
     }
     componentWillMount(){
@@ -47,7 +48,7 @@ export default class Chat extends Component {
                 })
                 this.renderRoom()
             })                        
-        })        
+        })          
     }
     handleClickFriend = (e) => {   
         this.setState({
@@ -60,7 +61,21 @@ export default class Chat extends Component {
                 this.componentDidMount()                                
             }
         })
+        API.get(`/get-read-message?userId=${this.state.userId}&friendId=${e.currentTarget.id}`)        
     }    
+    // getRead = (id) =>{
+    //     var data =[]
+    //     API.get(`/get-read?userId=${this.state.userId}&friendId=${id}`)
+    //     .then(res => {            
+    //         for (let index = 0; index < res.data.length; index++) {                
+    //             if(res.data[index].state !== "read"){
+    //                 data.push(res.data[index])
+    //             }             
+    //         }                                       
+    //     })        
+    //     console.log(data)
+    // }    
+    
     handleExit = (e) => {        
         this.setState({
             chatroom : []
@@ -129,6 +144,8 @@ export default class Chat extends Component {
                                         />       
                                         {/* <img src={datas.profileurl} className="comment-picture"/> */}
                                         <span className="ml-2">{datas.firstname}</span>
+                                        {/* {this.getRead(datas.userId)} */}
+                                        {/* <span className="ml-2">{this.renderAlert()}</span> */}
                                     </button>
                                 </LazyLoad>                                    
                                 </li>

@@ -30,17 +30,31 @@ export default class Message extends Component {
             })                    
         }, 100);                            
     }     
-    renderMessage = () => {                
-        console.log(this.props.message)
+    renderMessage = () => {                                
         if(this.props.ms === ""){
             const message = this.state.message.map((datas, index) => {            
                 const chatId = this.props.userId + "_" + this.props.friendId             
-                if(chatId === datas.chatId){                
+                if(chatId === datas.chatId){            
+                    // console.log("********************************")
+                    // console.log("--------------------------------")    
+                    // console.log("right")                                        
+                    // console.log("index : " + index)
+                    // console.log("Length of message state : " + this.state.message.length)
+                    // console.log(datas.toMessage)
+                    // console.log("--------------------------------")
                     return(
                         <li key={index} className="message-me"><p className="float-right">{datas.toMessage}</p></li>                                 
                     )
                 }else{                
-                    if(this.state.message.length === index + 1){
+                    // console.log("********************************")
+                    // console.log("--------------------------------")
+                    // console.log("left")                    
+                    // console.log("index : " + index)
+                    // console.log("Length of message state : " + this.state.message.length)
+                    // console.log(datas.toMessage)
+                    // console.log("--------------------------------")
+                    if(this.state.message.length - 1 === index){
+                        // console.log("Sound on")
                         this.handlePlaySound()
                     }
                     return(
