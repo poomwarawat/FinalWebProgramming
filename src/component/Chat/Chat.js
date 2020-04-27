@@ -100,10 +100,10 @@ export default class Chat extends Component {
                             </div>
                         </div>
                         <div className="chat-space">                                        
-                            <Message userId={this.state.userId} friendId={datas.userId}></Message>
+                            <Message userId={this.state.userId} ms={this.state.message} friendId={datas.userId}></Message>
                         </div>
                         <div className="footer-chat">                            
-                            <input placeholder="  enter your message here" value={this.state.message} onChange={this.handleChage} id={datas.userId} onKeyPress={this.handleEnter} className="chat-input"></input>
+                            <input placeholder="  enter your message here" value={this.state.message}  onChange={this.handleChage} id={datas.userId} onKeyPress={this.handleEnter} className="chat-input"></input>
                         </div>
                     </div> 
                     </div>
