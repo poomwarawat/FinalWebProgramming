@@ -98,6 +98,18 @@ export default class HeaderUser extends Component {
             )
         }
     }
+    renderDate = () =>{
+        const OldDate = this.props.user.birthday
+        
+        if(OldDate !== undefined){
+            console.log(OldDate)
+            const newDate = OldDate.split("T")[0]
+            console.log(newDate)
+            return(
+                <p>{newDate}</p>
+            )
+        }
+    }
     render() {
         return (
             <div>
@@ -113,7 +125,8 @@ export default class HeaderUser extends Component {
                 <div className="">
                     <div className="About">
                         <h1>{this.props.user.name + " " + this.props.user.lastname}</h1>
-                        <p>{this.props.user.birthday}</p>
+                        {this.renderDate()}
+                        {/* <p>{this.props.user.birthday}</p> */}
                         <p>{this.props.user.address + ", " + this.props.user.city}</p>
                     </div>
                     <div>    
