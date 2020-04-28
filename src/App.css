@@ -707,3 +707,12 @@ h4:hover {
   color: red;
   font-size: 1.5rem;
 }
+
+.b-content-address {
+  height: 120px;
+}
+
+.b-img-show {
+  height: 200px;
+  object-fit: cover;
+}
