@@ -61,10 +61,10 @@ export default class PostStatus extends Component {
         const URL = window.location.href
         var fullurl = URL,
         url = "/" + fullurl.split("/")[3];
-        // console.log(this.props.match.params)
-        const { id } = this.props.match.params
-        console.log(id)
+        // console.log(this.props.match.params)        
         if(url === '/profile'){            
+            const { id } = this.props.match.params
+            console.log(id)
             const Key = new FormData()
             Key.append('token', id)
             API.post("/auth-token", Key)
