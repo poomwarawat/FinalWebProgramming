@@ -36,15 +36,19 @@ export default class EditProfile extends Component {
         })
     }
     handleClick = () =>{
+        const Test = new Date(this.state.birthday)
+        console.log(Test)
+
         const Data = new FormData()
         Data.append("userId", this.state.userId)
         Data.append("firstname", this.state.firstname)
         Data.append("lastname", this.state.lastname)
-        Data.append("birthday", this.state.birthday)
+        Data.append("birthday", Test)
         Data.append("address", this.state.address)
-        Data.append("city", this.state.city)
+        Data.append("city", this.state.city)                
         API.post("/update-profile", Data)
         .then(res => {
+            console.log(res.data)
             if(res.data.upload === true){
                 window.location.reload()
             }

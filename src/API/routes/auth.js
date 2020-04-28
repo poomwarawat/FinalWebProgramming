@@ -128,8 +128,19 @@ router.post("/updateProfile", (req, res) => {
 
 //update profile data
 router.post("/update-profile", (req, res) => {
-  const { userId, firstname, lastname, birthday, address, city } = req.body;
-  const sql = `UPDATE users SET firstname='${firstname}', lastname='${lastname}', birthday='${birthday}', address='${address}', city='${city}' WHERE userId='${userId}'`;
+  const { userId, firstname, lastname, birthday, address, city } = req.body;  
+  const NewDate = new Date()
+  console.log(NewDate)
+
+  var formattedDate = ('0' + NewDate.getDate()).slice(-2);
+  var formattedMonth = ('0' + (NewDate.getMonth() + 1)).slice(-2);
+  var formattedYear = NewDate.getFullYear().toString().substr(2,2);
+
+    // Combine and format date string
+  var dateString = formattedYear + '-' + formattedMonth + '-' + formattedDate;
+  console.log(dateString)
+  
+  const sql = `UPDATE users SET firstname='${firstname}', lastname='${lastname}', birthday='${dateString}', address='${address}', city='${city}' WHERE userId='${userId}'`;
   con.query(sql, (err, result) => {
     return res.send({ upload: true });
   });
