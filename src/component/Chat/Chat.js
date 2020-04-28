@@ -3,6 +3,7 @@ import API from "../../API/API";
 import Message from "./Message";
 import LazyLoad from "react-lazy-load";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import {Link} from 'react-router-dom'
 
 export default class Chat extends Component {
   constructor(props) {
@@ -100,9 +101,11 @@ export default class Chat extends Component {
           <div id="chat-box" className="chat-box">
             <div className="box-chat">
               <div className="header-chat">
-                <span>
-                  {datas.firstname} {datas.lastname}
-                </span>
+                <Link to={`/profile/${datas.token}`} style={{color:"white"}}>
+                  <span>
+                    {datas.firstname} {datas.lastname}
+                  </span>
+                </Link>
                 <span className="float-right">
                   <button id={datas.id} onClick={this.handleExit} className="exit-chat">
                     X
