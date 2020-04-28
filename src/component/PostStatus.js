@@ -36,7 +36,8 @@ export default class PostStatus extends Component {
         postPhoto : null,
         postPhotoUrl : null,
         uploadper : null,
-        uploadState : true
+        uploadState : true,
+        token : this.props.param
     };
     var firebaseConfig = {
       apiKey: "AIzaSyCu36Uit6DfffqB7DiQjyHLhCmAI-s6pxI",
@@ -53,18 +54,22 @@ export default class PostStatus extends Component {
     }
   }
   componentWillMount(){
+        
     this.getPost()
   }
   getPost = () =>{
         const URL = window.location.href
         var fullurl = URL,
         url = "/" + fullurl.split("/")[3];
-
-        if(url === '/profile'){
+        // console.log(this.props.match.params)
+        const { id } = this.props.match.params
+        console.log(id)
+        if(url === '/profile'){            
             const Key = new FormData()
-            Key.append('token', this.props.param )
+            Key.append('token', id)
             API.post("/auth-token", Key)
             .then(res => {
+              console.log(res.data)
                 if(res.data.userId){
                     this.setState({
                         userId : res.data.userId
@@ -72,7 +77,7 @@ export default class PostStatus extends Component {
                 }
                 const userId = new FormData()
                 userId.append('userId', res.data.userId)
-                API.post("/post/get-post", userId)
+                API.post("/post/get-post", userId)                
                 .then(res => {
                     this.setState({
                         post : this.state.post.concat(res.data)

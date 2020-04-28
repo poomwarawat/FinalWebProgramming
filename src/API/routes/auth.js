@@ -3,6 +3,7 @@ const router = express.Router();
 const con = require("../config/mySQL");
 const { registerValidation, loginValidation } = require("../validation");
 const md5 = require("MD5");
+const joi = require('@hapi/joi');
 
 router.get("/", (req, res) => {
   res.send(new Date());
@@ -47,11 +48,19 @@ router.post("/register", async (req, res) => {
 //handing login
 
 router.post("/login", async (req, res) => {
+  console.log(req.body)
   const { email, password } = req.body;
 
-  const { error } = loginValidation(req.body);
+  const user = joi.object({
+    email : joi.string().email(),
+    password : joi.string().min(6)
+  })
+
+  const { error } = user.validate(req.body)
+  // const { error } = loginValidation(req.body);  
 
   if (error) {
+    console.log(error.details[0].message)
     return res.send({ err: error.details[0].message });
   }
 

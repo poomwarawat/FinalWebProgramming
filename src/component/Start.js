@@ -28,6 +28,9 @@ export default class Start extends Component {
         .then(res =>{
             if(res.data.err){
                 console.log(res.data.err)
+                this.setState({
+                    err : res.data.err
+                })
             }else{
                 localStorage.setItem("key", res.data.token)
                 window.location.reload()

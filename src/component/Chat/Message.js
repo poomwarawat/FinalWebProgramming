@@ -14,7 +14,8 @@ export default class Message extends Component {
         .then(res => {            
             this.setState({
                 message : this.state.message.concat(res.data)
-            })              
+            })     
+            this.refs.hello.scrollIntoView({ block: "end" });        
         })
         setInterval(() => {
             API.get(`/read-message?userId=${this.props.userId}&friendId=${this.props.friendId}`)
@@ -25,7 +26,8 @@ export default class Message extends Component {
                     })                                    
                     this.setState({
                         message : this.state.message.concat(res.data)
-                    })                                        
+                    })  
+                    this.refs.hello.scrollIntoView({ block: "end" });                                      
                 }                
             })                    
         }, 100);                            

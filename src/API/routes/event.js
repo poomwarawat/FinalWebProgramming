@@ -169,7 +169,7 @@ router.post("/create-pdf", (req, res) => {
 });
 
 router.get("/fetch-pdf", (req, res) => {
-  res.sendFile(`${resolve("pdfTemplate")}/result.pdf`);
+  res.sendFile(`./pdfTemplate/result.pdf`);
 });
 
 router.get("/event-status/:id", (req, res) => {

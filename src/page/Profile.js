@@ -55,7 +55,7 @@ export default class Profile extends Component {
     sendUser = () => {        
         const { urlpic, params, cover} = this.state
         if(urlpic === "" || params === "" || cover === ""){
-            console.log("Undefined")
+            // console.log("Undefined")
         }else{
             return(
                 <HeaderUser param={this.state.params} user={this.state}></HeaderUser>
@@ -70,8 +70,9 @@ export default class Profile extends Component {
                 </div>
                 <div className="col-sm-8 col-12">
                     <div className="container">
-                        {this.sendUser()}                                                
-                        <PostStatus param={this.state.params} email={this.state.email}></PostStatus>
+                        {this.sendUser()}       
+                        {/* {console.log(this.state.params)}                                                                  */}
+                        <PostStatus {...this.props} param={this.state.params} email={this.state.email}></PostStatus>
                     </div>
                 </div>
             </div>

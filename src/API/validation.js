@@ -13,7 +13,7 @@ const registerValidation = data =>{
     })
     return user.validate(data)
 }
-const loginValidation = data =>{
+const loginValidation = data =>{    
     const user = joi.object({
         email : joi.string().email(),
         password : joi.string().min(6)

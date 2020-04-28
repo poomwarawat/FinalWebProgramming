@@ -606,6 +606,11 @@ h4:hover {
     width: 200px;
     height: 200px;
   }
+  .friend-list-box {
+    background-color: none;
+    border: none;
+    padding: 0%;
+  }
 }
 
 .b-sub-text-1 {
