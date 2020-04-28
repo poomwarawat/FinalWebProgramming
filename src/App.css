@@ -289,12 +289,12 @@ h4:hover {
   position: absolute;
   z-index: 1;
 }
-.list-group-item{
+/* .list-group-item{
   transition: 0.5s;
 }
 .list-group-item:hover{
   background-color:rgb(228, 228, 228);
-}
+} */
 
 
 .p_profile_pic img {
@@ -717,4 +717,9 @@ h4:hover {
 
 .b-chart {
   height: 450px;
+}
+
+.icon-delete {
+  color: red;
+  font-size: 1.5rem;
 }

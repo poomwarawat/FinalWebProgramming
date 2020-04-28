@@ -42,7 +42,7 @@ class PaymentCheck extends Component {
               <Input type="time" name="time" id="time" required onChange={this.handelChange} />
             </Col>
           </FormGroup>
-          <Button className="btn-block">Change Yod</Button>
+          <Button className="btn-block">Report</Button>
         </Form>
       </div>
     );
