@@ -5,6 +5,7 @@ import { Progress } from 'reactstrap';
 import API from '../API/API'
 import EditProfile from '../component/EditProfile'
 import UploadCover from '../component/UploadCover'
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 export default class HeaderUser extends Component {
     constructor(props){
@@ -34,14 +35,22 @@ export default class HeaderUser extends Component {
     renderPic = () =>{
         if(localStorage.getItem('key') === this.props.param){
             return(
-                <div>
-                    <img alt="" data-toggle="modal" data-target="#exampleModal" className="profilepic" src={this.props.user.urlpic}/>
+                <div alt="" data-toggle="modal" data-target="#exampleModal" className="profilepic">
+                    <LazyLoadImage    
+                        effect="blur"                                                
+                        src={this.props.user.urlpic} 
+                    />
+                    {/* <img alt="" data-toggle="modal" data-target="#exampleModal" className="profilepic" src={this.props.user.urlpic}/> */}
                 </div>
             )
         }else{
             return(
-                <div>                    
-                    <img alt="" src={this.props.user.urlpic}/>
+                <div>   
+                    <LazyLoadImage    
+                        effect="blur"                                                
+                        src={this.props.user.urlpic} 
+                    />                 
+                    {/* <img alt="" src={this.props.user.urlpic}/> */}
                 </div>
             )
         }
@@ -113,8 +122,14 @@ export default class HeaderUser extends Component {
     render() {
         return (
             <div>
-                <div className="cover">                    
-                    <img className="coverimg" src={this.props.user.cover} alt="Cinque Terre" width="1000" height="300"/>
+                <div className="cover">  
+                    <div className="coverimg" width="1000" height="300">
+                        <LazyLoadImage    
+                            effect="blur"                                                
+                            src={this.props.user.cover} 
+                        />               
+                    </div>     
+                    {/* <img className="coverimg" src={this.props.user.cover} alt="Cinque Terre" width="1000" height="300"/> */}
                     <div className="top-left">
                         {this.renderUploadCover()}
                     </div>

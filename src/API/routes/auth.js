@@ -139,7 +139,7 @@ router.post("/update-profile", (req, res) => {
     // Combine and format date string
   var dateString = formattedYear + '-' + formattedMonth + '-' + formattedDate;
   console.log(dateString)
-  
+
   const sql = `UPDATE users SET firstname='${firstname}', lastname='${lastname}', birthday='${dateString}', address='${address}', city='${city}' WHERE userId='${userId}'`;
   con.query(sql, (err, result) => {
     return res.send({ upload: true });
@@ -153,6 +153,18 @@ router.post("/upload-cover", (req, res) => {
     return res.send({ upload: true });
   });
 });
+
+router.post("/user-search", (req, res) => {  
+  let data = req.body.data;
+  let sql = `SELECT *
+  FROM runrena.users
+  WHERE firstname LIKE '${data}__%' OR
+  lastname LIKE '${data}__%'`;
+  con.query(sql, (err, result) => {
+    if (err) throw err;
+    res.send(result);
+  });  
+})
 
 //handling logout
 router.post("/logout", (req, res) => {});

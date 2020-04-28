@@ -271,7 +271,7 @@ h4:hover {
 
 .bottomleft {
   border-radius: 50%;
-  background-color: black;
+  background-color: white;
   position: absolute;
   bottom: 0;
   left: 38%;
@@ -282,8 +282,19 @@ h4:hover {
   height: 200px;
   border: 5px solid white;
   border-radius: 50%;
+  background-color: white;
 }
 
+.user-list{
+  position: absolute;
+  z-index: 1;
+}
+.list-group-item{
+  transition: 0.5s;
+}
+.list-group-item:hover{
+  background-color:rgb(228, 228, 228);
+}
 
 
 .p_profile_pic img {

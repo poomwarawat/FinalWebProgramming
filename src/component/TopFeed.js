@@ -1,25 +1,29 @@
 import React, { Component } from 'react'
+import UserList from './UserList'
+import SearchUser from './SearchUser'
+
 
 export default class TopFeed extends Component {
+    state = {
+        eventData: null,
+      };
     handleLogout = () =>{
         localStorage.removeItem("key")
         window.location.reload()
     }
+    handelSearch = (eventDataSearch) => {
+        // console.log("EventManagement -> handelSearch -> eventDataSearch", eventDataSearch);
+        this.setState({ eventData: eventDataSearch });
+      };
     render() {
         return (
             <div>
                 <div className="row container">
                     <div className="col-sm-10 col-12 pt-4">
-                        <div className="input-group mb-3">
-                            <div className="search">
-                                <div className="input-group mb-3 ml-3">
-                                <input type="text" className="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2"/>
-                                <div className="input-group-append">
-                                    <button className="btn btn-outline-secondary" type="button" id="button-addon2">Search</button>
-                                </div>
-                                </div>
-                            </div>
-                        </div>
+                    <SearchUser handelSearch={this.handelSearch}></SearchUser>     
+                    <ul className="list-group" style={{width:"100%"}}>                        
+                        {this.state.eventData ? <UserList userlist={this.state.eventData} /> : null}
+                    </ul>               
                     </div>
                     <div className="col-sm-2 col-12">
                         <div className="ListProfile mt-2">

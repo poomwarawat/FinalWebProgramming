@@ -38,7 +38,14 @@ export default class UploadPost extends Component {
     renderProfile = () =>{
         if(this.props.data.profileurl !== ""){
             return(
-                <img src={this.props.data.profileurl} className="comment-picture" />
+                <div className="comment-picture">
+                    <LazyLoadImage    
+                        effect="blur"                                                
+                        src={this.props.data.profileurl} 
+                    />
+                </div>
+                // <img src={this.props.data.profileurl} className="comment-picture" />
+                
             )
         }else{
             return(
