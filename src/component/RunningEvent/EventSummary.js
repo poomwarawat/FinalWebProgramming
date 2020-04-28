@@ -9,10 +9,12 @@ export default class EventSummary extends Component {
       <Col sm="12" md="4" className="mt-2">
         <Card className="h-100">
           <CardHeader>{events.title}</CardHeader>
-          <CardImg top width="100%" src={events["imageUrl"]} alt="Card image cap" />
+          <CardImg top width="100%" src={events["imageUrl"]} alt="Card image cap" className="b-img-event" />
           <CardBody>
             <CardTitle>Date : {date[0]}</CardTitle>
-            <CardText>Location : {events.address}</CardText>
+            <CardText className="b-address-area">
+              <p>Location : {events.address}</p>
+            </CardText>
             <Link to={"events/" + events.eventId}>
               <Button size="sm">Register</Button>
             </Link>

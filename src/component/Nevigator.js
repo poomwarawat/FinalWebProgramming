@@ -52,11 +52,16 @@ export default class Nevigator extends Component {
                 <Link to="/event">
                   <h4>Event</h4>
                 </Link>
+                <Link to="/admin">
+                  <h4>Admin</h4>
+                </Link>
                 <Link to="/game">
                   <h4>Game</h4>
                 </Link>
                 <h4>
-                  <button onClick={this.handleLogout}>Logout</button>
+                  <button className="btn btn-danger" onClick={this.handleLogout}>
+                    Logout
+                  </button>
                 </h4>
               </div>
             </div>

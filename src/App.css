@@ -285,10 +285,11 @@ h4:hover {
   background-color: white;
 }
 
-.user-list{
+.user-list {
   position: absolute;
   z-index: 1;
 }
+
 /* .list-group-item{
   transition: 0.5s;
 }
@@ -617,6 +618,7 @@ h4:hover {
     width: 200px;
     height: 200px;
   }
+
   .friend-list-box {
     background-color: none;
     border: none;
@@ -722,4 +724,20 @@ h4:hover {
 .icon-delete {
   color: red;
   font-size: 1.5rem;
+}
+
+.b-img-event {
+  height: 250px;
+  object-fit: cover;
+}
+
+.b-address-area {
+  height: 25px;
+}
+
+.b-address-area>p {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  height: 100%;
 }
