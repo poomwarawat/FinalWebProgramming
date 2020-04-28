@@ -4,6 +4,7 @@ import { Row, Col } from "reactstrap";
 import API from "../../API/API";
 import EventListReport from "../admin/EventListReport";
 import ReportPdf from "../admin/ReportPdf";
+import { Button } from "reactstrap";
 
 export default class EventReport extends Component {
   state = {
@@ -11,6 +12,7 @@ export default class EventReport extends Component {
     eventReportData: null,
     eventData: null,
     participantCount: 0,
+    deleteButton: false,
   };
   componentDidMount = () => {
     let url = "/event-report/" + this.state.eventId;
@@ -24,6 +26,19 @@ export default class EventReport extends Component {
     });
     API.get(urlEventParticipant).then((res) => {
       this.setState({ participantCount: res.data });
+    });
+  };
+  handelClick = () => {
+    console.log("click");
+    this.setState({ deleteButton: !this.state.deleteButton });
+  };
+
+  handelDeleteEvent = () => {
+    console.log("event deletes");
+    let url = "/event-delete/" + this.state.eventId;
+    API.get(url).then((res) => {
+      console.log("delete done");
+      this.props.history.push("/event-management");
     });
   };
   render() {
@@ -54,11 +69,7 @@ export default class EventReport extends Component {
                   <div className="card-body">
                     <div className="row no-gutters align-items-center">
                       <div className="col mr-2">
-                        {eventData ? (
-                          <div className="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                            {eventData[0]["title"]}
-                          </div>
-                        ) : null}
+                        {eventData ? <div className="text-xs font-weight-bold text-primary text-uppercase mb-1">{eventData[0]["title"]}</div> : null}
                         {eventData ? (
                           <div className="mb-0 font-weight-bold text-gray-800 ">
                             <p>Date : {eventData[0]["event_date"].slice(0, 10)}</p>
@@ -85,9 +96,7 @@ export default class EventReport extends Component {
                 <div className="card border-left-warning shadow h-100">
                   <div className="card-body">
                     <div className="row no-gutters align-items-center">
-                      <div className="col mr-2">
-                        {this.state.eventId ? <ReportPdf eventId={this.state.eventId} /> : null}
-                      </div>
+                      <div className="col mr-2">{this.state.eventId ? <ReportPdf eventId={this.state.eventId} /> : null}</div>
                     </div>
                   </div>
                 </div>
@@ -98,7 +107,23 @@ export default class EventReport extends Component {
                 {" "}
                 <div className="card shadow mb-4">
                   <div className="card-header py-3">
-                    <h6 className="m-0 font-weight-bold text-primary">Paticipants</h6>
+                    <div>
+                      <Row className="align-items-center">
+                        <Col md="9">Participant</Col>
+                        <Col md="2">
+                          {this.state.deleteButton ? (
+                            <Button size="sm" className="float-right" onClick={this.handelDeleteEvent}>
+                              Delete Event
+                            </Button>
+                          ) : null}
+                        </Col>
+                        <Col md="1">
+                          <div>
+                            <i className="far fa-trash-alt icon-delete" onClick={this.handelClick}></i>
+                          </div>
+                        </Col>
+                      </Row>
+                    </div>
                   </div>
                   <div className="card-body">
                     <div className="table-responsive">

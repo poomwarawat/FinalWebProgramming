@@ -86,13 +86,7 @@ export default class DetailsSummary extends Component {
                         {eventData[0]["funrun_price"]} THB
                       </Col>
                       <Col md="2">
-                        <Button
-                          color="primary"
-                          size="sm"
-                          onClick={this.handelClick}
-                          disabled={this.state.buttonRegisterState}
-                          id="funrun"
-                        >
+                        <Button color="primary" size="sm" onClick={this.handelClick} disabled={this.state.buttonRegisterState} id="funrun">
                           Register
                         </Button>
                       </Col>
@@ -107,13 +101,7 @@ export default class DetailsSummary extends Component {
                         {eventData[0]["mini_price"]} THB
                       </Col>
                       <Col md="2">
-                        <Button
-                          color="primary"
-                          size="sm"
-                          onClick={this.handelClick}
-                          disabled={this.state.buttonRegisterState}
-                          id="minimarathon"
-                        >
+                        <Button color="primary" size="sm" onClick={this.handelClick} disabled={this.state.buttonRegisterState} id="minimarathon">
                           Register
                         </Button>
                       </Col>
@@ -128,13 +116,7 @@ export default class DetailsSummary extends Component {
                         {eventData[0]["half_price"]} THB
                       </Col>
                       <Col md="2">
-                        <Button
-                          color="primary"
-                          size="sm"
-                          onClick={this.handelClick}
-                          disabled={this.state.buttonRegisterState}
-                          id="halfmarathon"
-                        >
+                        <Button color="primary" size="sm" onClick={this.handelClick} disabled={this.state.buttonRegisterState} id="halfmarathon">
                           Register
                         </Button>
                       </Col>
@@ -149,13 +131,7 @@ export default class DetailsSummary extends Component {
                         {eventData[0]["marathon_price"]} THB
                       </Col>
                       <Col md="2">
-                        <Button
-                          color="primary"
-                          size="sm"
-                          onClick={this.handelClick}
-                          disabled={this.state.buttonRegisterState}
-                          id="marathon"
-                        >
+                        <Button color="primary" size="sm" onClick={this.handelClick} disabled={this.state.buttonRegisterState} id="marathon">
                           Register
                         </Button>
                       </Col>
@@ -168,9 +144,7 @@ export default class DetailsSummary extends Component {
                     <p className="text-success">You choose : Mini Mathon Run (10K) {eventData[0]["mini_price"]} THB</p>
                   ) : null}
                   {this.state.categorySelected === "halfmarathon" ? (
-                    <p className="text-success">
-                      You choose : Half Marathon Run (21K) {eventData[0]["half_price"]} THB
-                    </p>
+                    <p className="text-success">You choose : Half Marathon Run (21K) {eventData[0]["half_price"]} THB</p>
                   ) : null}
                   {this.state.categorySelected === "marathon" ? (
                     <p className="text-success">You choose : Marathon Run (21K) {eventData[0]["marathon_price"]} THB</p>
@@ -199,7 +173,9 @@ export default class DetailsSummary extends Component {
                   Runner : <span className="b-checkout-data">{this.state.name}</span>
                 </p>
                 {this.state.registered ? (
-                  <p>ท่านได้ทำการสมัครเข้าร่วมรายการวิ่งนี้แล้ว ทำการแจ้งยอดชำระเงินและรอการตรวจสอบจากผมนะครับที่รัก</p>
+                  <p>
+                    You have already applied to participate in this running event, please report the money transfer on the webpage and awaiting verification.
+                  </p>
                 ) : (
                   <div>
                     {" "}
@@ -207,26 +183,15 @@ export default class DetailsSummary extends Component {
                       Categories : <span className="b-checkout-data">{this.state.categorySelected}</span>
                     </p>
                     <p className="mt-0 mb-0 b-sub-text-1 b-checkout-title">
-                      Entry Fee :{" "}
-                      {this.state.categorySelected === "funrun" ? (
-                        <span className="text-success">{eventData[0]["funrun_price"]} THB</span>
-                      ) : null}
-                      {this.state.categorySelected === "minimarathon" ? (
-                        <span className="text-success">{eventData[0]["mini_price"]} THB</span>
-                      ) : null}
-                      {this.state.categorySelected === "halfmarathon" ? (
-                        <span className="text-success">{eventData[0]["half_price"]} THB</span>
-                      ) : null}
-                      {this.state.categorySelected === "marathon" ? (
-                        <span className="text-success">{eventData[0]["marathon_price"]} THB</span>
-                      ) : null}
+                      Entry Fee : {this.state.categorySelected === "funrun" ? <span className="text-success">{eventData[0]["funrun_price"]} THB</span> : null}
+                      {this.state.categorySelected === "minimarathon" ? <span className="text-success">{eventData[0]["mini_price"]} THB</span> : null}
+                      {this.state.categorySelected === "halfmarathon" ? <span className="text-success">{eventData[0]["half_price"]} THB</span> : null}
+                      {this.state.categorySelected === "marathon" ? <span className="text-success">{eventData[0]["marathon_price"]} THB</span> : null}
                     </p>
                   </div>
                 )}
               </div>
-              <div>
-                {this.state.categorySelected ? <PaymentModal event={eventData} eventData={this.state} /> : null}
-              </div>
+              <div>{this.state.categorySelected ? <PaymentModal event={eventData} eventData={this.state} /> : null}</div>
               {this.state.registered && this.state.paymentState == 1 ? (
                 <Alert color="warning" className="text-center">
                   pending
@@ -239,7 +204,7 @@ export default class DetailsSummary extends Component {
               ) : null}
               {this.state.registered && this.state.paymentState == 3 ? (
                 <Alert color="danger" className="text-center">
-                  จ่ายเบี้ยไม่ครบแล้วอีมาวิ่งพรืออ่ะครับ
+                  Incorrect, report the money transfer.
                 </Alert>
               ) : null}
               {(this.state.registered && this.state.paymentState == 0) || this.state.paymentState == 3 ? (

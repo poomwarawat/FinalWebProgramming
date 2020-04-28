@@ -174,7 +174,7 @@ router.get("/fetch-pdf", (req, res) => {
 
 router.get("/event-status/:id", (req, res) => {
   let userId = req.params.id;
-  let sql = `SELECT userId, 
+  let sql = `SELECT userId,   
   users_event.eventId, 
   category, 
   paymentState, 
@@ -227,5 +227,14 @@ router.get("/activities/:id", (req, res) => {
   con.query(sql, (err, result) => {
     if (err) throw err;
     res.send(result);
+  });
+});
+
+router.get("/event-delete/:id", (req, res) => {
+  let eventId = req.params.id;
+  let sql = `delete from runrena.running_event where eventId = ${eventId}`;
+  con.query(sql, (err, result) => {
+    if (err) throw err;
+    res.send();
   });
 });
