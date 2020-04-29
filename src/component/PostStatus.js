@@ -213,6 +213,7 @@ export default class PostStatus extends Component {
     // console.log(this.state.albumname)
     // console.log(this.state.userId)
     const AlbumName = new FormData()
+    var count = 0
     AlbumName.append("name", this.state.albumname)
     AlbumName.append("userId", this.state.userId)
     API.post("/post/upload-album", AlbumName)
@@ -232,14 +233,17 @@ export default class PostStatus extends Component {
                 console.log(error)
             } , () => {
                 console.log("Success")
-                task.snapshot.ref.getDownloadURL().then((downloadUrl) =>{
-                    console.log(downloadUrl)
+                task.snapshot.ref.getDownloadURL().then((downloadUrl) =>{                    
                     const data = new FormData()
                     data.append("userId", this.state.userId)
                     data.append("name", this.state.albumname)
                     data.append("url", downloadUrl)
                     API.post("/post/upload-phto-album", (data))
                     .then(res => {
+                      count += 1
+                      if(count == this.state.pictures.length - 1){
+                        alert("Upload!!")
+                      }
                       console.log(res.data)
                     })
                 })
@@ -327,7 +331,7 @@ export default class PostStatus extends Component {
               </div>
               <div className="modal-body">
               <p>Album name</p>
-              <input className="form-control" onChange={this.handleChange} id="albumname"/>
+              <input required className="form-control" onChange={this.handleChange} id="albumname"/>
               <div style={Display}>                
                 <ImageUploader
                       withIcon={true}

@@ -5,7 +5,7 @@ export default class AlbumBox extends Component {
     render() {
         return (
             <div >
-                <div className="album-box">
+                <div className="album-box mt-4 pt-2">
                     <div className="img-album">
                         <Link to="/myphoto">
                             <img src="http://www.thailandoutdoor.com/wp-content/uploads/12443704_10207970802445350_1538187090_o.jpg"/>
