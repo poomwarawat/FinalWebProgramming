@@ -21,6 +21,7 @@ import EventReport from "./page/admin/EventReport";
 import Myphoto from "./component/Album/Myphoto";
 import Game from "./page/game/GamePage";
 import ScoreRange from "./page/game/ScoreRange";
+import PrivateRoute from './privateRoute'
 function App() {
   return (
     <div className="App">
@@ -29,21 +30,21 @@ function App() {
         <Route path="/register" component={Register}></Route>
         <Route path="/about" component={About}></Route>
         <Route path="/contact" component={Contact}></Route>
-        <Route path="/profile/:id" component={Profile}></Route>
-        <Route path="/graph" component={Graph}></Route>
-        <Route path="/setting" component={Setting}></Route>
-        <Route path="/event" component={Event}></Route>
-        <Route path="/friend" component={Friend}></Route>
-        <Route path="/create-event" component={CreateEvent}></Route>
-        <Route path="/events/:id" component={DetailsEvent}></Route>
-        <Route path="/admin" component={adminPage}></Route>
-        <Route path="/payment" component={AdminRunningEvent} />
-        <Route path="/event-management" component={EventManagement} />
-        <Route path="/event-manage/:id" component={EventReport} />
-        <Route path="/myalbum" component={Myalbum}></Route>
-        <Route path="/myphoto/:id/:name" component={Myphoto}></Route>
-        <Route path="/game" component={Game}></Route>
-        <Route path="/ScoreRange" component={ScoreRange}></Route>
+        <PrivateRoute path="/profile/:id" component={Profile}></PrivateRoute>
+        <PrivateRoute path="/graph" component={Graph}></PrivateRoute>
+        <PrivateRoute path="/setting" component={Setting}></PrivateRoute>
+        <PrivateRoute path="/event" component={Event}></PrivateRoute>
+        <PrivateRoute path="/friend" component={Friend}></PrivateRoute>
+        <PrivateRoute path="/create-event" component={CreateEvent}></PrivateRoute>
+        <PrivateRoute path="/events/:id" component={DetailsEvent}></PrivateRoute>
+        <PrivateRoute path="/admin" component={adminPage}></PrivateRoute>
+        <PrivateRoute path="/payment" component={AdminRunningEvent} />
+        <PrivateRoute path="/event-management" component={EventManagement} />
+        <PrivateRoute path="/event-manage/:id" component={EventReport} />
+        <PrivateRoute path="/myalbum" component={Myalbum}></PrivateRoute>
+        <PrivateRoute path="/myphoto/:id/:name" component={Myphoto}></PrivateRoute>
+        <PrivateRoute path="/game" component={Game}></PrivateRoute>
+        <PrivateRoute path="/ScoreRange" component={ScoreRange}></PrivateRoute>
       </Switch>
     </div>
   );
