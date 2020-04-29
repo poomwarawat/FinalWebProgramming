@@ -96,6 +96,7 @@ export default class HeaderUser extends Component {
             return(
                <div>
                     <EditProfile></EditProfile>
+                    <Album></Album>
                </div>
             )
         }
@@ -148,7 +149,7 @@ export default class HeaderUser extends Component {
                     {this.renderEdit()}
                     </div>
                 </div>
-                <Album></Album>
+                
         
                 <div className="modal fade" id="exampleModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div className="modal-dialog" role="document">

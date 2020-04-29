@@ -5,6 +5,8 @@ import { Progress } from 'reactstrap'
 import firebase from 'firebase'
 import 'react-image-lightbox/style.css'; 
 import LazyLoad from 'react-lazy-load';
+import ImageUploader from 'react-images-upload';
+import PhotoUpload from './Album/PhotoUpload'
 
 import {
   Form,
@@ -37,7 +39,11 @@ export default class PostStatus extends Component {
         postPhotoUrl : null,
         uploadper : null,
         uploadState : true,
-        token : this.props.param
+        token : this.props.param,
+        pictures: [],
+        uploaderState : "inline"  ,
+        albumname : "",
+        uploadper1 : null  
     };
     var firebaseConfig = {
       apiKey: "AIzaSyCu36Uit6DfffqB7DiQjyHLhCmAI-s6pxI",
@@ -189,8 +195,63 @@ export default class PostStatus extends Component {
         </div>
       )
     }
+  }  
+  onDrop = (picture) => {
+    this.setState({
+        pictures: this.state.pictures.concat(picture),
+        uploaderState : "none"
+    });
+  }
+  handleReset = () => {
+    this.setState({
+      pictures : [],
+      uploaderState : "inline"
+    })
+    window.location.reload()
+  }  
+  handleUpload = () =>{    
+    // console.log(this.state.albumname)
+    // console.log(this.state.userId)
+    const AlbumName = new FormData()
+    AlbumName.append("name", this.state.albumname)
+    AlbumName.append("userId", this.state.userId)
+    API.post("/post/upload-album", AlbumName)
+    .then(res => {
+      if(res.data.add === true){
+        for (let index = 0; index < this.state.pictures.length; index++) {
+          var photo = this.state.pictures[index]
+          var name = photo.name
+          const storageRef = firebase.storage().ref(`${this.props.email}/${this.state.albumname}/${name}`);
+          const task = storageRef.put(photo)  
+          task.on(`state_changed` , (snapshort) => {
+            let percentage = (snapshort.bytesTransferred / snapshort.totalBytes) * 100;
+            this.setState({
+                uploadper1 : percentage
+            })
+            } , (error) => {
+                console.log(error)
+            } , () => {
+                console.log("Success")
+                task.snapshot.ref.getDownloadURL().then((downloadUrl) =>{
+                    console.log(downloadUrl)
+                    const data = new FormData()
+                    data.append("userId", this.state.userId)
+                    data.append("name", this.state.albumname)
+                    data.append("url", downloadUrl)
+                    API.post("/post/upload-phto-album", (data))
+                    .then(res => {
+                      console.log(res.data)
+                    })
+                })
+            })    
+        }        
+      }
+    })    
   }
   renderPostBox = () =>{
+    const Display = {
+      display : this.state.uploaderState
+    }
     const URL = window.location.href
     var fullurl = URL,
     url = "/" + fullurl.split("/")[3];
@@ -245,12 +306,46 @@ export default class PostStatus extends Component {
             </Form>
             {this.renderPhoto()}                       
             <div className="row text-center pb-2 mt-3">
-              <div className="col-sm-12 col-12">
+              <div className="col-sm-6 col-6">
                 <input id="upload-photo-post" onChange={this.handleChangePhoto} type="file"/>
-                <label htmlFor="upload-photo-post" id="for-picture" className="btn btn-outline-info">Upload photo</label>
+                <label htmlFor="upload-photo-post" id="for-picture">Upload photo</label>
+              </div> 
+              <div className="col-sm-6 col-6">
+                <input id="upload-photo-post" onChange={this.handleChangePhoto} type="file"/>
+                <label data-toggle="modal" data-target="#uploadAlbum" id="for-picture">Upload Album</label>
               </div>              
             </div>
           </Card>
+          <div className="modal fade" id="uploadAlbum" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div className="modal-dialog" role="document">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title" id="exampleModalLabel">Album</h5>
+                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div className="modal-body">
+              <p>Album name</p>
+              <input className="form-control" onChange={this.handleChange} id="albumname"/>
+              <div style={Display}>                
+                <ImageUploader
+                      withIcon={true}
+                      buttonText='Choose images'
+                      onChange={this.onDrop}
+                      imgExtension={['.jpg', '.gif', '.png', '.gif']}                  
+                />
+              </div>
+              {this.state.pictures ? <PhotoUpload pictures={this.state.pictures}/> : null}
+              </div>
+              <div className="modal-footer">
+                <button type="button" className="btn btn-secondary" onClick={this.handleReset}>Reset</button>
+                <button type="button" className="btn btn-primary" onClick={this.handleUpload}>Upload</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
           <div className="head-post-box">
             <button className="btn btn-info w-100" onClick={this.handleClick}>
               POST

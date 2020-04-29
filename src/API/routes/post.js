@@ -104,11 +104,48 @@ router.post("/get-user-like", (req, res) =>{
 })
 
 
-router.post("/test", (req, res) =>{
+router.post("/upload-album", (req, res) => {
     console.log(req.body)
+    const sql = `INSERT INTO Albumname (userId, albumname) VALUES (${req.body.userId}, '${req.body.name}')`
+    con.query(sql, (err, result) => {        
+        if(result){
+            return res.send({add : true})
+        }
+    })
 })
 
-//Delete post and its comments from database
-router.delete("/post/:id", (req, res) => {});
+router.post("/upload-phto-album", (req, res) => {
+    console.log(req.body)
+    const sql = `INSERT INTO photoalbum (userId, albumname, url) VALUES (${req.body.userId}, '${req.body.name}', '${req.body.url}')`
+    con.query(sql, (err, result) => {
+        if(result){
+            return res.send({add : true})
+        }        
+    })
+})
+
+router.post("/get-album/:id", (req, res) => {
+    let userId = req.params.id;
+    console.log(userId)
+    const sql = `SELECT * FROM Albumname WHERE userId=${userId}`
+    con.query(sql, (err, result) => {
+        console.log(result)
+        return res.send(result)
+    })
+})
+
+router.post("/get-photo-album/:id/:name", (req, res) => {
+    let userId = req.params.id
+    let name = req.params.name
+    console.log(userId)
+    console.log(name)
+    const sql = `SELECT * FROM photoalbum WHERE userId=${userId} AND albumname='${name}'`
+    con.query(sql, (err, result) => {
+        console.log(result)
+        if(result){
+            return res.send(result)
+        }
+    })
+})
 
 module.exports = router;

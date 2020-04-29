@@ -290,6 +290,12 @@ h4:hover {
   z-index: 1;
 }
 
+.photo-al{
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
 /* .list-group-item{
   transition: 0.5s;
 }

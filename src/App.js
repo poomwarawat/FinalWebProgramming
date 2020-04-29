@@ -41,7 +41,7 @@ function App() {
         <Route path="/event-management" component={EventManagement} />
         <Route path="/event-manage/:id" component={EventReport} />
         <Route path="/myalbum" component={Myalbum}></Route>
-        <Route path="/myphoto" component={Myphoto}></Route>
+        <Route path="/myphoto/:id/:name" component={Myphoto}></Route>
         <Route path="/game" component={Game}></Route>
         <Route path="/ScoreRange" component={ScoreRange}></Route>
       </Switch>

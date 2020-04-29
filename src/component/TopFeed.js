@@ -19,13 +19,13 @@ export default class TopFeed extends Component {
         return (
             <div>
                 <div className="row container">
-                    <div className="col-sm-10 col-12 pt-4">
+                    <div className="col-sm-9 col-12 pt-4">
                     <SearchUser handelSearch={this.handelSearch}></SearchUser>     
                     <ul className="list-group" style={{width:"100%"}}>                        
                         {this.state.eventData ? <UserList userlist={this.state.eventData} /> : null}
                     </ul>               
                     </div>
-                    <div className="col-sm-2 col-12">
+                    <div className="col-sm-3 col-12">
                         <div className="ListProfile mt-2">
                             <div className="dropdown">
                                 <div className="dropdown-toggle" id="userName" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
