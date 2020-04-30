@@ -34,7 +34,11 @@ export default class MonthReport extends Component {
     let distance = [];
     if (activitiesData) {
       activitiesData.forEach((data) => {
-        date.push(data.date.slice(0, 10));
+        //date.push();
+        let newDate = new Date(data.date.slice(0, 10));
+        newDate.setDate(newDate.getDate() + 1);
+        let x = newDate.toISOString().substring(0, 10);
+        date.push(x);
         distance.push(data["sum(total_distance)"]);
       });
       data["labels"] = date;

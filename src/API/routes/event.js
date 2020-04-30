@@ -225,6 +225,7 @@ router.get("/activities/:id", (req, res) => {
   let userId = req.params.id;
   let sql = `SELECT CAST(created_time AS DATE) as date , sum(total_distance)  FROM runrena.post WHERE userId = ${userId} GROUP BY CAST(created_time AS DATE)`;
   con.query(sql, (err, result) => {
+    console.log("result", result);
     if (err) throw err;
     res.send(result);
   });
